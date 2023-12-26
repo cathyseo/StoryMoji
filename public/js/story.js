@@ -30,8 +30,9 @@ function generateStory(prompt) {
     const messages = [
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": prompt}
-        // Add user and assistant messages as needed
     ];
+
+    console.log("Sending request with messages:", messages);
 
     fetch('/generate-story', {
         method: 'POST',
@@ -41,18 +42,21 @@ function generateStory(prompt) {
         body: JSON.stringify({ messages: messages })
     })
     .then(response => {
+        console.log("Received response:", response);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         return response.json();
     })
     .then(data => {
-        displayGeneratedStory(data.choices[0].text);
+        console.log("Data from OpenAI:", data);
+        displayGeneratedStory(data.message.content);
     })
     .catch(error => {
         console.error('Error:', error);
     });
 }
+
 
 function displayGeneratedStory(story) {
     const output = document.getElementById('fairyTaleOutput');

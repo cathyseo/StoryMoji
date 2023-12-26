@@ -24,20 +24,23 @@ app.get('/story', (req, res) => {
 });
 
 // Endpoint to handle OpenAI API requests
-
 app.post('/generate-story', async (req, res) => {
     try {
+        console.log("Received messages:", req.body.messages);
+
         const completion = await openai.chat.completions.create({
-            messages: req.body.messages, // Assuming messages are sent in the request body
-            model: "gpt-4", // Specify the model
+            messages: req.body.messages,
+            model: "gpt-4",
         });
 
+        console.log("OpenAI response:", completion);
         res.json(completion.choices[0]);
     } catch (error) {
         console.error("Error occurred:", error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
+
 
 
 app.listen(port, () => {

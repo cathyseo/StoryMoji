@@ -166,6 +166,10 @@ button:hover {
 }
 
 /* Story view styling */
+#storyContainer {
+    display: flex;
+    justify-content: start;
+}
 #storyView {
     text-align: center;
     padding: 20px;
@@ -181,11 +185,6 @@ button:hover {
 #storyView p {
     max-width: 1440px; /* Adjust as necessary */
     margin: 0 0 20px 0;
-}
-
-#storyView .container {
-    justify-content: center;
-
 }
 
 #fairyTaleOutput {
