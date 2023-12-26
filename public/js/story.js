@@ -33,7 +33,12 @@ function generateStory(prompt) {
         },
         body: JSON.stringify({ prompt: prompt })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
         displayGeneratedStory(data.choices[0].text);
     })
