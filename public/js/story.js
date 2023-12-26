@@ -25,13 +25,20 @@ function createPromptFromEmojis(selectedEmojisData) {
     return prompt;
 }
 
+
 function generateStory(prompt) {
+    const messages = [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": prompt}
+        // Add user and assistant messages as needed
+    ];
+
     fetch('/generate-story', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ prompt: prompt })
+        body: JSON.stringify({ messages: messages })
     })
     .then(response => {
         if (!response.ok) {
