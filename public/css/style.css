@@ -1,0 +1,199 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+/* Top container styling */
+#topContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff; /* Or any color you prefer */
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+/* Container styling */
+.container {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tab styling */
+#emojiTabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#emojiTabs > div {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #eee;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+#emojiTabs > div:hover {
+    background-color: #ddd;
+    border-color: #ccc;
+}
+
+/* Emoji container styling */
+
+#emojiContainer {
+    margin-top: 160px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: start; /* Align items to the start */
+    margin-bottom: 70px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px;
+    width: 800px; /* Adjust the width as needed */
+}
+
+#emojiContainer img {
+    cursor: pointer;
+    height: 50px; /* Set emoji size */
+    width: 50px; /* Set emoji size */
+    margin: 5px;
+    object-fit: cover; /* This ensures the image covers the area properly */
+    border-radius: 5px; /* Rounded corners */
+}
+
+#emojiContainer img:hover {
+    background-color: #f0f0f0; /* Light grey background on hover */
+}
+
+/* Emoji container styling */
+#bottomContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* Selected emojis box styling */
+#selectedEmojis {
+    display: flex;
+    flex-direction: row; /* Ensure emojis are in a row */
+    align-items: center;
+    justify-content: start; /* Align content to the start */
+    width: 300px; /* Fixed width for emoji box */
+    height: 50px; /* Height of the box */
+    overflow-x: auto; /* Horizontal scrolling if too many emojis */
+    overflow-y: hidden; /* Prevent vertical scrolling */
+    border: 1px solid #ddd; /* Border for the box */
+    padding: 5px;
+    margin-right: 20px; /* Space between emojis box and the button */
+    background-color: white; /* White background */
+    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box;
+}
+
+#selectedEmojisPlaceholder {
+    font-size: 16px;
+    color: grey;
+}
+
+#selectedEmojis img {
+    cursor: pointer;
+    height: auto;
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+    margin-right: 2px;
+    transition: opacity 0.3s; /* Smooth transition for opacity */
+}
+
+#selectedEmojis img:hover {
+    opacity: 0.5; /* 50% transparent on hover */
+}
+
+
+/* Fixed bottom container styling */
+#bottomContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f0f0f0; /* Or any color you prefer */
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 50px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Story view styling */
+#storyView {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Full viewport height */
+    max-height: 100vh; /* Limit maximum height */
+    overflow-y: auto; /* Scroll only if needed */
+}
+
+#storyView p {
+    max-width: 1440px; /* Adjust as necessary */
+    margin: 0 0 20px 0;
+}
+
+#fairyTaleOutput {
+    font-size: 100px;
+}
+
+/* Re-sizing emoji in results story page */
+#fairyTaleOutput .emoji {
+    height: 1em; /* Sets the emoji height to match the surrounding text */
+    vertical-align: middle; /* Aligns emoji with the middle of the text */
+}
+
+/* Adjust padding of the main container to avoid overlap with the fixed bottom container */
+.container {
+    padding-bottom: 70px; /* Adjust based on the height of #bottomContainer */
+}
