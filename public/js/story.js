@@ -1,3 +1,4 @@
+// Main story script
 document.addEventListener('DOMContentLoaded', function() {
     displayStory();
 
