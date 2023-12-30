@@ -18,7 +18,7 @@ function displayStory() {
 function createPromptFromEmojis(selectedEmojisData) {
     // Construct a prompt based on selected emojis
     // This is an example. Modify it according to your needs.
-    let prompt = "Create a fairy tale story about ";
+    let prompt = "Create a fairy tale story in an one sentence. The story is about ";
     selectedEmojisData.forEach((emoji, index) => {
         prompt += emoji.key + (index < selectedEmojisData.length - 1 ? ', ' : '');
     });

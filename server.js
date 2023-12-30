@@ -31,6 +31,7 @@ app.post('/generate-story', async (req, res) => {
         const completion = await openai.chat.completions.create({
             messages: req.body.messages,
             model: "gpt-4",
+            max_tokens: 150
         });
 
         console.log("OpenAI response:", completion);
