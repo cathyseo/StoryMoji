@@ -69,7 +69,7 @@ h2 {
     box-sizing: border-box; /* Ensures padding and border are included in the width */
     white-space: nowrap; /* Prevents the text from wrapping to a new line */
     overflow: hidden; /* Prevents overflow of text */
-    text-overflow: ellipsis; /* Adds an ellipsis if text overflows */
+    display: flex;
 }
 
 
