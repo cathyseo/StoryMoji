@@ -9,12 +9,16 @@ body {
     max-width: 1920px; /* Maximum width of the content */
     padding: 0 50px; /* Padding on both sides */
 }
+p {
+    margin: 0;
+}
 header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
     flex: 1 0 0;
+    padding: 20px 0px;
 }
 #logoContainer {
     display: flex;
@@ -63,24 +67,52 @@ h2 {
 }
 
 .full-width-text {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* Ensures padding and border are included in the width */
-    white-space: nowrap; /* Prevents the text from wrapping to a new line */
-    overflow: hidden; /* Prevents overflow of text */
+    white-space: nowrap; 
+    display: inline-block; 
+    font-size: 152.855px;
     display: flex;
 }
-
+#heroTitleStory {
+    position:relative;
+    display:inline-block;
+}
+#heroTitleStory h1 {
+    position: relative; 
+    display: inline-block; 
+    translate: none; 
+    rotate: none; 
+    scale: none; 
+    transform: translate(0px, 0px);
+}
+#heroTitleEmoji {
+    position:relative;
+    display:inline-block;
+}
+#heroTitleEmoji h1 {
+    position: relative; 
+    display: inline-block; 
+    translate: none; 
+    rotate: none; 
+    scale: none; 
+    transform: translate(0px, 0px);
+}
 
 #heroContainer {
     display: flex;
+    gap: 15px;
 }
 #heroTextContainer {
     background-color: #FFA500;
-    color: black;
+    color: #1F2223;
     padding: 60px 30px;
     width: 50%;
+    gap: 22px;
+}
+#heroTextContainer div {
+    max-width: 550px;
+}
+#heroTextContainer button {
+    margin-top: 22px;
 }
 #heroGraphicContainer {
     width: 50%;
@@ -110,8 +142,8 @@ h2 {
 button {
     border: none;
 }
-#primaryButton {
-    background: var(--Secondary-Black, #000);
+.primaryButton {
+    background: #1F2223;
     color: white;
     font-size: 18px;
     font-weight: 700;
@@ -120,4 +152,53 @@ button {
     justify-content: center;
     align-items: center;
     gap: 8px;
+}
+
+/* Generator section */
+.headingBox {
+    text-align: center;
+    margin: 64px 0 24px 0;
+}
+
+#generatorButtons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.secondaryButton {
+    background: white;
+    color: #1F2223;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+#typeButton {
+    background-color: #03C9EA;
+}
+
+#lengthButton {
+    background-color: #B056FF;
+}
+
+#generateContainer {
+    display: flex;
+    width: 100%;
+}
+
+#generateContainer button {
+    flex: 1; /* Take up available space */
+    background-color: #FFA500;
+    color: #1F2223;
+}
+
+#selectedOptions {
+    display: flex;
+    flex: 2; /* Take up available space */
 }

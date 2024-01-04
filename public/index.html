@@ -23,14 +23,21 @@
         </nav>
     </header>
     <!-- Hero section -->
-    <div class="full-width-text">
-        <h1>S</h1><h1>T</h1><h1>O</h1><h1>R</h1><h1>Y</h1><h1>&</h1><h1>E</h1><h1>M</h1><h1>O</h1><h1>J</h1><h1>I</h1>
+    <div class="full-width-text" js-fit-text js-words class="-fitted">
+        <div id="heroTitleStory">
+            <h1>S</h1><h1>T</h1><h1>O</h1><h1>R</h1><h1>Y</h1><h1>&</h1>
+        </div>
+        <div is="heroTitleEmoji">
+            <h1>E</h1><h1>M</h1><h1>O</h1><h1>J</h1><h1>I</h1>
+        </div>
     </div>
     <div id="heroContainer">
         <div id="heroTextContainer">
-            <h2>Imagine your creative story</h2>
-            <p>With EmojiTeller, every emoji you select weaves a new tale. Fun, intuitive, and full of creative possibilities.</p>
-            <button id="primaryButton">Try Now</button>
+            <div>
+                <h2>Imagine your creative story</h2>
+                <p>With EmojiTeller, every emoji you select weaves a new tale. Fun, intuitive, and full of creative possibilities.</p>
+            </div>  
+            <button class="primaryButton">Try Now</button>
         </div>
         <div id="heroGraphicContainer">
             <img id="eyes" src="assets/img/Eyes.png" alt="Eyes">
@@ -38,7 +45,36 @@
 
         </div>
     </div>
-    <div id="topContainer">
+    <div id="generatorContainer">
+        <div class="headingBox">
+            <h2>Let’s start</h2>
+            <p>Take a look how other people make creative stories and get inspiration.</p>
+        </div>
+        <div id="generatorBox">
+            <div id="generatorButtons">
+                <button class="secondaryButton" id="emojisButton">
+                    Emojis
+                    <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
+                </button>
+                <button class="secondaryButton" id="typeButton">
+                    Story Type
+                    <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
+                </button>
+                <button class="secondaryButton"id="lengthButton">
+                    Length
+                    <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
+                </button>
+            </div>
+            <div id="generateContainer">
+                <div id="selectedOptions">
+                    <!--here selected options appear as a tags-->
+                    <div>Example</div>
+                    <div>Example</div>
+                    <div>Example</div>
+                </div>
+                <button class="primaryButton">Get a Story</button>
+            </div>
+        </div>
         <div id="emojiTabs"></div>
     </div>
 
