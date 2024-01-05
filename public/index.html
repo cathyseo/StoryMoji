@@ -50,43 +50,69 @@
             <h2>Let’s start</h2>
             <p>Take a look how other people make creative stories and get inspiration.</p>
         </div>
+        <!--Story Generator-->
         <div id="generatorBox">
             <div id="generatorButtons">
                 <button class="secondaryButton" id="emojisButton">
-                    Emojis
+                    Emojis *
                     <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
                 </button>
                 <button class="secondaryButton" id="typeButton">
-                    Story Type
+                    Story Type *
                     <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
                 </button>
                 <button class="secondaryButton"id="lengthButton">
-                    Length
+                    Length *
                     <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
                 </button>
             </div>
+
+        <!-- Emoji Modal Structure -->
+        <div id="emojiModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <!-- Your modal content here -->
+                <div id="emojiTabs"></div>
+                <div id="emojiContainer" class="container">
+                </div>
+                <!-- Close button -->
+                <div id="modalButtonContainer">
+                    <button id="closeModal" class="secondaryButton">Close</button>
+                    <button id="saveModal" class="primaryButton">Save</button>
+                </div>    
+            </div>
+        </div>
+
             <div id="generateContainer">
                 <div id="selectedOptions">
                     <!--here selected options appear as a tags-->
-                    <div>Example</div>
-                    <div>Example</div>
-                    <div>Example</div>
+                    <div class="tag" id="selectedEmojisContainer">
+                        <div id="selectedEmojis">
+                            <div id="selectedEmojisPlaceholder"></div>
+                        </div>
+                        <img id="" src="assets/svg/buttonTagDelete.svg" alt="Delete">
+                    </div>
+                    <div class="tag">
+                        Fairy Tale
+                        <img id="" src="assets/svg/buttonTagDelete.svg" alt="Delete">
+                    </div>                    <div class="tag">
+                        1 Sentence
+                        <img id="" src="assets/svg/buttonTagDelete.svg" alt="Delete">
+                    </div>
                 </div>
-                <button class="primaryButton">Get a Story</button>
+                <button class="primaryButton" button id="generateBtn" onclick="location.href='story.html'">Get a Story</button>
             </div>
         </div>
-        <div id="emojiTabs"></div>
+        <!--Stories Others made-->
+
     </div>
 
-    <div id="emojiContainer" class="container">
-    </div>
-
-    <div id="bottomContainer">
+<!--    <div id="bottomContainer">
         <div id="selectedEmojis">
             <div id="selectedEmojisPlaceholder">You can select multiple emojis.</div>
         </div>
         <button id="generateBtn" onclick="location.href='story.html'">Tell me a story</button>
     </div>    
+-->
 
     <script src="js/script.js"></script>
 </body>

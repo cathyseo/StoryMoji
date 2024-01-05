@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
             createEmojiTabs();
         })
         .catch(error => console.error('Error loading emoji metadata:', error));
+    // Hide the selectedEmojisContainer initially
+    document.getElementById('selectedEmojisContainer').style.display = 'none';
+
 });
 
 function createEmojiTabs() {
@@ -36,6 +39,7 @@ function createEmojiTabs() {
     });
 }
 
+
 function showEmojisForCategory(category) {
     const container = document.getElementById('emojiContainer');
     container.innerHTML = '';
@@ -46,37 +50,73 @@ function showEmojisForCategory(category) {
             img.src = emoji.styles["3D"];
             img.alt = emoji.cldr;
             img.title = emoji.cldr;
-            img.addEventListener('click', () => selectEmoji(key));
+
+            // Check if the emoji is already selected and add the active class if it is
+            if (selectedEmojis.includes(key)) {
+                img.classList.add('activeImage');
+            }
+
+            img.addEventListener('click', function() {
+                if (this.classList.contains('activeImage')) {
+                    this.classList.remove('activeImage');
+                    deselectEmoji(key);
+                } else {
+                    this.classList.add('activeImage');
+                    selectEmoji(key);
+                }
+            });
+
             container.appendChild(img);
         }
     });
 }
 
+
+
+
+
 function selectEmoji(emojiKey) {
-    selectedEmojis.push(emojiKey);
-    updateSelectedEmojisDisplay();
+    if (!selectedEmojis.includes(emojiKey)) {
+        selectedEmojis.push(emojiKey);
+        updateSelectedEmojisDisplay();
+    }
+}
+
+function deselectEmoji(emojiKey) {
+    const index = selectedEmojis.indexOf(emojiKey);
+    if (index > -1) {
+        selectedEmojis.splice(index, 1);
+        updateSelectedEmojisDisplay();
+    }
 }
 
 function updateSelectedEmojisDisplay() {
     const emojisDisplay = document.getElementById('selectedEmojis');
+    const emojisContainer = document.getElementById('selectedEmojisContainer');
+
+    // Clear existing emojis from the display
     emojisDisplay.innerHTML = '';
 
-    selectedEmojis.forEach((emojiKey, index) => {
-        const emojiData = emojiMetadata[emojiKey];
-        if (emojiData && emojiData.styles["3D"]) {
-            const img = document.createElement('img');
-            img.src = emojiData.styles["3D"];
-            img.alt = emojiKey;
-            img.classList.add('emoji');
-            img.addEventListener('click', function() {
-                // Remove the clicked emoji from selectedEmojis
-                selectedEmojis.splice(index, 1);
-                updateSelectedEmojisDisplay(); // Update display
-            });
-            emojisDisplay.appendChild(img);
-        }
-    });
+    // Show or hide the emojis container based on whether emojis are selected
+    if (selectedEmojis.length > 0) {
+        selectedEmojis.forEach(emojiKey => {
+            const emojiData = emojiMetadata[emojiKey];
+            if (emojiData && emojiData.styles["3D"]) {
+                const img = document.createElement('img');
+                img.src = emojiData.styles["3D"];
+                img.alt = emojiKey;
+                img.classList.add('emoji');
+                emojisDisplay.appendChild(img); // Add emoji to the display
+            }
+        });
+        emojisContainer.style.display = 'flex'; // Show the container with flex layout
+    } else {
+        emojisContainer.style.display = 'none'; // Hide the container
+    }
 }
+
+
+
 
 // Save selected emojis to local storage or session storage
 document.getElementById('generateBtn').addEventListener('click', function() {
@@ -86,3 +126,42 @@ document.getElementById('generateBtn').addEventListener('click', function() {
     }));
     localStorage.setItem('selectedEmojis', JSON.stringify(emojisToSave));
 });
+
+//modals
+document.getElementById("emojisButton").addEventListener("click", function() {
+    document.getElementById("emojiModal").style.display = "block";
+});
+
+document.getElementById("saveModal").addEventListener("click", function() {
+    document.getElementById("emojiModal").style.display = "none";
+});
+document.getElementById("closeModal").addEventListener("click", function() {
+    // Hide the modal
+    document.getElementById("emojiModal").style.display = "none";
+
+    // Reset the selectedEmojis array
+    selectedEmojis = [];
+
+    // Update the display to reflect the reset
+    updateSelectedEmojisDisplay();
+
+    // Optionally, reset the active status of images in the emojiContainer
+    const images = document.querySelectorAll('#emojiContainer img');
+    images.forEach(img => img.classList.remove('activeImage'));
+});
+
+
+
+//Active status of emoji tabs
+const tabs = document.querySelectorAll('.emojiTab');
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+        tabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+    });
+});
+
+
+
+

@@ -201,4 +201,85 @@ button {
 #selectedOptions {
     display: flex;
     flex: 2; /* Take up available space */
+    align-items: center;
+    gap: 10px;
+    background-color: #323435;
+    padding-left: 10px;
+}
+.tag {
+    color: #1F2223;
+    background-color: white;
+    display: flex;
+    padding: 8px 14px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+/*Modal*/
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+}
+
+.modal-content {
+    background-color: #E9EDF0;
+    margin: auto;
+    padding: 20px;
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+}
+#modalButtonContainer {
+    display: flex;
+    position: fixed; /* Fixed position relative to viewport */
+    right: 20px; /* Right side */
+    bottom: 20px; /* Bottom side */
+}
+
+/*Emoji modal*/
+#emojiContainer img {
+    width: 60px;
+    height: 60px;
+    padding: 5px;
+    margin: 5px;
+}
+/* Active state for images */
+#emojiContainer img:hover, #emojiContainer img.activeImage {
+    background-color: white;
+    border-radius: 10px;
+}
+
+#emojiTabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.emojiTab {
+    color:black;
+    text-align: right;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+/* Active state for tabs */
+.emojiTab:hover, .emojiTab.active {
+    text-decoration: solid underline black 6px;
+}
+
+#emojiContainer {
+    padding-top: 30px;
+    background-color: #E9EDF0;
+}
+
+/*Selected emojis tag*/
+#selectedEmojis img {
+    width: 24px;
+    height: 24px;
 }
