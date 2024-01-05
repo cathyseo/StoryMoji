@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error loading emoji metadata:', error));
     
-        // Hide the selectedEmojisContainer initially
     document.getElementById('selectedEmojisContainer').style.display = 'none';
     
     // Event listeners for the Story Type Modal
@@ -106,17 +105,18 @@ function showEmojisForCategory(category) {
 
 
 function selectEmoji(emojiKey) {
-    if (!selectedEmojis.includes(emojiKey)) {
-        selectedEmojis.push(emojiKey);
-        updateSelectedEmojisDisplay();
+    if (!temporarySelectedEmojis.includes(emojiKey)) {
+        temporarySelectedEmojis.push(emojiKey); // Add to the temporary array
     }
+    // Update display without affecting the main selectedEmojis array
+    updateTemporaryEmojisDisplay(); 
 }
 
 function deselectEmoji(emojiKey) {
-    const index = selectedEmojis.indexOf(emojiKey);
+    const index = temporarySelectedEmojis.indexOf(emojiKey);
     if (index > -1) {
-        selectedEmojis.splice(index, 1);
-        updateSelectedEmojisDisplay();
+        temporarySelectedEmojis.splice(index, 1); // Remove from the temporary array
+        updateTemporaryEmojisDisplay(); // Update display
     }
 }
 
@@ -169,31 +169,23 @@ document.getElementById('generateBtn').addEventListener('click', function() {
 
 
 
-// Opening the Emoji Modal
-document.getElementById("emojisButton").addEventListener("click", function() {
-    document.getElementById("emojiModal").style.display = "block";
-});
+
+    // Opening the Emoji Modal
+    document.getElementById("emojisButton").addEventListener("click", function() {
+        temporarySelectedEmojis = [...selectedEmojis]; // Copy the current selections to the temporary array
+        document.getElementById("emojiModal").style.display = "block";
+    });
     // Closing the Emoji Modal using the Save button
     document.getElementById("saveEmojiModal").addEventListener("click", function() {
+        selectedEmojis = [...temporarySelectedEmojis]; // Save the changes made in the modal
+        updateSelectedEmojisDisplay(); // Update the display with the new selections
         document.getElementById("emojiModal").style.display = "none";
     });
     // Closing the Emoji Modal using the Close button
     document.getElementById("closeEmojiModal").addEventListener("click", function() {
-        // Hide the modal
         document.getElementById("emojiModal").style.display = "none";
-
-        // Reset the selectedEmojis array
-        selectedEmojis = [];
-
-        // Update the display to reflect the reset
-        updateSelectedEmojisDisplay();
-
-        // Optionally, reset the active status of images in the emojiContainer
-        const images = document.querySelectorAll('#emojiContainer img');
-        images.forEach(img => img.classList.remove('activeImage'));
+        // Changes made in the modal are discarded, and the original selectedEmojis remains unchanged
     });
-
-
 
 
 //Active status of emoji tabs
@@ -238,23 +230,16 @@ typeOptions.forEach(option => {
 
 //Save active type and show in browser
 document.getElementById("saveTypeModal").addEventListener("click", function() {
-    // Find the active type option
     const activeTypeOption = document.querySelector('.typeOption.active');
-
-    // Check if an active type option exists
     if (activeTypeOption) {
-        // Get the text of the active type option
         const selectedTypeText = activeTypeOption.textContent;
-
-        // Update the selectedType div with this text
-        const selectedTypeDiv = document.getElementById('selectedType');
-        selectedTypeDiv.textContent = selectedTypeText; // Replace the existing content
-        selectedTypeDiv.style.display = 'block'; // Make sure the div is visible
+        const selectedTypeTextSpan = document.getElementById('selectedTypeText');
+        selectedTypeTextSpan.textContent = selectedTypeText; // Update only the text content
+        document.getElementById('selectedType').style.display = 'block'; // Make sure the div is visible
     }
-
-    // Hide the type modal
     document.getElementById("typeModal").style.display = "none";
 });
+
 
 
 
