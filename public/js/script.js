@@ -9,10 +9,40 @@ document.addEventListener('DOMContentLoaded', function() {
             createEmojiTabs();
         })
         .catch(error => console.error('Error loading emoji metadata:', error));
-    // Hide the selectedEmojisContainer initially
+    
+        // Hide the selectedEmojisContainer initially
     document.getElementById('selectedEmojisContainer').style.display = 'none';
+    
+    // Event listeners for the Story Type Modal
+    document.getElementById("typeButton").addEventListener("click", function() {
+        document.getElementById("typeModal").style.display = "block";
+        updateActiveTypeState(); // Update the active state based on the confirmed selection
+    });
 
+    document.getElementById("closeTypeModal").addEventListener("click", function() {
+        document.getElementById("typeModal").style.display = "none";
+    });
+
+    document.getElementById("saveTypeModal").addEventListener("click", function() {
+        const activeTypeOption = document.querySelector('.typeOption.active');
+        if (activeTypeOption) {
+            confirmedTypeSelection = activeTypeOption.textContent;
+        }
+        document.getElementById("typeModal").style.display = "none";
+    });
+    // Event listeners for story type options
+    const typeOptions = document.querySelectorAll('.typeOption');
+    typeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            typeOptions.forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+        // ... (rest of your existing code for emojis and tabs) ...
 });
+
+
+
 
 function createEmojiTabs() {
     const tabsContainer = document.getElementById('emojiTabs');
@@ -115,6 +145,16 @@ function updateSelectedEmojisDisplay() {
     }
 }
 
+function updateActiveTypeState() {
+    const typeOptions = document.querySelectorAll('.typeOption');
+    typeOptions.forEach(opt => {
+        opt.classList.remove('active');
+        if (opt.textContent === confirmedTypeSelection) {
+            opt.classList.add('active');
+        }
+    });
+}
+
 
 
 
@@ -127,28 +167,32 @@ document.getElementById('generateBtn').addEventListener('click', function() {
     localStorage.setItem('selectedEmojis', JSON.stringify(emojisToSave));
 });
 
-//modals
+
+
+// Opening the Emoji Modal
 document.getElementById("emojisButton").addEventListener("click", function() {
     document.getElementById("emojiModal").style.display = "block";
 });
+    // Closing the Emoji Modal using the Save button
+    document.getElementById("saveEmojiModal").addEventListener("click", function() {
+        document.getElementById("emojiModal").style.display = "none";
+    });
+    // Closing the Emoji Modal using the Close button
+    document.getElementById("closeEmojiModal").addEventListener("click", function() {
+        // Hide the modal
+        document.getElementById("emojiModal").style.display = "none";
 
-document.getElementById("saveModal").addEventListener("click", function() {
-    document.getElementById("emojiModal").style.display = "none";
-});
-document.getElementById("closeModal").addEventListener("click", function() {
-    // Hide the modal
-    document.getElementById("emojiModal").style.display = "none";
+        // Reset the selectedEmojis array
+        selectedEmojis = [];
 
-    // Reset the selectedEmojis array
-    selectedEmojis = [];
+        // Update the display to reflect the reset
+        updateSelectedEmojisDisplay();
 
-    // Update the display to reflect the reset
-    updateSelectedEmojisDisplay();
+        // Optionally, reset the active status of images in the emojiContainer
+        const images = document.querySelectorAll('#emojiContainer img');
+        images.forEach(img => img.classList.remove('activeImage'));
+    });
 
-    // Optionally, reset the active status of images in the emojiContainer
-    const images = document.querySelectorAll('#emojiContainer img');
-    images.forEach(img => img.classList.remove('activeImage'));
-});
 
 
 
@@ -160,6 +204,56 @@ tabs.forEach(tab => {
         tabs.forEach(t => t.classList.remove('active'));
         this.classList.add('active');
     });
+});
+
+
+//Story type modal
+document.addEventListener('DOMContentLoaded', function() {
+    // Event listener for opening the Story Type Modal
+    document.getElementById("typeButton").addEventListener("click", function() {
+        document.getElementById("typeModal").style.display = "block";
+    });
+
+    // Event listener for closing the Story Type Modal using the Close button
+    // Note: Ensure you have unique IDs for each modal's Close and Save buttons
+    document.getElementById("closeTypeModal").addEventListener("click", function() {
+        document.getElementById("typeModal").style.display = "none";
+    });
+
+    // ... (rest of your existing code) ...
+});
+
+// Active status of story type options
+const typeOptions = document.querySelectorAll('.typeOption');
+
+typeOptions.forEach(option => {
+    option.addEventListener('click', function() {
+        // Remove 'active' class from all type options
+        typeOptions.forEach(opt => opt.classList.remove('active'));
+
+        // Add 'active' class to the clicked type option
+        this.classList.add('active');
+    });
+});
+
+//Save active type and show in browser
+document.getElementById("saveTypeModal").addEventListener("click", function() {
+    // Find the active type option
+    const activeTypeOption = document.querySelector('.typeOption.active');
+
+    // Check if an active type option exists
+    if (activeTypeOption) {
+        // Get the text of the active type option
+        const selectedTypeText = activeTypeOption.textContent;
+
+        // Update the selectedType div with this text
+        const selectedTypeDiv = document.getElementById('selectedType');
+        selectedTypeDiv.textContent = selectedTypeText; // Replace the existing content
+        selectedTypeDiv.style.display = 'block'; // Make sure the div is visible
+    }
+
+    // Hide the type modal
+    document.getElementById("typeModal").style.display = "none";
 });
 
 

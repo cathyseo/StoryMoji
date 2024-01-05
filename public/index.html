@@ -70,14 +70,30 @@
         <!-- Emoji Modal Structure -->
         <div id="emojiModal" class="modal" style="display: none;">
             <div class="modal-content">
-                <!-- Your modal content here -->
+                <!-- Emoji modal content here -->
                 <div id="emojiTabs"></div>
-                <div id="emojiContainer" class="container">
+                <div id="emojiContainer" class="container"></div>
+                <div id="emojiModalButtonContainer" class="modalButtonContainer">
+                    <button id="closeEmojiModal" class="secondaryButton">Close</button>
+                    <button id="saveEmojiModal" class="primaryButton">Save</button>
+                </div>    
+            </div>
+        </div>
+        
+        <!-- Story Type Modal Structure -->
+        <div id="typeModal" class="modal" style="display: none;">
+            <div id="modalContentId" class="modal-content">
+                <!-- Story type modal content here -->
+                <div id="typeContainer" class="container">
+                    <div class="typeOption">Fairy Story</div>
+                    <div class="typeOption">Horror</div>
+                    <div class="typeOption">Dad Joke</div>
+                    <div class="typeOption">Breaking News</div>
+                    <div class="typeOption">Sci-Fi</div>
                 </div>
-                <!-- Close button -->
-                <div id="modalButtonContainer">
-                    <button id="closeModal" class="secondaryButton">Close</button>
-                    <button id="saveModal" class="primaryButton">Save</button>
+                <div id="typeModalButtonContainer" class="modalButtonContainer">
+                    <button id="closeTypeModal" class="secondaryButton">Close</button>
+                    <button id="saveTypeModal" class="primaryButton">Save</button>
                 </div>    
             </div>
         </div>
@@ -91,10 +107,11 @@
                         </div>
                         <img id="" src="assets/svg/buttonTagDelete.svg" alt="Delete">
                     </div>
+                    <div id="selectedType" class="tag" style="display:none;">
+                        <span id="selectedTypeText"></span> <!-- Placeholder for the text -->
+                        <img src="assets/svg/buttonTagDelete.svg" alt="Delete">
+                    </div>                                    
                     <div class="tag">
-                        Fairy Tale
-                        <img id="" src="assets/svg/buttonTagDelete.svg" alt="Delete">
-                    </div>                    <div class="tag">
                         1 Sentence
                         <img id="" src="assets/svg/buttonTagDelete.svg" alt="Delete">
                     </div>
