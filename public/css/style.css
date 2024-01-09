@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+/* Base styles for mobile */
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -6,15 +6,19 @@ body {
     background-color: #1F2223;
     color: white;
     margin: 0 auto; /* Centers the container */
-    max-width: 1920px; /* Maximum width of the content */
-    padding: 0 50px; /* Padding on both sides */
+    padding: 0 18px; /* Padding on both sides */
 }
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
 p {
     margin: 0;
 }
 header {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: start;
     justify-content: space-between;
     gap: 10px;
     flex: 1 0 0;
@@ -52,61 +56,36 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     letter-spacing: -2px;
     line-height: 120%;
+    margin: 0;
 }
 h1 {
-    font-size: 150px;
-    margin: 0; /* Removes default margin */
+    font-size: 60px;
     display: inline-block; /* Aligns with the line-height */
     vertical-align: top; /* Aligns text to the top of the container */
 }
 h2 {
-    font-size: 58px;
+    font-size: 40px;
     margin: 0; /* Removes default margin */
     display: inline-block; /* Aligns with the line-height */
     vertical-align: top; /* Aligns text to the top of the container */
 }
 
-.full-width-text {
-    white-space: nowrap; 
-    display: inline-block; 
-    font-size: 152.855px;
-    display: flex;
-}
 #heroTitleStory {
-    position:relative;
-    display:inline-block;
-}
-#heroTitleStory h1 {
-    position: relative; 
-    display: inline-block; 
-    translate: none; 
-    rotate: none; 
-    scale: none; 
-    transform: translate(0px, 0px);
-}
-#heroTitleEmoji {
-    position:relative;
-    display:inline-block;
-}
-#heroTitleEmoji h1 {
-    position: relative; 
-    display: inline-block; 
-    translate: none; 
-    rotate: none; 
-    scale: none; 
-    transform: translate(0px, 0px);
+    margin-bottom: 30px;
 }
 
 #heroContainer {
     display: flex;
-    gap: 15px;
+    flex-direction: column-reverse;
 }
 #heroTextContainer {
     background-color: #FFA500;
     color: #1F2223;
-    padding: 60px 30px;
-    width: 50%;
+    padding: 36px 30px;
     gap: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 #heroTextContainer div {
     max-width: 550px;
@@ -115,7 +94,6 @@ h2 {
     margin-top: 22px;
 }
 #heroGraphicContainer {
-    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,6 +101,7 @@ h2 {
     background: var(--BG-Dark-Gradient, linear-gradient(180deg, rgba(50, 52, 53, 0.00) 0%, #323435 100%));
     /*Filter Animation*/
     animation: squiglly 0.8s infinite;
+    min-height: 300px;
 }
 
 
@@ -141,6 +120,7 @@ h2 {
 }
 button {
     border: none;
+    text-transform: uppercase;
 }
 .primaryButton {
     background: #1F2223;
@@ -165,6 +145,7 @@ button {
 
 #generatorButtons {
     display: flex;
+    flex-direction: column;
     gap: 8px;
     margin-bottom: 15px;
 }
@@ -182,6 +163,11 @@ button {
     width: 100%;
 }
 
+.OptionButton {
+    font-size: 18px;
+    font-weight: 700;
+}
+
 #typeButton {
     background-color: #B056FF;
 }
@@ -192,32 +178,52 @@ button {
 
 #generateContainer {
     display: flex;
+    flex-direction: column;
     width: 100%;
 }
 
 #generateContainer button {
-    flex: 1; /* Take up available space */
     background-color: #FFA500;
     color: #1F2223;
 }
 
 #selectedOptions {
     display: flex;
-    flex: 2; /* Take up available space */
+    flex-wrap: wrap;
     align-items: center;
     gap: 10px;
     background-color: #323435;
-    padding-left: 10px;
+    padding: 10px;
+    min-height: 35px;
+}
+#generateBtn {
+    width: 100%;
 }
 .tag {
+    font-size: 18px;
+    font-weight: 700;
     color: #1F2223;
     background-color: white;
     display: flex;
-    padding: 8px 14px;
-    justify-content: center;
-    align-items: center;
+    align-items: center; /* Vertically center all items */
+    justify-content: space-between; /* Space out the content and the delete icon */
     gap: 20px;
+    padding: 8px 14px; /* Adjust padding as needed */
+    height: 30px;
+    text-transform: uppercase;
 }
+/* Adjust the height of images and text inside the tag */
+.tag img {
+    max-height: 24px; /* Set max height to match emoji images, adjust as needed */
+    width: auto; /* Keep the aspect ratio of the delete icon */
+}
+#selectedType {
+    background-color: #B056FF;
+}
+#selectedLength {
+    background-color: #03C9EA;
+}
+
 
 /*Modal*/
 .modal {
@@ -231,9 +237,8 @@ button {
 }
 
 .modal-content {
-    background-color: #E9EDF0;
     margin: auto;
-    padding: 20px;
+    padding: 20px 0px;
     width: 100vw; /* Full width */
     height: 100vh; /* Full height */
 }
@@ -245,6 +250,10 @@ button {
 }
 
 /*Emoji modal*/
+#emojiModal {
+    background-color: #E9EDF0;
+}
+
 #emojiContainer img {
     width: 60px;
     height: 60px;
@@ -256,16 +265,44 @@ button {
         background-color: white;
         border-radius: 10px;
     }
-
-    #emojiTabs {
+    #emojiTabsContainer {
+        overflow: hidden;
         display: flex;
-        flex-wrap: wrap;
+        align-items: center;
+    }
+   
+    #emojiTabs {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex: 1 1 auto;
+        white-space: nowrap;
+        overflow-x: auto;
+        margin-left: 18px;
+        overflow-x: auto; /* Enable horizontal scrolling */
         gap: 20px;
+        /* white-space: nowrap;  Keep text in a single line */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS devices */
+        /* Hide scrollbar for Chrome, Safari, and Opera */
+        -webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge, and Firefox */
+        scrollbar-width: none;
+
+        /* Prevent scrollbar space from displaying */
+        -ms-overflow-style: none;
+    }
+    #emojiTabs::-webkit-scrollbar {
+        display: none;
     }
     .emojiTab {
+        margin-bottom: 10px;
+        flex: 0 0 auto; /* Prevent tabs from stretching */
         color:black;
         text-align: right;
-        font-size: 38px;
+        font-size: 26px;
         font-style: normal;
         font-weight: 700;
         line-height: 130%;
@@ -274,18 +311,17 @@ button {
     }
     /* Active state for tabs */
     .emojiTab:hover, .emojiTab.active {
-        text-decoration: solid underline black 6px;
+        text-decoration: solid underline black 4px;
     }
 
     #emojiContainer {
-        padding-top: 30px;
+        padding-top: 10px;
         background-color: #E9EDF0;
     }
-
-    /*Selected emojis tag*/
+    
     #selectedEmojis img {
-        width: 24px;
-        height: 24px;
+        width: 24px; /* Keep your existing width */
+        height: 24px; /* Keep the emoji images at a fixed size */
     }
 
 /*Type modal*/
@@ -296,10 +332,16 @@ button {
     flex-direction: column;
     justify-content: center;
 }
+#lengthModalContentId {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 #typeContainer {
     color: black;
     gap: 20px;
-    font-size: 80px;
+    font-size: 40px;
     line-height: 130%;
     font-weight: 700;
     text-align: left;
@@ -308,5 +350,274 @@ button {
 }
 /* Active state for type */
    .typeOption:hover, .typeOption.active {
-    text-decoration: solid underline black 12px;
+    text-decoration: solid underline black 6px;
+}
+/* Active state for length */
+.lengthOption:hover, .lengthOption.active {
+    text-decoration: solid underline black 6px;
+}
+/*Length modal*/
+#lengthModal {
+    background-color: #03C9EA;
+}
+
+
+
+
+/* Media Query for larger screens */
+
+@media (min-width: 768px) {
+    body {
+        max-width: 1920px; /* Maximum width of the content */
+        padding: 0 50px; /* Padding on both sides */
+    }
+
+    header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex: 1 0 0;
+        padding: 20px 0px;
+    }
+    #logoContainer {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    #logo {
+        font-size: 34px;
+        font-weight: 700;
+        text-transform: capitalize;
+        text-transform: uppercase;
+    }
+    #free {
+        font-size: 16px;
+        border-radius: 100px;
+        border: 1px solid var(--Secondary-White, #FFF);
+        padding: 0 10px;
+    }
+    li {
+        display: flex;
+        align-items: center;
+        gap: 27px;
+    }
+    ui {
+        list-style-type: none;
+    }
+    h1 {
+        font-size: 150px;
+        margin: 0; /* Removes default margin */
+        display: inline-block; /* Aligns with the line-height */
+        vertical-align: top; /* Aligns text to the top of the container */
+    }
+    h2 {
+        font-size: 58px;
+        margin: 0; /* Removes default margin */
+        display: inline-block; /* Aligns with the line-height */
+        vertical-align: top; /* Aligns text to the top of the container */
+    }
+    
+    #heroTitleStory {
+        margin-bottom: 30px;
+    }
+    
+    #heroContainer {
+        min-height: 500px;
+        display: flex;
+        flex-direction: row;
+    }
+    #heroTextContainer {
+        background-color: #FFA500;
+        color: #1F2223;
+        padding: 60px 30px;
+        width: 50%;
+        gap: 22px;
+    }
+    #heroTextContainer div {
+        max-width: 550px;
+    }
+    #heroTextContainer button {
+        margin-top: 22px;
+        max-width: 200px;
+    }
+    #heroGraphicContainer {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background: var(--BG-Dark-Gradient, linear-gradient(180deg, rgba(50, 52, 53, 0.00) 0%, #323435 100%));
+        /*Filter Animation*/
+        animation: squiglly 0.8s infinite;
+    }
+    
+    
+    #eyes {
+        position: absolute;
+        top: 50%; /* Adjust values as needed */
+        left: 50%; /* Adjust values as needed */
+        transform: translate(-50%, -50%);
+    }
+    #heroSubGraphic {
+        width: 300px;
+        position: absolute;
+        top: 50%; /* Adjust values as needed */
+        left: 50%; /* Adjust values as needed */
+        transform: translate(-50%, -50%);
+    }
+
+    
+    /* Generator section */
+    #generatorContainer {
+        margin-bottom: 150px;
+    }
+    .headingBox {
+        text-align: center;
+        margin: 64px 0 24px 0;
+    }
+    
+    #generatorButtons {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+    
+    
+    #generateContainer {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+    
+    #generateContainer button {
+        background-color: #FFA500;
+        color: #1F2223;
+    }
+    
+    #selectedOptions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        background-color: #323435;
+        padding: 10px;
+        width: 66.666%;
+    }
+    #generateBtn {
+        width: 33.333%;
+    }
+
+    /* Adjust the height of images and text inside the tag */
+    .tag img {
+        max-height: 24px; /* Set max height to match emoji images, adjust as needed */
+        width: auto; /* Keep the aspect ratio of the delete icon */
+    }
+    
+    
+    /*Modal*/
+    .modal {
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100vw; /* Full width */
+        height: 100vh; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+    }
+    
+    .modal-content {
+        margin: auto;
+        padding: 20px;
+        width: 100vw; /* Full width */
+        height: 100vh; /* Full height */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }
+    .modal-content * {   
+        /*max-width: 100%; Ensure children don't exceed parent's width */
+        box-sizing: border-box; /* Apply box-sizing to all child elements */
+    }
+
+    .modalButtonContainer {
+        display: flex;
+        position: fixed; /* Fixed position relative to viewport */
+        right: 20px; /* Right side */
+        bottom: 20px; /* Bottom side */
+    }
+    
+    /*Emoji modal*/
+    #emojiModal {
+        background-color: #E9EDF0;
+    }
+
+    #emojiContainer img {
+        width: 80px;
+        height: 80px;
+        padding: 5px;
+        margin: 5px;
+    }
+        /* Active state for images */
+        #emojiContainer img:hover, #emojiContainer img.activeImage {
+            background-color: white;
+            border-radius: 10px;
+        }
+    
+        .emojiTab {
+            color:black;
+            text-align: right;
+            font-size: 38px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 130%;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        /* Active state for tabs */
+        .emojiTab:hover, .emojiTab.active {
+            text-decoration: solid underline black 6px;
+        }
+    
+        #emojiContainer {
+            padding-top: 10px;
+            background-color: #E9EDF0;
+        }
+        
+        #selectedEmojis img {
+            width: 24px; /* Keep your existing width */
+            height: 24px; /* Keep the emoji images at a fixed size */
+        }
+    
+    /*Type modal*/
+    #typeModalContentId {
+        background-color: #B056FF;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #typeContainer {
+        color: black;
+        gap: 20px;
+        font-size: 80px;
+        line-height: 130%;
+        font-weight: 700;
+        text-align: left;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+    /* Active state for type */
+       .typeOption:hover, .typeOption.active {
+        text-decoration: solid underline black 12px;
+    }
+    /* Active state for length */
+    .lengthOption:hover, .lengthOption.active {
+        text-decoration: solid underline black 12px;
+    }
+    /*Length modal*/
+    #lengthModal {
+        background-color: #03C9EA;
+    }
+    
 }

@@ -23,13 +23,10 @@
         </nav>
     </header>
     <!-- Hero section -->
-    <div class="full-width-text" js-fit-text js-words class="-fitted">
-        <div id="heroTitleStory">
-            <h1>S</h1><h1>T</h1><h1>O</h1><h1>R</h1><h1>Y</h1><h1>&</h1>
-        </div>
-        <div is="heroTitleEmoji">
-            <h1>E</h1><h1>M</h1><h1>O</h1><h1>J</h1><h1>I</h1>
-        </div>
+    <div>
+        <h1 id="heroTitleStory">
+            Story & Emoji
+        </h1>
     </div>
     <div id="heroContainer">
         <div id="heroTextContainer">
@@ -53,15 +50,15 @@
         <!--Story Generator-->
         <div id="generatorBox">
             <div id="generatorButtons">
-                <button class="secondaryButton" id="emojisButton">
+                <button class="secondaryButton" class="OptionButton" id="emojisButton">
                     Emojis *
                     <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
                 </button>
-                <button class="secondaryButton" id="typeButton">
+                <button class="secondaryButton" class="OptionButton" id="typeButton">
                     Story Type *
                     <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
                 </button>
-                <button class="secondaryButton"id="lengthButton">
+                <button class="secondaryButton" class="OptionButton" id="lengthButton">
                     Length *
                     <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
                 </button>
@@ -69,9 +66,13 @@
 
         <!-- Emoji Modal Structure -->
         <div id="emojiModal" class="modal" style="display: none;">
-            <div class="modal-content">
+            <div id="emojiModalContainer" class="modal-content">
                 <!-- Emoji modal content here -->
-                <div id="emojiTabs"></div>
+                <div id="emojiTabsContainer">
+                    <div class="scrollArrow"><img id="scrollArrowLeft" src="assets/svg/scrollArrowLeft.svg" alt="Arrow Icon Left"></div>
+                    <div id="emojiTabs"></div>
+                    <div class="scrollArrow"><img id="scrollArrowRight" src="assets/svg/scrollArrowRight.svg" alt="Arrow Icon Right"></div>
+                </div>
                 <div id="emojiContainer" class="container"></div>
                 <div id="emojiModalButtonContainer" class="modalButtonContainer">
                     <button id="closeEmojiModal" class="secondaryButton">Close</button>
@@ -127,8 +128,8 @@
                         <span id="selectedTypeText"></span> <!-- Placeholder for the text -->
                         <img src="assets/svg/buttonTagDelete.svg" alt="Delete">
                     </div>                                    
-                    <div id="selectedLength" class="tag">
-                        1 Sentence
+                    <div id="selectedLength" class="tag" style="display:none;">
+                        
                         <img id="" src="assets/svg/buttonTagDelete.svg" alt="Delete">
                     </div>
                 </div>

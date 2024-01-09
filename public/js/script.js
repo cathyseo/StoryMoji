@@ -1,5 +1,7 @@
 let selectedEmojis = [];
 let emojiMetadata = {};
+// Initialize confirmedLengthSelection with null or an empty string
+let confirmedLengthSelection = "";
 
 document.addEventListener('DOMContentLoaded', function() {
     fetch('/metadata.json')
@@ -26,16 +28,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const activeTypeOption = document.querySelector('.typeOption.active');
         if (activeTypeOption) {
             confirmedTypeSelection = activeTypeOption.textContent;
+            const selectedTypeDiv = document.getElementById('selectedType');
+            
+            // Remove existing text node if it exists
+            if (selectedTypeDiv.childNodes[0].nodeType === Node.TEXT_NODE) {
+                selectedTypeDiv.removeChild(selectedTypeDiv.childNodes[0]);
+            }
+
+            // Insert new text content before the delete image
+            selectedTypeDiv.insertBefore(document.createTextNode(confirmedTypeSelection), selectedTypeDiv.firstChild);
+
+            // Display the selectedType div with flex style after saving
+            selectedTypeDiv.style.display = 'flex';
         }
         document.getElementById("typeModal").style.display = "none";
-    });
-    // Event listeners for story type options
-    const typeOptions = document.querySelectorAll('.typeOption');
-    typeOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            typeOptions.forEach(opt => opt.classList.remove('active'));
-            this.classList.add('active');
-        });
     });
         // ... (rest of your existing code for emojis and tabs) ...
 });
@@ -199,7 +205,7 @@ tabs.forEach(tab => {
 });
 
 
-//Story type modal
+//Story type, Length modal
 document.addEventListener('DOMContentLoaded', function() {
     // Event listener for opening the Story Type Modal
     document.getElementById("typeButton").addEventListener("click", function() {
@@ -212,8 +218,64 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("typeModal").style.display = "none";
     });
 
+    
+    // Event listener for the Length Modal
+    document.getElementById("lengthButton").addEventListener("click", function() {
+        document.getElementById("lengthModal").style.display = "block";
+        updateActiveLengthState(); // Update active state when the modal is opened
+    });
+
+    document.getElementById("closelengthModal").addEventListener("click", function() {
+        document.getElementById("lengthModal").style.display = "none";
+    });
+
+    // Event listener for saving the length selection
+    document.getElementById("savelengthModal").addEventListener("click", function() {
+        const activeLengthOption = document.querySelector('.lengthOption.active');
+        if (activeLengthOption) {
+            confirmedLengthSelection = activeLengthOption.textContent;
+            const selectedLengthDiv = document.getElementById('selectedLength');
+            
+            // Remove existing text node if it exists
+            if (selectedLengthDiv.childNodes[0].nodeType === Node.TEXT_NODE) {
+                selectedLengthDiv.removeChild(selectedLengthDiv.childNodes[0]);
+            }
+
+            // Insert new text content before the delete image
+            selectedLengthDiv.insertBefore(document.createTextNode(confirmedLengthSelection), selectedLengthDiv.firstChild);
+
+            // Display the selectedLength div with flex style after saving
+            selectedLengthDiv.style.display = 'flex';
+        }
+        document.getElementById("lengthModal").style.display = "none";
+    });
+
+
+    // Event listeners for length options
+    const lengthOptions = document.querySelectorAll('.lengthOption');
+    lengthOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            lengthOptions.forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+
+
     // ... (rest of your existing code) ...
+    
 });
+
+
+function updateActiveLengthState() {
+    const lengthOptions = document.querySelectorAll('.lengthOption');
+    lengthOptions.forEach(opt => {
+        opt.classList.remove('active');
+        if (opt.textContent === confirmedLengthSelection) {
+            opt.classList.add('active');
+        }
+    });
+}
 
 // Active status of story type options
 const typeOptions = document.querySelectorAll('.typeOption');
@@ -228,19 +290,45 @@ typeOptions.forEach(option => {
     });
 });
 
-//Save active type and show in browser
-document.getElementById("saveTypeModal").addEventListener("click", function() {
-    const activeTypeOption = document.querySelector('.typeOption.active');
-    if (activeTypeOption) {
-        const selectedTypeText = activeTypeOption.textContent;
-        const selectedTypeTextSpan = document.getElementById('selectedTypeText');
-        selectedTypeTextSpan.textContent = selectedTypeText; // Update only the text content
-        document.getElementById('selectedType').style.display = 'block'; // Make sure the div is visible
+
+// Arrow buttons in Emoji tabs
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollAmount = 100; // Adjust the scroll amount as needed
+    const scrollLeftArrow = document.getElementById('scrollArrowLeft');
+    const scrollRightArrow = document.getElementById('scrollArrowRight');
+    const emojiTabs = document.getElementById('emojiTabs');
+
+    function updateScrollButtonStates() {
+        // Use a small tolerance to account for fractional differences
+        const tolerance = 1;
+    
+        // Disable left arrow if at the start of the scroll
+        scrollLeftArrow.style.opacity = emojiTabs.scrollLeft <= 0 ? '0.2' : '1';
+        scrollLeftArrow.disabled = emojiTabs.scrollLeft <= 0;
+    
+        // Check if we can scroll more to the right
+        const maxScrollLeft = emojiTabs.scrollWidth - emojiTabs.clientWidth;
+        scrollRightArrow.style.opacity = (emojiTabs.scrollLeft + tolerance) >= maxScrollLeft ? '0.2' : '1';
+        scrollRightArrow.disabled = (emojiTabs.scrollLeft + tolerance) >= maxScrollLeft;
     }
-    document.getElementById("typeModal").style.display = "none";
+
+    // Initial state setup
+    scrollLeftArrow.style.opacity = '0.2';
+    scrollLeftArrow.disabled = true;
+    scrollRightArrow.style.opacity = '1';
+    scrollRightArrow.disabled = false;
+
+    // Event listeners for arrows
+    scrollLeftArrow.addEventListener('click', function() {
+        emojiTabs.scrollLeft -= scrollAmount;
+        updateScrollButtonStates();
+    });
+
+    scrollRightArrow.addEventListener('click', function() {
+        emojiTabs.scrollLeft += scrollAmount;
+        updateScrollButtonStates();
+    });
+
+    // Listener for scroll events
+    emojiTabs.addEventListener('scroll', updateScrollButtonStates);
 });
-
-
-
-
-
