@@ -3,10 +3,11 @@
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 150%;
-    background-color: #1F2223;
-    color: white;
+    color: 1F2223;
+    background-color: #EBDFD0;
     margin: 0 auto; /* Centers the container */
     padding: 0 18px; /* Padding on both sides */
+    max-width: 1100px;
 }
 * {
     font-family: 'Poppins', sans-serif;
@@ -17,8 +18,8 @@ p {
 }
 header {
     display: flex;
-    flex-direction: column;
-    align-items: start;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     gap: 10px;
     flex: 1 0 0;
@@ -38,7 +39,7 @@ header {
 #free {
     font-size: 16px;
     border-radius: 100px;
-    border: 1px solid var(--Secondary-White, #FFF);
+    border: 1px solid var(--Secondary-White, #1F2223);
     padding: 0 10px;
 }
 li {
@@ -57,67 +58,64 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: -2px;
     line-height: 120%;
     margin: 0;
+    color: #1F2223;
+    text-transform: capitalize;
 }
 h1 {
-    font-size: 60px;
+    font-size: 50px;
     display: inline-block; /* Aligns with the line-height */
     vertical-align: top; /* Aligns text to the top of the container */
 }
 h2 {
-    font-size: 40px;
+    font-size: 34px;
     margin: 0; /* Removes default margin */
     display: inline-block; /* Aligns with the line-height */
     vertical-align: top; /* Aligns text to the top of the container */
 }
 
-#heroTitleStory {
-    margin-bottom: 30px;
-}
-
 #heroContainer {
-    display: flex;
-    flex-direction: column-reverse;
-}
-#heroTextContainer {
-    background-color: #FFA500;
-    color: #1F2223;
-    padding: 36px 30px;
-    gap: 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-#heroTextContainer div {
-    max-width: 550px;
-}
-#heroTextContainer button {
-    margin-top: 22px;
-}
-#heroGraphicContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
-    background: var(--BG-Dark-Gradient, linear-gradient(180deg, rgba(50, 52, 53, 0.00) 0%, #323435 100%));
-    /*Filter Animation*/
-    animation: squiglly 0.8s infinite;
-    min-height: 300px;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#heroTitleStory {
+    z-index: 1;
+    margin-bottom: 30px;
+    color: #1F2223;
+    text-align: center;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: capitalize;
+    width: 300px; /* Adjust to the size you want */
+    height: 200px; /* Adjust to the size you want */
+}
+#imgStar {
+    z-index: -10;
+    position: absolute;
+    top: -10%;
+    left: 0%;
+}
+#imgHeart {
+    z-index: -10;
+    position: absolute;
+    bottom: 10%;
+    left: 3%;
+    width: 70px;
+    height: auto;
+}
+#imgBalloon {
+    z-index: -10;
+    position: absolute;
+    bottom: 20%;
+    right: 5%;
+    width: 70px;
+    height: auto;
 }
 
 
-#eyes {
-    position: absolute;
-    top: 50%; /* Adjust values as needed */
-    left: 50%; /* Adjust values as needed */
-    transform: translate(-50%, -50%);
-}
-#heroSubGraphic {
-    width: 300px;
-    position: absolute;
-    top: 50%; /* Adjust values as needed */
-    left: 50%; /* Adjust values as needed */
-    transform: translate(-50%, -50%);
-}
 button {
     border: none;
     text-transform: uppercase;
@@ -126,7 +124,7 @@ button {
     background: #1F2223;
     color: white;
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
     display: flex;
     padding: 20px 30px;
     justify-content: center;
@@ -139,8 +137,15 @@ button {
     margin-bottom: 150px;
 }
 .headingBox {
+    margin: 64px auto 24px auto; /* Vertical margins as before, horizontal margins set to auto */
+    max-width: 560px;
     text-align: center;
-    margin: 64px 0 24px 0;
+}
+.headingBox h2{
+    margin: 0 0 10px 0;
+}
+.headingBox p{
+    margin: 0 0 32px 0;
 }
 
 #generatorButtons {
@@ -183,8 +188,8 @@ button {
 }
 
 #generateContainer button {
-    background-color: #FFA500;
-    color: #1F2223;
+    background-color: #1F2223;
+    color: white;
 }
 
 #selectedOptions {
@@ -192,7 +197,7 @@ button {
     flex-wrap: wrap;
     align-items: center;
     gap: 10px;
-    background-color: #323435;
+    background-color: #D8CBBA;
     padding: 10px;
     min-height: 35px;
 }
@@ -300,7 +305,7 @@ button {
     .emojiTab {
         margin-bottom: 10px;
         flex: 0 0 auto; /* Prevent tabs from stretching */
-        color:black;
+        color:#1F2223;
         text-align: right;
         font-size: 26px;
         font-style: normal;
@@ -311,7 +316,7 @@ button {
     }
     /* Active state for tabs */
     .emojiTab:hover, .emojiTab.active {
-        text-decoration: solid underline black 4px;
+        text-decoration: solid underline #1F2223 4px;
     }
 
     #emojiContainer {
@@ -339,7 +344,7 @@ button {
     justify-content: center;
 }
 #typeContainer {
-    color: black;
+    color: #1F2223;
     gap: 20px;
     font-size: 40px;
     line-height: 130%;
@@ -350,11 +355,11 @@ button {
 }
 /* Active state for type */
    .typeOption:hover, .typeOption.active {
-    text-decoration: solid underline black 6px;
+    text-decoration: solid underline #1F2223 6px;
 }
 /* Active state for length */
 .lengthOption:hover, .lengthOption.active {
-    text-decoration: solid underline black 6px;
+    text-decoration: solid underline #1F2223 6px;
 }
 /*Length modal*/
 #lengthModal {
@@ -363,12 +368,11 @@ button {
 
 
 
-
 /* Media Query for larger screens */
 
 @media (min-width: 768px) {
     body {
-        max-width: 1920px; /* Maximum width of the content */
+        max-width: 1100px; /* Maximum width of the content */
         padding: 0 50px; /* Padding on both sides */
     }
 
@@ -392,12 +396,6 @@ button {
         text-transform: capitalize;
         text-transform: uppercase;
     }
-    #free {
-        font-size: 16px;
-        border-radius: 100px;
-        border: 1px solid var(--Secondary-White, #FFF);
-        padding: 0 10px;
-    }
     li {
         display: flex;
         align-items: center;
@@ -407,67 +405,45 @@ button {
         list-style-type: none;
     }
     h1 {
-        font-size: 150px;
+        font-size: 100px;
+        letter-spacing: -5;
         margin: 0; /* Removes default margin */
         display: inline-block; /* Aligns with the line-height */
         vertical-align: top; /* Aligns text to the top of the container */
     }
     h2 {
-        font-size: 58px;
+        font-size: 42px;
         margin: 0; /* Removes default margin */
         display: inline-block; /* Aligns with the line-height */
         vertical-align: top; /* Aligns text to the top of the container */
     }
     
     #heroTitleStory {
-        margin-bottom: 30px;
+        width: 1100px; /* Adjust to the size you want */
+        height: 400px; /* Adjust to the size you want */
     }
-    
-    #heroContainer {
-        min-height: 500px;
-        display: flex;
-        flex-direction: row;
-    }
-    #heroTextContainer {
-        background-color: #FFA500;
-        color: #1F2223;
-        padding: 60px 30px;
-        width: 50%;
-        gap: 22px;
-    }
-    #heroTextContainer div {
-        max-width: 550px;
-    }
-    #heroTextContainer button {
-        margin-top: 22px;
-        max-width: 200px;
-    }
-    #heroGraphicContainer {
-        width: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        background: var(--BG-Dark-Gradient, linear-gradient(180deg, rgba(50, 52, 53, 0.00) 0%, #323435 100%));
-        /*Filter Animation*/
-        animation: squiglly 0.8s infinite;
-    }
-    
-    
-    #eyes {
+    #imgStar {
+        z-index: -10;
         position: absolute;
-        top: 50%; /* Adjust values as needed */
-        left: 50%; /* Adjust values as needed */
-        transform: translate(-50%, -50%);
+        top: -4%;
+        left: 35%;
     }
-    #heroSubGraphic {
-        width: 300px;
+    #imgHeart {
+        z-index: -10;
         position: absolute;
-        top: 50%; /* Adjust values as needed */
-        left: 50%; /* Adjust values as needed */
-        transform: translate(-50%, -50%);
+        bottom: 27%;
+        left: 22%;
+        width: 80px;
+        height: auto;
     }
-
+    #imgBalloon {
+        z-index: -10;
+        position: absolute;
+        bottom: 30%;
+        right: 20%;
+        width: 80px;
+        height: auto;
+    }
     
     /* Generator section */
     #generatorContainer {
@@ -475,7 +451,8 @@ button {
     }
     .headingBox {
         text-align: center;
-        margin: 64px 0 24px 0;
+        margin: 64px auto 24px auto; /* Vertical margins as before, horizontal margins set to auto */
+        text-align: center;
     }
     
     #generatorButtons {
@@ -492,17 +469,12 @@ button {
         width: 100%;
     }
     
-    #generateContainer button {
-        background-color: #FFA500;
-        color: #1F2223;
-    }
-    
     #selectedOptions {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         gap: 10px;
-        background-color: #323435;
+        background-color: #D8CBBA;
         padding: 10px;
         width: 66.666%;
     }
@@ -565,7 +537,7 @@ button {
         }
     
         .emojiTab {
-            color:black;
+            color:#1F2223;
             text-align: right;
             font-size: 38px;
             font-style: normal;
@@ -576,7 +548,7 @@ button {
         }
         /* Active state for tabs */
         .emojiTab:hover, .emojiTab.active {
-            text-decoration: solid underline black 6px;
+            text-decoration: solid underline #1F2223 6px;
         }
     
         #emojiContainer {
@@ -598,7 +570,7 @@ button {
         justify-content: center;
     }
     #typeContainer {
-        color: black;
+        color: #1F2223;
         gap: 20px;
         font-size: 80px;
         line-height: 130%;
@@ -609,11 +581,11 @@ button {
     }
     /* Active state for type */
        .typeOption:hover, .typeOption.active {
-        text-decoration: solid underline black 12px;
+        text-decoration: solid underline #1F2223 12px;
     }
     /* Active state for length */
     .lengthOption:hover, .lengthOption.active {
-        text-decoration: solid underline black 12px;
+        text-decoration: solid underline #1F2223 12px;
     }
     /*Length modal*/
     #lengthModal {
