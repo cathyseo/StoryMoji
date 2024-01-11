@@ -1,65 +1,83 @@
 // Main story script
 document.addEventListener('DOMContentLoaded', function() {
-    displayStory();
-
-    document.getElementById('tryAgainBtn').addEventListener('click', function() {
-        localStorage.removeItem('selectedEmojis');
-        window.location.href = '/';
-    });
-});
-
-function displayStory() {
-    const selectedEmojisData = JSON.parse(localStorage.getItem('selectedEmojis'));
-    if (selectedEmojisData && selectedEmojisData.length > 0) {
+    loadContent();
+  });
+  
+  async function loadContent() {
+    try {
+      // Show loading animation
+      document.getElementById('loadingAnimation').style.display = 'flex'; // Show the loading container
+  
+      const selectedEmojisData = JSON.parse(localStorage.getItem('selectedEmojis'));
+      if (selectedEmojisData && selectedEmojisData.length > 0) {
         const prompt = createPromptFromEmojis(selectedEmojisData);
-        generateStory(prompt);
+        await generateStory(prompt); // This function now needs to be async
+  
+        // Fetch and display selected emoji 3D images
+        const metadataResponse = await fetch('metadata.json');
+        if (!metadataResponse.ok) throw new Error('Failed to load emoji metadata');
+        const metadata = await metadataResponse.json();
+  
+        displayEmojis(selectedEmojisData, metadata);
+      }
+  
+      // Hide loading animation and show the story content
+      document.getElementById('loadingAnimation').style.display = 'none';
+      document.getElementById('storyView').style.display = 'block';
+    } catch (error) {
+      console.error('Error loading content:', error);
+      // Handle any errors appropriately here
     }
-}
-
-function createPromptFromEmojis(selectedEmojisData) {
-    // Construct a prompt based on selected emojis
-    // This is an example. Modify it according to your needs.
-    let prompt = "Create a fairy tale story in an one sentence. The story is about ";
+  }
+  
+  function displayEmojis(selectedEmojisData, metadata) {
+    const selectedEmojisContainer = document.getElementById('selectedEmojisPlaceholder');
+    selectedEmojisContainer.innerHTML = selectedEmojisData
+        .map(emoji => {
+            const emojiData = metadata[emoji.key];
+            return emojiData ? `<img src="${emojiData.styles['3D']}" alt="${emoji.key}" />` : '';
+        })
+        .join(' ');
+  }
+  
+  function createPromptFromEmojis(selectedEmojisData) {
+    let prompt = "Create a fairy tale story in one sentence. The story is about ";
     selectedEmojisData.forEach((emoji, index) => {
         prompt += emoji.key + (index < selectedEmojisData.length - 1 ? ', ' : '');
     });
     return prompt;
-}
-
-
-function generateStory(prompt) {
+  }
+  
+  async function generateStory(prompt) {
     const messages = [
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": prompt}
     ];
-
-    console.log("Sending request with messages:", messages);
-
-    fetch('/generate-story', {
+  
+    try {
+      const response = await fetch('/generate-story', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ messages: messages })
-    })
-    .then(response => {
-        console.log("Received response:", response);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log("Data from OpenAI:", data);
-        displayGeneratedStory(data.message.content);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
-
-
-function displayGeneratedStory(story) {
+      });
+  
+      if (!response.ok) throw new Error('Network response was not ok');
+      const data = await response.json();
+      displayGeneratedStory(data.message.content);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  
+  function displayGeneratedStory(story) {
     const output = document.getElementById('fairyTaleOutput');
-    output.textContent = story; // Display the story returned from OpenAI
-}
+    output.textContent = story;
+  }
+  
+  document.getElementById('tryAgainBtn').addEventListener('click', function() {
+    localStorage.removeItem('selectedEmojis');
+    window.location.href = 'index.html'; // Updated to match your HTML
+  });
+  
