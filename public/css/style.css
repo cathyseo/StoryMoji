@@ -36,6 +36,10 @@ header {
     text-transform: capitalize;
     text-transform: uppercase;
 }
+#logo img {
+    width: 70px;
+    height: auto;
+}
 #free {
     font-size: 16px;
     border-radius: 100px;
@@ -71,6 +75,7 @@ h2 {
     margin: 0; /* Removes default margin */
     display: inline-block; /* Aligns with the line-height */
     vertical-align: top; /* Aligns text to the top of the container */
+    letter-spacing: -1px;
 }
 
 #heroContainer {
@@ -130,6 +135,7 @@ button {
     justify-content: center;
     align-items: center;
     gap: 8px;
+    width:100%;
 }
 
 /* Generator section */
@@ -141,11 +147,12 @@ button {
     max-width: 560px;
     text-align: center;
 }
-.headingBox h2{
+h2{
     margin: 0 0 10px 0;
+    font-size: 30px;
 }
 .headingBox p{
-    margin: 0 0 32px 0;
+    margin: 10px 0 32px 0;
 }
 
 #generatorButtons {
@@ -366,11 +373,86 @@ button {
     background-color: #03C9EA;
 }
 
+/*Story Output page*/
 
+#fairyTaleOutput {
+    color: #1F2223;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 160%;
+    margin: 20px 0px 40px 0px;
+}
+.outputSelectedEmojis {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+}
+.outputSelectedEmojis img {
+    height: auto;
+    width: 100px;
+}
+#outputButtonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 60px;
+}
+#outputButtonContainer button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#saveBtn {
+    background-color: #B056FF;
+}
+#shareBtn {
+    background-color: #03C9EA;
+}
+#storyView {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+/*Loading*/
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    margin: 100px auto;
+  }
+  
+  .loading-image {
+    /* Adjust the width and height as needed */
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px; /* Space between image and text */
+  }
+  
+  .loading-text {
+    font-size: 50px;
+    font-weight: 700;
+    color: #1F2223;
+    line-height: 130%;
+  }
+  
+/* Styles for screens between 768px and 1024px */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* CSS rules for medium screens */
+    h1 {
+        font-size: 70px;
+    }
+    #heroTitleStory {
+        width: auto;
+        margin: 0 50px;
+    }
+}
+  
 
 /* Media Query for larger screens */
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
     body {
         max-width: 1100px; /* Maximum width of the content */
         padding: 0 50px; /* Padding on both sides */
@@ -383,7 +465,7 @@ button {
         justify-content: space-between;
         gap: 10px;
         flex: 1 0 0;
-        padding: 20px 0px;
+        padding: 10px 0px;
     }
     #logoContainer {
         display: flex;
@@ -451,10 +533,10 @@ button {
     }
     .headingBox {
         text-align: center;
-        margin: 64px auto 24px auto; /* Vertical margins as before, horizontal margins set to auto */
+        margin: 0px auto 24px auto; /* Vertical margins as before, horizontal margins set to auto */
         text-align: center;
     }
-    
+
     #generatorButtons {
         display: flex;
         flex-direction: row;
@@ -591,5 +673,33 @@ button {
     #lengthModal {
         background-color: #03C9EA;
     }
-    
+    /*Output story page*/
+    #outputButtonContainer {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+    /*Loading*/
+    .loading-image {
+        /* Adjust the width and height as needed */
+        width: 200px;
+        height: 200px;
+        margin-bottom: 20px; /* Space between image and text */
+      }
+      
+      .loading-text {
+        font-size: 80px;
+        font-weight: 700;
+        color: #1F2223;
+        line-height: 130%;
+        max-width: 00px;
+      }
+    /*Output*/
+    #fairyTaleOutput {
+        font-size: 42px;
+        line-height: 150%;
+        margin: 40px 0px 60px 0px;
+    }
 }
+
+
