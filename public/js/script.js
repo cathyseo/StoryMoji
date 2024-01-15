@@ -179,22 +179,22 @@ document.getElementById('generateBtn').addEventListener('click', function() {
 
 
 
-    // Opening the Emoji Modal
-    document.getElementById("emojisButton").addEventListener("click", function() {
-        temporarySelectedEmojis = [...selectedEmojis]; // Copy the current selections to the temporary array
-        document.getElementById("emojiModal").style.display = "block";
-    });
-    // Closing the Emoji Modal using the Save button
-    document.getElementById("saveEmojiModal").addEventListener("click", function() {
-        selectedEmojis = [...temporarySelectedEmojis]; // Save the changes made in the modal
-        updateSelectedEmojisDisplay(); // Update the display with the new selections
-        document.getElementById("emojiModal").style.display = "none";
-    });
-    // Closing the Emoji Modal using the Close button
-    document.getElementById("closeEmojiModal").addEventListener("click", function() {
-        document.getElementById("emojiModal").style.display = "none";
-        // Changes made in the modal are discarded, and the original selectedEmojis remains unchanged
-    });
+// Opening the Emoji Modal
+document.getElementById("emojisButton").addEventListener("click", function() {
+    temporarySelectedEmojis = [...selectedEmojis]; // Copy the current selections to the temporary array
+    document.getElementById("emojiModal").style.display = "block";
+});
+// Closing the Emoji Modal using the Save button
+document.getElementById("saveEmojiModal").addEventListener("click", function() {
+    selectedEmojis = [...temporarySelectedEmojis]; // Save the changes made in the modal
+    updateSelectedEmojisDisplay(); // Update the display with the new selections
+    document.getElementById("emojiModal").style.display = "none";
+});
+// Closing the Emoji Modal using the Close button
+document.getElementById("closeEmojiModal").addEventListener("click", function() {
+    document.getElementById("emojiModal").style.display = "none";
+    // Changes made in the modal are discarded, and the original selectedEmojis remains unchanged
+});
 
 
 //Active status of emoji tabs
@@ -392,12 +392,21 @@ document.getElementById('share').addEventListener('click', function(event) {
     }
 });
 
-//Delete button in tags
+// When the 'Delete Emoji Tag' button is clicked
 document.getElementById('deleteEmojiTag').addEventListener('click', function() {
-    // Clear the selected emojis and update the display
     selectedEmojis = [];
-    updateSelectedEmojisDisplay(); // Assuming this function updates the emoji tag display
+    temporarySelectedEmojis = []; // Also clear the temporary array
+    updateSelectedEmojisDisplay(); // Update display
+    resetEmojiModalSelection(); // Reset the visual state in the modal
 });
+
+function resetEmojiModalSelection() {
+    const emojiImages = document.querySelectorAll('#emojiContainer img');
+    emojiImages.forEach(img => {
+        img.classList.remove('activeImage'); // Remove the selected status style
+    });
+}
+
 
 document.getElementById('deleteTypeTag').addEventListener('click', function() {
     // Clear the selected type and update the display
