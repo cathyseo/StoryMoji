@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
 function createEmojiTabs() {
     const tabsContainer = document.getElementById('emojiTabs');
     const emojiContainer = document.getElementById('emojiContainer');
@@ -59,20 +58,24 @@ function createEmojiTabs() {
     });
 
     Array.from(categories).forEach((category, index) => {
-        const tab = document.createElement('div');
-        tab.classList.add('emojiTab');
-        if (index === 0) tab.classList.add('active');
-        tab.textContent = category;
-        tab.addEventListener('click', () => {
-            showEmojisForCategory(category, emojiContainer);
-            document.querySelectorAll('.emojiTab').forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-        });
-        tabsContainer.appendChild(tab);
+        // Exclude the 'People & Body' tab
+        if (category !== "People & Body") {
+            const tab = document.createElement('div');
+            tab.classList.add('emojiTab');
+            if (index === 0) tab.classList.add('active');
+            tab.textContent = category;
+            tab.addEventListener('click', () => {
+                showEmojisForCategory(category, emojiContainer);
+                document.querySelectorAll('.emojiTab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+            tabsContainer.appendChild(tab);
 
-        if (index === 0) showEmojisForCategory(category, emojiContainer);
+            if (index === 0) showEmojisForCategory(category, emojiContainer);
+        }
     });
 }
+
 
 
 function showEmojisForCategory(category) {
