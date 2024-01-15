@@ -303,6 +303,9 @@ h2{
     max-height: 24px; /* Set max height to match emoji images, adjust as needed */
     width: auto; /* Keep the aspect ratio of the delete icon */
 }
+.deleteTag {
+    cursor: pointer;
+}
 #selectedType {
     background-color: #B056FF;
 }

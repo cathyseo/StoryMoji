@@ -392,6 +392,28 @@ document.getElementById('share').addEventListener('click', function(event) {
     }
 });
 
+//Delete button in tags
+document.getElementById('deleteEmojiTag').addEventListener('click', function() {
+    // Clear the selected emojis and update the display
+    selectedEmojis = [];
+    updateSelectedEmojisDisplay(); // Assuming this function updates the emoji tag display
+});
+
+document.getElementById('deleteTypeTag').addEventListener('click', function() {
+    // Clear the selected type and update the display
+    confirmedTypeSelection = '';
+    document.getElementById('selectedType').style.display = 'none';
+    // Additional logic to update the type selection in the modal, if necessary
+});
+
+document.getElementById('deleteLengthTag').addEventListener('click', function() {
+    // Clear the selected length and update the display
+    confirmedLengthSelection = '';
+    document.getElementById('selectedLength').style.display = 'none';
+    // Additional logic to update the length selection in the modal, if necessary
+});
+
+
 
 
 
