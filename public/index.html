@@ -18,120 +18,127 @@
             <p id="free">FREE</p>
         </div>
         <nav>
-            <li>
-                <ui>About</ui>
-                <ui>Share</ui>
-            </li>
+            <ui>
+                <li><a href="#">About</a></li>
+                <li id="shareContainer">
+                    <a href="#" id="share">Share</a>
+                    <span id="linkCopied">Link copied</span>
+                </li>
+            </ui>
         </nav>
     </header>
     <!-- Hero section -->
-    <div id="heroContainer">
-        <h1 id="heroTitleStory">
-            Every Emojis you choose weaves a new story
-        </h1>
-        <img id="imgStar" src="assets/img/star.png" alt="start image">
-        <img id="imgHeart" src="assets/img/heart.png" alt="heart image">
-        <img id="imgBalloon" src="assets/img/balloon.png" alt="balloon image">
-    </div>
-
-    <div id="generatorContainer">
-        <div class="headingBox">
-            <h2>Let’s start</h2>
-            <p>Choose emojis, story type and length for the story you want. When you are ready, click Get A Story!</p>
-        </div>
-        <!--Story Generator-->
-        <div id="generatorBox">
-            <div id="generatorButtons">
-                <button class="secondaryButton" class="OptionButton" id="emojisButton">
-                    Emojis *
-                    <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
-                </button>
-                <button class="secondaryButton" class="OptionButton" id="typeButton">
-                    Story Type *
-                    <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
-                </button>
-                <button class="secondaryButton" class="OptionButton" id="lengthButton">
-                    Length *
-                    <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
-                </button>
+    <div id="contentContainer">
+        <div id="heroContainer">
+            <div id="heroTitleStory">
+                <h1>Every Emoji you choose makes a story</h1>
+                <p>Choose emojis, story type and length for the story you want. When you are ready, click Make A Story!</p>
             </div>
+            <div id="heroImgContainer">
+                <img class="heroIMG" id="imgCow" src="assets/img/Cow-Face-NA.png" alt="Cow image">
+                <img class="heroIMG" id="imgFire" src="assets/img/Fire-NA.png" alt="Fire image">
+                <img class="heroIMG" id="imgFlying" src="assets/img/Flying-Saucer-NA.png" alt="Flying image">
+                <img class="heroIMG" id="imgVoltage" src="assets/img/High-Voltage-NA.png" alt="Voltage image">
+                <img class="heroIMG" id="imgFountain" src="assets/img/Fountain-NA.png" alt="Fountain image">
+                <img class="heroIMG" id="imgHeart" src="assets/img/Red-Heart-NA.png" alt="Heart image">
+            </div>
+        </div>
 
-        <!-- Emoji Modal Structure -->
-        <div id="emojiModal" class="modal" style="display: none;">
-            <div id="emojiModalContainer" class="modal-content">
-                <!-- Emoji modal content here -->
-                <div id="emojiTabsContainer">
-                    <div class="scrollArrow"><img id="scrollArrowLeft" src="assets/svg/scrollArrowLeft.svg" alt="Arrow Icon Left"></div>
-                    <div id="emojiTabs"></div>
-                    <div class="scrollArrow"><img id="scrollArrowRight" src="assets/svg/scrollArrowRight.svg" alt="Arrow Icon Right"></div>
+        <div id="generatorContainer">
+            <!--Story Generator-->
+            <div id="generatorBox">
+                <div id="generatorButtons">
+                    <button class="secondaryButton" class="OptionButton" id="emojisButton">
+                        Emojis *
+                        <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
+                    </button>
+                    <button class="secondaryButton" class="OptionButton" id="typeButton">
+                        Story Type *
+                        <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
+                    </button>
+                    <button class="secondaryButton" class="OptionButton" id="lengthButton">
+                        Length *
+                        <img id="" src="assets/svg/buttonArrowRight.svg" alt="Arrow Icon ">
+                    </button>
                 </div>
-                <div id="emojiContainer" class="container"></div>
-                <div id="emojiModalButtonContainer" class="modalButtonContainer">
-                    <button id="closeEmojiModal" class="secondaryButton">Close</button>
-                    <button id="saveEmojiModal" class="primaryButton">Save</button>
-                </div>    
-            </div>
-        </div>
-        
-        <!-- Story Type Modal Structure -->
-        <div id="typeModal" class="modal" style="display: none;">
-            <div id="typeModalContentId" class="modal-content">
-                <!-- Story type modal content here -->
-                <div id="typeContainer" class="container">
-                    <div class="typeOption">Fairy Story</div>
-                    <div class="typeOption">Horror</div>
-                    <div class="typeOption">Dad Joke</div>
-                    <div class="typeOption">Breaking News</div>
-                    <div class="typeOption">Sci-Fi</div>
-                </div>
-                <div id="typeModalButtonContainer" class="modalButtonContainer">
-                    <button id="closeTypeModal" class="secondaryButton">Close</button>
-                    <button id="saveTypeModal" class="primaryButton">Save</button>
-                </div>    
-            </div>
-        </div>
 
-        <!-- Length Modal Structure -->
-        <div id="lengthModal" class="modal" style="display: none;">
-            <div id="lengthModalContentId" class="modal-content">
-                <!-- Length modal content here -->
-                <div id="typeContainer" class="container">
-                    <div class="lengthOption">1 sentence</div>
-                    <div class="lengthOption">2 sentences</div>
-                    <div class="lengthOption">3 sentences</div>
+            <!-- Emoji Modal Structure -->
+            <div id="emojiModal" class="modal" style="display: none;">
+                <div id="emojiModalContainer" class="modal-content">
+                    <!-- Emoji modal content here -->
+                    <div id="emojiTabsContainer">
+                        <div class="scrollArrow"><img id="scrollArrowLeft" src="assets/svg/scrollArrowLeft.svg" alt="Arrow Icon Left"></div>
+                        <div id="emojiTabs"></div>
+                        <div class="scrollArrow"><img id="scrollArrowRight" src="assets/svg/scrollArrowRight.svg" alt="Arrow Icon Right"></div>
+                    </div>
+                    <div id="emojiContainer" class="container"></div>
+                    <div id="emojiModalButtonContainer" class="modalButtonContainer">
+                        <button id="closeEmojiModal" class="secondaryButton">Close</button>
+                        <button id="saveEmojiModal" class="primaryButton">Save</button>
+                    </div>    
                 </div>
-                <div id="lengthModalButtonContainer" class="modalButtonContainer">
-                    <button id="closelengthModal" class="secondaryButton">Close</button>
-                    <button id="savelengthModal" class="primaryButton">Save</button>
-                </div>    
             </div>
-        </div>
+            
+            <!-- Story Type Modal Structure -->
+            <div id="typeModal" class="modal" style="display: none;">
+                <div id="typeModalContentId" class="modal-content">
+                    <!-- Story type modal content here -->
+                    <div id="typeContainer" class="container">
+                        <div class="typeOption">Fairy Story</div>
+                        <div class="typeOption">Horror</div>
+                        <div class="typeOption">Dad Joke</div>
+                        <div class="typeOption">Breaking News</div>
+                        <div class="typeOption">Sci-Fi</div>
+                    </div>
+                    <div id="typeModalButtonContainer" class="modalButtonContainer">
+                        <button id="closeTypeModal" class="secondaryButton">Close</button>
+                        <button id="saveTypeModal" class="primaryButton">Save</button>
+                    </div>    
+                </div>
+            </div>
 
-            <div id="generateContainer">
-                <div id="selectedOptions">
-                    <!--here selected options appear as a tags-->
-                    <div class="tag" id="selectedEmojisContainer">
-                        <div id="selectedEmojis">
-                            <div id="selectedEmojisPlaceholder"></div>
+            <!-- Length Modal Structure -->
+            <div id="lengthModal" class="modal" style="display: none;">
+                <div id="lengthModalContentId" class="modal-content">
+                    <!-- Length modal content here -->
+                    <div id="typeContainer" class="container">
+                        <div class="lengthOption">1 sentence</div>
+                        <div class="lengthOption">2 sentences</div>
+                        <div class="lengthOption">3 sentences</div>
+                    </div>
+                    <div id="lengthModalButtonContainer" class="modalButtonContainer">
+                        <button id="closelengthModal" class="secondaryButton">Close</button>
+                        <button id="savelengthModal" class="primaryButton">Save</button>
+                    </div>    
+                </div>
+            </div>
+
+                <div id="generateContainer">
+                    <div id="selectedOptions">
+                        <!--here selected options appear as a tags-->
+                        <div class="tag" id="selectedEmojisContainer">
+                            <div id="selectedEmojis">
+                                <div id="selectedEmojisPlaceholder"></div>
+                            </div>
+                            <img id="" src="assets/svg/buttonTagDelete.svg" alt="Delete">
                         </div>
-                        <img id="" src="assets/svg/buttonTagDelete.svg" alt="Delete">
+                        <div id="selectedType" class="tag" style="display:none;">
+                            <span id="selectedTypeText"></span> <!-- Placeholder for the text -->
+                            <img src="assets/svg/buttonTagDelete.svg" alt="Delete">
+                        </div>                                    
+                        <div id="selectedLength" class="tag" style="display:none;">
+                            
+                            <img id="" src="assets/svg/buttonTagDelete.svg" alt="Delete">
+                        </div>
                     </div>
-                    <div id="selectedType" class="tag" style="display:none;">
-                        <span id="selectedTypeText"></span> <!-- Placeholder for the text -->
-                        <img src="assets/svg/buttonTagDelete.svg" alt="Delete">
-                    </div>                                    
-                    <div id="selectedLength" class="tag" style="display:none;">
-                        
-                        <img id="" src="assets/svg/buttonTagDelete.svg" alt="Delete">
-                    </div>
+                    <button class="primaryButton" button id="generateBtn" onclick="location.href='story.html'">Get a Story</button>
                 </div>
-                <button class="primaryButton" button id="generateBtn" onclick="location.href='story.html'">Get a Story</button>
             </div>
+
+            <!--Stories Others made-->
+
         </div>
-
-        <!--Stories Others made-->
-
-    </div>
+    </contentContainer>
 
 
     <script src="js/script.js"></script>

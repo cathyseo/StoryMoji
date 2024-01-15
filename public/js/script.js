@@ -332,3 +332,65 @@ document.addEventListener('DOMContentLoaded', function() {
     // Listener for scroll events
     emojiTabs.addEventListener('scroll', updateScrollButtonStates);
 });
+
+//Animate images
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to toggle between animated and non-animated images
+    function toggleImage(event) {
+        // Get the clicked image element
+        var img = event.target;
+        // Check if the image is non-animated
+        if (img.src.includes('-NA.png')) {
+            // Change to the animated image
+            img.src = img.src.replace('-NA.png', '.png');
+        } else {
+            // Change back to the non-animated image
+            img.src = img.src.replace('.png', '-NA.png');
+        }
+    }
+
+    // Get all elements with the class 'heroIMG'
+    var images = document.querySelectorAll('.heroIMG');
+
+    // Add click event listener to each image
+    images.forEach(function(img) {
+        img.addEventListener('click', toggleImage);
+    });
+});
+
+//Share button
+document.getElementById('share').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    // Function to check if the device is mobile
+    function isMobileDevice() {
+        return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    }
+
+    // If it's a mobile device, use the native share modal
+    if (isMobileDevice() && navigator.share) {
+        navigator.share({
+            title: document.title,
+            url: window.location.href
+        }).then(() => {
+            console.log('Thanks for sharing!');
+        }).catch(console.error);
+    } else {
+        // For non-mobile devices, use the existing clipboard functionality
+        navigator.clipboard.writeText(window.location.href).then(function() {
+            var linkCopied = document.getElementById('linkCopied');
+            linkCopied.classList.add('active');
+            setTimeout(function() {
+                linkCopied.classList.remove('active');
+            }, 1000); // Duration for the message display
+        }, function(err) {
+            console.error('Could not copy text:', err);
+        });
+    }
+});
+
+
+
+
+
+
