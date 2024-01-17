@@ -1,158 +1,39 @@
-let selectedEmojis = [];
-let emojiMetadata = {};
+let activeEmojis = new Set(); // To keep track of activated emojis
 // Initialize confirmedLengthSelection with null or an empty string
 let confirmedLengthSelection = "";
 
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('/metadata.json')
-        .then(response => response.json())
-        .then(data => {
-            emojiMetadata = data;
-            createEmojiTabs();
-        })
-        .catch(error => console.error('Error loading emoji metadata:', error));
-    
-    document.getElementById('selectedEmojisContainer').style.display = 'none';
-    
-    // Event listeners for the Story Type Modal
-    document.getElementById("typeButton").addEventListener("click", function() {
-        document.getElementById("typeModal").style.display = "block";
-        updateActiveTypeState(); // Update the active state based on the confirmed selection
-    });
 
-    document.getElementById("closeTypeModal").addEventListener("click", function() {
-        document.getElementById("typeModal").style.display = "none";
-    });
+// Event listeners for the Story Type Modal
+document.getElementById("typeButton").addEventListener("click", function() {
+    document.getElementById("typeModal").style.display = "block";
+    updateActiveTypeState(); // Update the active state based on the confirmed selection
+});
 
-    document.getElementById("saveTypeModal").addEventListener("click", function() {
-        const activeTypeOption = document.querySelector('.typeOption.active');
-        if (activeTypeOption) {
-            confirmedTypeSelection = activeTypeOption.textContent;
-            const selectedTypeDiv = document.getElementById('selectedType');
-            
-            // Remove existing text node if it exists
-            if (selectedTypeDiv.childNodes[0].nodeType === Node.TEXT_NODE) {
-                selectedTypeDiv.removeChild(selectedTypeDiv.childNodes[0]);
-            }
+document.getElementById("closeTypeModal").addEventListener("click", function() {
+    document.getElementById("typeModal").style.display = "none";
+});
 
-            // Insert new text content before the delete image
-            selectedTypeDiv.insertBefore(document.createTextNode(confirmedTypeSelection), selectedTypeDiv.firstChild);
-
-            // Display the selectedType div with flex style after saving
-            selectedTypeDiv.style.display = 'flex';
+document.getElementById("saveTypeModal").addEventListener("click", function() {
+    const activeTypeOption = document.querySelector('.typeOption.active');
+    if (activeTypeOption) {
+        confirmedTypeSelection = activeTypeOption.textContent;
+        const selectedTypeDiv = document.getElementById('selectedType');
+        
+        // Remove existing text node if it exists
+        if (selectedTypeDiv.childNodes[0].nodeType === Node.TEXT_NODE) {
+            selectedTypeDiv.removeChild(selectedTypeDiv.childNodes[0]);
         }
-        document.getElementById("typeModal").style.display = "none";
-    });
-        // ... (rest of your existing code for emojis and tabs) ...
+
+        // Insert new text content before the delete image
+        selectedTypeDiv.insertBefore(document.createTextNode(confirmedTypeSelection), selectedTypeDiv.firstChild);
+
+        // Display the selectedType div with flex style after saving
+        selectedTypeDiv.style.display = 'flex';
+    }
+    document.getElementById("typeModal").style.display = "none";
 });
 
 
-
-function createEmojiTabs() {
-    const tabsContainer = document.getElementById('emojiTabs');
-    const emojiContainer = document.getElementById('emojiContainer');
-    const categories = new Set();
-
-    Object.keys(emojiMetadata).forEach(key => {
-        categories.add(emojiMetadata[key].group);
-    });
-
-    Array.from(categories).forEach((category, index) => {
-        // Exclude the 'People & Body' tab
-        if (category !== "People & Body") {
-            const tab = document.createElement('div');
-            tab.classList.add('emojiTab');
-            if (index === 0) tab.classList.add('active');
-            tab.textContent = category;
-            tab.addEventListener('click', () => {
-                showEmojisForCategory(category, emojiContainer);
-                document.querySelectorAll('.emojiTab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-            });
-            tabsContainer.appendChild(tab);
-
-            if (index === 0) showEmojisForCategory(category, emojiContainer);
-        }
-    });
-}
-
-
-
-function showEmojisForCategory(category) {
-    const container = document.getElementById('emojiContainer');
-    container.innerHTML = '';
-    Object.keys(emojiMetadata).forEach(key => {
-        const emoji = emojiMetadata[key];
-        if (emoji.group === category) {
-            const img = document.createElement('img');
-            img.src = emoji.styles["3D"];
-            img.alt = emoji.cldr;
-            img.title = emoji.cldr;
-
-            // Check if the emoji is already selected and add the active class if it is
-            if (selectedEmojis.includes(key)) {
-                img.classList.add('activeImage');
-            }
-
-            img.addEventListener('click', function() {
-                if (this.classList.contains('activeImage')) {
-                    this.classList.remove('activeImage');
-                    deselectEmoji(key);
-                } else {
-                    this.classList.add('activeImage');
-                    selectEmoji(key);
-                }
-            });
-
-            container.appendChild(img);
-        }
-    });
-}
-
-
-
-
-
-function selectEmoji(emojiKey) {
-    if (!temporarySelectedEmojis.includes(emojiKey)) {
-        temporarySelectedEmojis.push(emojiKey); // Add to the temporary array
-    }
-    // Update display without affecting the main selectedEmojis array
-    updateTemporaryEmojisDisplay(); 
-}
-
-function deselectEmoji(emojiKey) {
-    const index = temporarySelectedEmojis.indexOf(emojiKey);
-    if (index > -1) {
-        temporarySelectedEmojis.splice(index, 1); // Remove from the temporary array
-        updateTemporaryEmojisDisplay(); // Update display
-    }
-}
-
-function updateSelectedEmojisDisplay() {
-    const emojisDisplay = document.getElementById('selectedEmojis');
-    const emojisContainer = document.getElementById('selectedEmojisContainer');
-
-    // Clear existing emojis from the display
-    emojisDisplay.innerHTML = '';
-
-    // Show or hide the emojis container based on whether emojis are selected
-    if (selectedEmojis.length > 0) {
-        selectedEmojis.forEach(emojiKey => {
-            const emojiData = emojiMetadata[emojiKey];
-            if (emojiData && emojiData.styles["3D"]) {
-                const img = document.createElement('img');
-                img.src = emojiData.styles["3D"];
-                img.alt = emojiKey;
-                img.classList.add('emoji');
-                emojisDisplay.appendChild(img); // Add emoji to the display
-            }
-        });
-        emojisContainer.style.display = 'flex'; // Show the container with flex layout
-    } else {
-        emojisContainer.style.display = 'none'; // Hide the container
-    }
-}
 
 function updateActiveTypeState() {
     const typeOptions = document.querySelectorAll('.typeOption');
@@ -167,49 +48,13 @@ function updateActiveTypeState() {
 
 
 
-// Save selected emojis to local storage or session storage
-document.getElementById('generateBtn').addEventListener('click', function() {
-    const emojisToSave = selectedEmojis.map(key => ({
-        key: key,
-        src: emojiMetadata[key].styles["3D"]
-    }));
-    localStorage.setItem('selectedEmojis', JSON.stringify(emojisToSave));
-});
 
 
-
-
-// Opening the Emoji Modal
-document.getElementById("emojisButton").addEventListener("click", function() {
-    temporarySelectedEmojis = [...selectedEmojis]; // Copy the current selections to the temporary array
-    document.getElementById("emojiModal").style.display = "block";
-});
-// Closing the Emoji Modal using the Save button
-document.getElementById("saveEmojiModal").addEventListener("click", function() {
-    selectedEmojis = [...temporarySelectedEmojis]; // Save the changes made in the modal
-    updateSelectedEmojisDisplay(); // Update the display with the new selections
-    document.getElementById("emojiModal").style.display = "none";
-});
-// Closing the Emoji Modal using the Close button
-document.getElementById("closeEmojiModal").addEventListener("click", function() {
-    document.getElementById("emojiModal").style.display = "none";
-    // Changes made in the modal are discarded, and the original selectedEmojis remains unchanged
-});
-
-
-//Active status of emoji tabs
-const tabs = document.querySelectorAll('.emojiTab');
-
-tabs.forEach(tab => {
-    tab.addEventListener('click', function() {
-        tabs.forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
-    });
-});
 
 
 //Story type, Length modal
 document.addEventListener('DOMContentLoaded', function() {
+
     // Event listener for opening the Story Type Modal
     document.getElementById("typeButton").addEventListener("click", function() {
         document.getElementById("typeModal").style.display = "block";
@@ -292,7 +137,6 @@ typeOptions.forEach(option => {
         this.classList.add('active');
     });
 });
-
 
 // Arrow buttons in Emoji tabs
 document.addEventListener('DOMContentLoaded', function() {
@@ -392,20 +236,21 @@ document.getElementById('share').addEventListener('click', function(event) {
     }
 });
 
-// When the 'Delete Emoji Tag' button is clicked
+// Event listener for the 'deleteEmojiTag' button
 document.getElementById('deleteEmojiTag').addEventListener('click', function() {
-    selectedEmojis = [];
-    temporarySelectedEmojis = []; // Also clear the temporary array
-    updateSelectedEmojisDisplay(); // Update display
-    resetEmojiModalSelection(); // Reset the visual state in the modal
+    const selectedEmojisPlaceholder = document.getElementById('selectedEmojisPlaceholder');
+    const selectedEmojisContainer = document.getElementById('selectedEmojisContainer');
+
+    // Clear the emojis from the placeholder
+    selectedEmojisPlaceholder.innerHTML = '';
+
+    // Hide the entire container
+    selectedEmojisContainer.style.display = 'none';
+
+    // Optionally, clear the set of activated emojis if you want to reset the selection
+    activeEmojis.clear();
 });
 
-function resetEmojiModalSelection() {
-    const emojiImages = document.querySelectorAll('#emojiContainer img');
-    emojiImages.forEach(img => {
-        img.classList.remove('activeImage'); // Remove the selected status style
-    });
-}
 
 
 document.getElementById('deleteTypeTag').addEventListener('click', function() {
@@ -424,7 +269,143 @@ document.getElementById('deleteLengthTag').addEventListener('click', function() 
 
 
 
+// ***** All about emoji modal related code *****
+
+// Event listener for opening the Emoji Modal
+document.getElementById("emojisButton").addEventListener("click", function() {
+    document.getElementById("emojiModal").style.display = "block";
+});
+
+
+// Fetch emoji metadata and handle tab functionalities
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('metadata.json')
+        .then(response => response.json())
+        .then(fetchedMetadata => {
+            emojiMetadata = fetchedMetadata;
+
+            const uniqueGroups = new Set();
+            for (const emoji in emojiMetadata) {
+                uniqueGroups.add(emojiMetadata[emoji].group);
+            }
+
+            const emojiTabsContainer = document.getElementById('emojiTabs');
+            uniqueGroups.forEach(group => {
+                if (group !== 'People & Body') {
+                    const tab = document.createElement('div');
+                    tab.className = 'emojiTab';
+                    tab.textContent = group;
+                    emojiTabsContainer.appendChild(tab);
+                }
+            });
+
+            const tabs = document.querySelectorAll('.emojiTab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    updateEmojiContainer(this.textContent, emojiMetadata);
+                });
+            });
+
+            if (uniqueGroups.size > 0) {
+                const firstTab = emojiTabsContainer.children[0];
+                firstTab.classList.add('active');
+                updateEmojiContainer([...uniqueGroups][0], emojiMetadata);
+            }
+        })
+        .catch(error => console.error('Error loading emoji metadata:', error));
+});
+
+function updateEmojiContainer(group, metadata) {
+    const emojiContainer = document.getElementById('emojiContainer');
+    emojiContainer.innerHTML = '';
+
+    for (const emoji in metadata) {
+        if (metadata[emoji].group === group) {
+            const img = document.createElement('img');
+            img.src = metadata[emoji].styles['3D'];
+            img.alt = metadata[emoji].cldr;
+            img.className = 'emojiImage';
+            img.dataset.emojiName = emoji;
+
+            if (activeEmojis.has(emoji)) {
+                img.classList.add('activeImage');
+            }
+
+            img.addEventListener('click', function() {
+                this.classList.toggle('activeImage');
+                const emojiName = this.dataset.emojiName;
+                if (activeEmojis.has(emojiName)) {
+                    activeEmojis.delete(emojiName);
+                } else {
+                    activeEmojis.add(emojiName);
+                }
+            });
+
+            emojiContainer.appendChild(img);
+        }
+    }
+}
+
+// Event listener for the Save button
+document.getElementById('saveEmojiModal').addEventListener('click', function() {
+    const selectedEmojisPlaceholder = document.getElementById('selectedEmojisPlaceholder');
+    const selectedEmojisContainer = document.getElementById('selectedEmojisContainer');
+
+    selectedEmojisPlaceholder.innerHTML = ''; // Clear existing content
+
+    if (activeEmojis.size > 0) {
+        activeEmojis.forEach(emojiName => {
+            const emoji = emojiMetadata[emojiName];
+            if (emoji) {
+                const img = document.createElement('img');
+                img.src = emoji.styles['3D'];
+                img.alt = emoji.cldr;
+                img.className = 'selectedEmojiImage';
+                selectedEmojisPlaceholder.appendChild(img);
+            }
+        });
+
+        // Make the container visible with flex display
+        selectedEmojisContainer.style.display = 'flex';
+    } else {
+        // Hide the container
+        selectedEmojisContainer.style.display = 'none';
+    }
+
+    // Close the emoji modal
+    document.getElementById("emojiModal").style.display = "none";
+});
 
 
 
+// Event listener for the Close button
+document.getElementById('closeEmojiModal').addEventListener('click', function() {
+    // Close the emoji modal
+    document.getElementById("emojiModal").style.display = "none";
 
+    // Reset the active state of emojis in the modal
+    document.querySelectorAll('#emojiContainer .emojiImage').forEach(img => {
+        img.classList.remove('activeImage');
+    });
+
+    // Clear the set of activated emojis
+    activeEmojis.clear();
+});
+
+
+// Event listener for the 'Get a Story' button
+document.getElementById('generateBtn').addEventListener('click', function() {
+    // Prepare the data to be saved
+    const emojisToSave = Array.from(activeEmojis).map(emojiName => ({
+        key: emojiName,
+        src: emojiMetadata[emojiName].styles['3D']
+    }));
+    
+    // Save the selected emojis to local storage
+    localStorage.setItem('selectedEmojis', JSON.stringify(emojisToSave));
+
+    // Optionally, you can redirect to the story page here if it's not done by the button's default behavior
+    // window.location.href = '/story.html';
+});

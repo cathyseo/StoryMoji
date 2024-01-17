@@ -19,7 +19,7 @@
         </div>
         <nav>
             <ui>
-                <li><a href="#">About</a></li>
+                <li><a href="about.html">About</a></li>
                 <li id="shareContainer">
                     <a href="#" id="share">Share</a>
                     <span id="linkCopied">Link copied</span>
@@ -116,8 +116,8 @@
                 <div id="generateContainer">
                     <div id="selectedOptions">
                         <!--here selected options appear as a tags-->
-                        <div class="tag" id="selectedEmojisContainer">
-                            <div id="selectedEmojis">
+                        <div class="tag" id="selectedEmojisContainer" style="display:none;">
+                            <div id="selectedEmojis" >
                                 <div id="selectedEmojisPlaceholder"></div>
                             </div>
                             <img class="deleteTag" id="deleteEmojiTag" src="assets/svg/buttonTagDelete.svg" alt="Delete">
@@ -135,11 +135,16 @@
                 </div>
             </div>
 
-            <!--Stories Others made-->
-
         </div>
+        <footer>
+            <div id="copyrightText">© Cathy Seo, Frank Meng</div>
+            <div id="footerLinks">
+                <a id="footerAbout">About</a>
+                <a>Source Code</a>
+                <a href="mailto:cathyseo.d@gmail.com">Contact Me</a>
+            </div>
+        </footer>
     </contentContainer>
-
 
     <script src="js/script.js"></script>
 </body>
