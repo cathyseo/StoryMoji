@@ -82,6 +82,9 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
 
+
+
+
 //Share button
 document.getElementById('share').addEventListener('click', function(event) {
   event.preventDefault();
