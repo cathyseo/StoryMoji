@@ -1,5 +1,9 @@
 /* Base styles for mobile */
 
+html {
+    height: 100%;
+    margin: 0;
+}
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 150%;
@@ -8,11 +12,23 @@ body {
     margin: 0 auto; /* Centers the container */
     padding: 0 18px; /* Padding on both sides */
     max-width: 1100px;
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* header, content, footer */
+    min-height: 100vh; /* Ensure the body takes at least the viewport height */
+
 }
 * {
     font-family: 'Poppins', sans-serif;
 }
-
+a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+a:hover {
+    text-decoration: underline;
+}
 p {
     margin: 0;
 }
@@ -47,13 +63,47 @@ header {
     padding: 0 10px;
 }
 li {
+    list-style-type: none;
+}
+ul {
     display: flex;
     align-items: center;
     gap: 27px;
 }
-ui {
-    list-style-type: none;
+/* Existing styles for #shareContainer */
+#shareContainer {
+    position: relative;
 }
+
+/* Default styles for #linkCopied */
+#linkCopied {
+    position: absolute;
+    bottom: -34px; /* Adjust as needed */
+    left: 16%;
+    transform: translateX(-50%);
+    color: #fff;
+    background-color: #333;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap; /* Prevents the text from wrapping */
+    min-width: 100px; /* Set a minimum width */
+    text-align: center; /* Center the text */
+    opacity: 0; /* Start with the element fully transparent */
+    visibility: hidden; /* Initially hidden */
+    transition: visibility 0s linear 0.3s, opacity 0.3s linear; /* Transition for visibility and opacity */
+}
+
+#linkCopied.active {
+    visibility: visible; /* Make it visible */
+    opacity: 1; /* Fully opaque */
+    transition: opacity 0.3s linear; /* Only transition opacity */
+}
+
+
+
+
+
 /* Hero section*/
 h1, h2, h3, h4, h5, h6 {
     text-transform: capitalize;
@@ -78,52 +128,95 @@ h2 {
     letter-spacing: -1px;
 }
 
-#heroContainer {
-    position: relative;
-    min-height: 200px;
+#contentContainer {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+#heroContainer {
+    display: flex;
+    flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
 }
 
+
 #heroTitleStory {
-    z-index: 1;
     margin-bottom: 30px;
     color: #1F2223;
     text-align: center;
     font-style: normal;
-    font-weight: 700;
     text-transform: capitalize;
-    width: 300px; /* Adjust to the size you want */
-    height: 200px; /* Adjust to the size you want */
+    max-width: 550px;
 }
-#imgStar {
-    z-index: -10;
+#heroTitleStory h1 {
+    margin-top: 10px;
+}
+#heroTitleStory p {
+    margin: 20px 0;
+}
+#heroImgContainer {
+    margin-top: 0;
+    position: relative;
+    height: 235px;
+    width: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.heroIMG {
+    cursor: pointer;
+}
+#imgCow {
     position: absolute;
-    top: -10%;
-    left: 0%;
+    top: 30%;
+    left: 27%;
+    width: 160px;
+    height: auto;
+}
+#imgFire {
+    position: absolute;
+    top: 20%;
+    left: 3%;
+    width: 96px;
+    height: auto;
+}
+#imgFlying {
+    position: absolute;
+    top: -4%;
+    left: 36%;
+    width: 86px;
+    height: auto;
+}
+#imgVoltage {
+    position: absolute;
+    top: 12%;
+    left: 67%;
+    width: 70px;
+    height: auto;
+}
+#imgFountain {
+    position: absolute;
+    top: 46%;
+    left: 67%;
+    width: 104px;
+    height: auto;
 }
 #imgHeart {
-    z-index: -10;
     position: absolute;
-    bottom: 10%;
-    left: 3%;
-    width: 70px;
+    top: 62%;
+    left: 10%;
+    width: 72px;
     height: auto;
 }
-#imgBalloon {
-    z-index: -10;
-    position: absolute;
-    bottom: 20%;
-    right: 5%;
-    width: 70px;
-    height: auto;
-}
-
 
 button {
     border: none;
     text-transform: uppercase;
+    cursor: pointer;
 }
 .primaryButton {
     background: #1F2223;
@@ -140,20 +233,15 @@ button {
 
 /* Generator section */
 #generatorContainer {
-    margin-bottom: 150px;
+    margin-bottom: 100px;
+    width: 100%;
 }
-.headingBox {
-    margin: 64px auto 24px auto; /* Vertical margins as before, horizontal margins set to auto */
-    max-width: 560px;
-    text-align: center;
-}
+
 h2{
     margin: 0 0 10px 0;
     font-size: 30px;
 }
-.headingBox p{
-    margin: 10px 0 32px 0;
-}
+
 
 #generatorButtons {
     display: flex;
@@ -229,12 +317,16 @@ h2{
     max-height: 24px; /* Set max height to match emoji images, adjust as needed */
     width: auto; /* Keep the aspect ratio of the delete icon */
 }
+.deleteTag {
+    cursor: pointer;
+}
 #selectedType {
     background-color: #B056FF;
 }
 #selectedLength {
     background-color: #03C9EA;
 }
+
 
 
 /*Modal*/
@@ -421,6 +513,7 @@ h2{
     display: flex;
     flex-direction: column;
     margin: 100px auto;
+    width: 100%;
   }
   
   .loading-image {
@@ -437,22 +530,56 @@ h2{
     line-height: 130%;
   }
   
-/* Styles for screens between 768px and 1024px */
-@media (min-width: 768px) and (max-width: 1023px) {
-    /* CSS rules for medium screens */
-    h1 {
-        font-size: 70px;
-    }
-    #heroTitleStory {
-        width: auto;
-        margin: 0 50px;
-    }
+footer {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 50px;
+    gap: 30px;
+    padding-top: 70px;
+    border-top: 1px solid #D8CBBA;
 }
-  
+#footerLinks {
+    color: black;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#copyrightText {
+    color: #6F6F6F;
+}
+#footerAbout {
+    display: block;
+}
+
+/*About page*/
+#aboutContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    width: 100%;
+}
+#aboutContainer h1 {
+    letter-spacing: 0px;
+    font-size: 30px;
+}
+#pContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    font-size: 16px;
+}
 
 /* Media Query for larger screens */
 
-@media (min-width: 1024px) {
+@media (min-width: 1100px) {
     body {
         max-width: 1100px; /* Maximum width of the content */
         padding: 0 50px; /* Padding on both sides */
@@ -478,16 +605,17 @@ h2{
         text-transform: capitalize;
         text-transform: uppercase;
     }
+    
     li {
+        list-style-type: none;
+    }
+    ui {
         display: flex;
         align-items: center;
         gap: 27px;
     }
-    ui {
-        list-style-type: none;
-    }
     h1 {
-        font-size: 100px;
+        font-size: 78px;
         letter-spacing: -5;
         margin: 0; /* Removes default margin */
         display: inline-block; /* Aligns with the line-height */
@@ -499,42 +627,84 @@ h2{
         display: inline-block; /* Aligns with the line-height */
         vertical-align: top; /* Aligns text to the top of the container */
     }
-    
-    #heroTitleStory {
-        width: 1100px; /* Adjust to the size you want */
-        height: 400px; /* Adjust to the size you want */
+    #contentContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
-    #imgStar {
-        z-index: -10;
+
+    #heroContainer {
+        flex-direction: row;
+        justify-content: start;
+        min-height: 450px;
+    }
+    #heroImgContainer {
+        height: 405px;
+        width: 550px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #imgCow {
         position: absolute;
-        top: -4%;
-        left: 35%;
+        top: 27%;
+        left: 27%;
+        width: 266px;
+        height: auto;
+    }
+    #imgFire {
+        position: absolute;
+        top: 20%;
+        left: 5%;
+        width: 143px;
+        height: auto;
     }
     #imgHeart {
-        z-index: -10;
         position: absolute;
-        bottom: 27%;
-        left: 22%;
-        width: 80px;
+        top: 58%;
+        left: 9%;
+        width: 125px;
         height: auto;
     }
-    #imgBalloon {
-        z-index: -10;
+    #imgFlying {
         position: absolute;
-        bottom: 30%;
-        right: 20%;
-        width: 80px;
+        top: -8%;
+        left: 36%;
+        width: 155px;
         height: auto;
+    }
+    #imgVoltage {
+        position: absolute;
+        top: 12%;
+        left: 67%;
+        width: 137px;
+        height: auto;
+    }
+    #imgFountain {
+        position: absolute;
+        top: 46%;
+        left: 66%;
+        width: 160px;
+        height: auto;
+    }
+
+    #heroTitleStory {
+        text-align: start;
+        width: 50%;
+    }
+    #heroTitleStory h1 {
+        margin-top: 0px;
+    }
+    #heroTitleStory p {
+        max-width: 460px;
     }
     
     /* Generator section */
     #generatorContainer {
-        margin-bottom: 150px;
-    }
-    .headingBox {
-        text-align: center;
-        margin: 0px auto 24px auto; /* Vertical margins as before, horizontal margins set to auto */
-        text-align: center;
+        margin-bottom: 100px;
+        width: 100%;
     }
 
     #generatorButtons {
@@ -692,7 +862,6 @@ h2{
         font-weight: 700;
         color: #1F2223;
         line-height: 130%;
-        max-width: 00px;
       }
     /*Output*/
     #fairyTaleOutput {
@@ -700,6 +869,42 @@ h2{
         line-height: 150%;
         margin: 40px 0px 60px 0px;
     }
+    footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 50px;
+        padding-top: 50px;
+        border-top: 0px 
+    }
+    #footerLinks {
+        color: black;
+        text-align: start;
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+    }
+    #footerAbout {
+        display: none;
+    }
+    /*About page*/
+    #aboutContainer {
+        margin-top: 70px;
+        flex-direction: row;
+        gap: 0px;
+    }
+    #aboutContainer h1{
+        font-size: 55px;
+        letter-spacing: -2px;
+        width: 45%;
+    }
+    #pContainer {
+        width: 55%;
+        font-size: 20px;
+        line-height: 170%;
+    }
+
 }
 
 
