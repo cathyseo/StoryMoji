@@ -1,6 +1,8 @@
 let activeEmojis = new Set(); // To keep track of activated emojis
 // Initialize confirmedLengthSelection with null or an empty string
 let confirmedLengthSelection = "";
+let confirmedTypeSelection = "";
+
 
 
 // Event listeners for the Story Type Modal

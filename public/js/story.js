@@ -1,3 +1,5 @@
+let confirmedTypeSelection = "";
+
 // Main story script
 document.addEventListener('DOMContentLoaded', function() {
     loadContent();
@@ -41,12 +43,23 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   function createPromptFromEmojis(selectedEmojisData) {
-    let prompt = "Create a fairy tale story in one sentence. The story is about ";
+    let storyTypes = {
+        "Fairy Story": "Create a fairy tale story in one sentence. The story is about ",
+        "Horror": "Create a horror movie story in one sentence. The story is about ",
+        "Dad Joke": "Create a funny dad joke in one sentence. The joke is about ",
+        "Breaking News": "Create a breaking news story in one sentence. The story is about ",
+        "Sci-Fi": "Create a sci-fi story in one sentence. The story is about "
+    };
+
+    let promptIntro = storyTypes[confirmedTypeSelection] || "Create a story in one sentence. The story is about ";
+    let prompt = promptIntro;
+
     selectedEmojisData.forEach((emoji, index) => {
         prompt += emoji.key + (index < selectedEmojisData.length - 1 ? ', ' : '');
     });
     return prompt;
-  }
+}
+
   
   async function generateStory(prompt) {
     const messages = [
