@@ -79,15 +79,19 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("lengthModal").style.display = "none";
     });
 
-    // Event listener for saving the length selection
-    document.getElementById("savelengthModal").addEventListener("click", function() {
-        const activeLengthOption = document.querySelector('.lengthOption.active');
-        if (activeLengthOption) {
-            confirmedLengthSelection = activeLengthOption.textContent;
-            const selectedLengthDiv = document.getElementById('selectedLength');
-            
+document.getElementById("savelengthModal").addEventListener("click", function() {
+    const activeLengthOption = document.querySelector('.lengthOption.active');
+    if (activeLengthOption) {
+        confirmedLengthSelection = activeLengthOption.textContent;
+        
+        // Save the length selection in local storage
+        localStorage.setItem('confirmedLengthSelection', confirmedLengthSelection);
+
+        // Ensure selectedLengthDiv is defined and accessible
+        const selectedLengthDiv = document.getElementById('selectedLength');
+        if (selectedLengthDiv) {
             // Remove existing text node if it exists
-            if (selectedLengthDiv.childNodes[0].nodeType === Node.TEXT_NODE) {
+            if (selectedLengthDiv.childNodes.length > 0 && selectedLengthDiv.childNodes[0].nodeType === Node.TEXT_NODE) {
                 selectedLengthDiv.removeChild(selectedLengthDiv.childNodes[0]);
             }
 
@@ -97,8 +101,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Display the selectedLength div with flex style after saving
             selectedLengthDiv.style.display = 'flex';
         }
-        document.getElementById("lengthModal").style.display = "none";
-    });
+    }
+    document.getElementById("lengthModal").style.display = "none";
+});
+
 
 
     // Event listeners for length options
