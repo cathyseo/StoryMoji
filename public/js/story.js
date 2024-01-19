@@ -21,7 +21,7 @@ function displayEmojis(selectedEmojisData, metadata) {
 // story.js
 function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, confirmedLengthSelection) {
   let storyTypes = {
-      "Fairy Story": "Create a fairy tale story.",
+      "Fairy Story": "Create a Disney-style gender-neutra fairy tale story.",
       "Horror": "Create a horror movie story.",
       "Dad Joke": "Create a funny dad joke.",
       "Breaking News": "Create a breaking news story.",

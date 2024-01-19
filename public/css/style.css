@@ -398,7 +398,7 @@ h2{
 
         /* Prevent scrollbar space from displaying */
         -ms-overflow-style: none;
-    }
+    }}
     #emojiTabs::-webkit-scrollbar {
         display: none;
     }
@@ -546,6 +546,7 @@ footer {
     gap: 30px;
     padding-top: 70px;
     border-top: 1px solid #D8CBBA;
+    padding-bottom: 40px;
 }
 #footerLinks {
     color: black;
