@@ -382,23 +382,23 @@ h2{
         align-items: center;
         flex: 1 1 auto;
         white-space: nowrap;
-        overflow-x: auto;
-        margin-left: 18px;
         overflow-x: auto; /* Enable horizontal scrolling */
+        margin-left: 18px;
         gap: 20px;
-        /* white-space: nowrap;  Keep text in a single line */
         -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS devices */
-        /* Hide scrollbar for Chrome, Safari, and Opera */
-        -webkit-scrollbar {
-            display: none;
-        }
-
+    
         /* Hide scrollbar for IE, Edge, and Firefox */
         scrollbar-width: none;
-
+    
         /* Prevent scrollbar space from displaying */
         -ms-overflow-style: none;
-    }}
+    }
+    
+    /* Hide scrollbar for Chrome, Safari, and Opera */
+    #emojiTabs::-webkit-scrollbar {
+        display: none;
+    }
+    
     #emojiTabs::-webkit-scrollbar {
         display: none;
     }
