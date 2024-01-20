@@ -19,6 +19,9 @@ document.getElementById("saveTypeModal").addEventListener("click", function() {
     const activeTypeOption = document.querySelector('.typeOption.active');
     if (activeTypeOption) {
         confirmedTypeSelection = activeTypeOption.textContent;
+        // Save the type selection in local storage
+        localStorage.setItem('confirmedTypeSelection', confirmedTypeSelection);
+
         const selectedTypeDiv = document.getElementById('selectedType');
         
         // Remove existing text node if it exists

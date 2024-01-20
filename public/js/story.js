@@ -20,34 +20,53 @@ function displayEmojis(selectedEmojisData, metadata) {
   
 // story.js
 function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, confirmedLengthSelection) {
-  let storyTypes = {
-      "Fairy Story": "Create a Disney-style gender-neutra fairy tale story.",
-      "Horror": "Create a horror movie story.",
-      "Dad Joke": "Create a funny dad joke.",
-      "Breaking News": "Create a breaking news story.",
+  // Story Types and Length Mapping
+  const storyTypes = {
+      "Fairy Story": "Create a Disney-style gender-neutral fairy tale story.",
+      "Horror": "Craft a modern horror story set in a contemporary urban environment. The plot should revolve around eerie, unexplained phenomena, causing escalating tension among the characters. Incorporate elements of suspense, unexpected twists, and psychological depth to create an atmosphere of dread. Technology or modern societal themes may play a role in the storyline, contributing to the contemporary setting and the characters' interactions.",
+      "Dad Joke": "Tell an extremely short, pun-based dad joke.",
+      "Breaking News": "This is strictly a factual news report. Absolutely no storytelling, fictional narratives, or descriptive journeys...",
       "Sci-Fi": "Create a sci-fi story."
   };
-
-  let lengthMapping = {
+  const lengthMapping = {
       "1 sentence": "in 1 sentence.",
       "2 sentences": "in 2 sentences.",
       "3 sentences": "in 3 sentences."
   };
 
-  let promptIntro = storyTypes[confirmedTypeSelection] || "Create a story.";
-  // Check if confirmedLengthSelection is correctly passed
-  console.log("Confirmed Length Selection:", confirmedLengthSelection); // Debugging line
-  let promptLength = lengthMapping[confirmedLengthSelection] || "in 1 sentence.";
-  let prompt = `${promptIntro} ${promptLength} The story involves `;
+  // Debugging: Log the keys of storyTypes and the confirmed selections
+  console.log("Available story types:", Object.keys(storyTypes));
+  console.log("User's confirmed type selection:", confirmedTypeSelection);
+  console.log("User's confirmed length selection:", confirmedLengthSelection);
+
+  // Validating the confirmedTypeSelection against storyTypes
+  if (!(confirmedTypeSelection in storyTypes)) {
+      console.log("Error: Selected type does not exist in storyTypes:", confirmedTypeSelection);
+      // Handle the invalid selection appropriately
+      // For now, returning an error message.
+      return "Error: Invalid story type selected.";
+  } else {
+      console.log("Selected type is valid, proceeding with generation.");
+  }
+
+  // Constructing the prompt
+  const promptIntro = storyTypes[confirmedTypeSelection];
+  const promptLength = lengthMapping[confirmedLengthSelection] || "Default Prompt Length";
+  let prompt = `${promptIntro}. Story ${promptLength}. And the story involves`;
 
   selectedEmojisData.forEach((emoji, index) => {
-      prompt += emoji.key + (index < selectedEmojisData.length - 1 ? ', ' : '.');
+      if (emoji && emoji.key) {
+          prompt += ` ${emoji.key}${index < selectedEmojisData.length - 1 ? ',' : '.'}`;
+      }
   });
 
-  // Log the final prompt for debugging
-  console.log("Generated Prompt:", prompt); // Debugging line
+  // Debugging: Log the final prompt for validation
+  console.log("Generated Prompt:", prompt);
+
+  // Return the generated prompt
   return prompt;
 }
+
 
 
 // Function to load content and generate story
@@ -58,7 +77,8 @@ async function loadContent() {
 
       // Retrieve the selections from local storage
       const confirmedLengthSelection = localStorage.getItem('confirmedLengthSelection') || "1 sentence";
-      const confirmedTypeSelection = localStorage.getItem('confirmedTypeSelection') || "Default Type"; // Add this line if you're using story types
+      // Ensure the default type is a valid key from `storyTypes`, for example, "Fairy Story"
+      const confirmedTypeSelection = localStorage.getItem('confirmedTypeSelection') || "Fairy Story"; 
 
       // Retrieve the selected emojis data
       const selectedEmojisData = JSON.parse(localStorage.getItem('selectedEmojis'));
