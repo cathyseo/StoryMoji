@@ -326,6 +326,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .catch(error => console.error('Error loading emoji metadata:', error));
+
+        // Event listener for the Close button of the error message box
+        document.querySelector('.closeErrorBtn').addEventListener('click', function() {
+        document.getElementById('errorMessage').style.display = 'none'; // Hide error message
+        });
+
 });
 
 function updateEmojiContainer(group, metadata) {
@@ -340,24 +346,40 @@ function updateEmojiContainer(group, metadata) {
             img.className = 'emojiImage';
             img.dataset.emojiName = emoji;
 
+            // Add 'activeImage' class if the emoji is in the activeEmojis set
             if (activeEmojis.has(emoji)) {
                 img.classList.add('activeImage');
             }
 
+            // Attach click event listener to each emoji
             img.addEventListener('click', function() {
-                this.classList.toggle('activeImage');
+                // Retrieve the emoji name from the data-attribute
                 const emojiName = this.dataset.emojiName;
+
+                // Check if the emoji is already selected
                 if (activeEmojis.has(emojiName)) {
+                    // If so, deselect it
                     activeEmojis.delete(emojiName);
+                    this.classList.remove('activeImage');
                 } else {
-                    activeEmojis.add(emojiName);
+                    // If not, check if we can add a new emoji to the selection
+                    if (activeEmojis.size < 5) {
+                        // If less than 5 emojis are selected, add the new one
+                        activeEmojis.add(emojiName);
+                        this.classList.add('activeImage');
+                    } else {
+                        // If 5 emojis are already selected, show the error message
+                        document.getElementById('errorMessage').style.display = 'flex';
+                    }
                 }
             });
 
+            // Append the emoji image to the container
             emojiContainer.appendChild(img);
         }
     }
 }
+
 
 // Event listener for the Save button
 document.getElementById('saveEmojiModal').addEventListener('click', function() {
@@ -420,3 +442,4 @@ document.getElementById('generateBtn').addEventListener('click', function() {
     // Optionally, you can redirect to the story page here if it's not done by the button's default behavior
     // window.location.href = '/story.html';
 });
+

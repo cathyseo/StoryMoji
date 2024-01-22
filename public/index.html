@@ -72,10 +72,16 @@
                         <div class="scrollArrow"><img id="scrollArrowRight" src="assets/svg/scrollArrowRight.svg" alt="Arrow Icon Right"></div>
                     </div>
                     <div id="emojiContainer" class="container"></div>
-                    <div id="emojiModalButtonContainer" class="modalButtonContainer">
-                        <button id="closeEmojiModal" class="secondaryButton">Close</button>
-                        <button id="saveEmojiModal" class="primaryButton">Save</button>
-                    </div>    
+                    <div id="emojiButtonErrorContainer">
+                        <div id="errorMessage" class="modal-error-message" style="display: none;">
+                            <span>You can only choose a maximum of 5 emojis.</span>
+                            <img src="assets/svg/close_small.svg" alt="Close" class="closeErrorBtn">
+                        </div>
+                        <div id="emojiModalButtonContainer" class="modalButtonContainer">
+                            <button id="closeEmojiModal" class="secondaryButton">Close</button>
+                            <button id="saveEmojiModal" class="primaryButton">Save</button>
+                        </div>  
+                    </div> 
                 </div>
             </div>
             
