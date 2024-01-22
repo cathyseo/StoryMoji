@@ -127,21 +127,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-// Event listeners for length options
-const lengthOptions = document.querySelectorAll('.lengthOption');
-lengthOptions.forEach(option => {
-    option.addEventListener('click', function() {
-        // Remove 'active' class from all length options
-        lengthOptions.forEach(opt => opt.classList.remove('active'));
-
-        // Add 'active' class to the clicked length option
-        this.classList.add('active');
-
-        // Call the function to check all selections and update error message visibility
-        checkAllSelectionsAndUpdateError();
+    // Event listeners for length options
+    const lengthOptions = document.querySelectorAll('.lengthOption');
+    lengthOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            lengthOptions.forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+        });
     });
-});
-
 
 
 
@@ -170,12 +163,8 @@ typeOptions.forEach(option => {
 
         // Add 'active' class to the clicked type option
         this.classList.add('active');
-
-        // Call the function to check all selections and update error message visibility
-        checkAllSelectionsAndUpdateError();
     });
 });
-
 
 // Arrow buttons in Emoji tabs
 document.addEventListener('DOMContentLoaded', function() {
@@ -375,22 +364,25 @@ function updateEmojiContainer(group, metadata) {
 
             // Attach click event listener to each emoji
             img.addEventListener('click', function() {
+                // Retrieve the emoji name from the data-attribute
                 const emojiName = this.dataset.emojiName;
-    
+
+                // Check if the emoji is already selected
                 if (activeEmojis.has(emojiName)) {
+                    // If so, deselect it
                     activeEmojis.delete(emojiName);
                     this.classList.remove('activeImage');
                 } else {
+                    // If not, check if we can add a new emoji to the selection
                     if (activeEmojis.size < 5) {
+                        // If less than 5 emojis are selected, add the new one
                         activeEmojis.add(emojiName);
                         this.classList.add('activeImage');
                     } else {
+                        // If 5 emojis are already selected, show the error message
                         document.getElementById('errorMessage').style.display = 'flex';
                     }
                 }
-    
-                // Call the function to check all selections and update error message visibility
-                checkAllSelectionsAndUpdateError();
             });
 
             // Append the emoji image to the container
@@ -448,50 +440,19 @@ document.getElementById('closeEmojiModal').addEventListener('click', function() 
 
 
 // Event listener for the 'Get a Story' button
-document.getElementById('generateBtn').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent any default action or form submission
+document.getElementById('generateBtn').addEventListener('click', function() {
+    // Prepare the data to be saved
+    const emojisToSave = Array.from(activeEmojis).map(emojiName => ({
+        key: emojiName,
+        src: emojiMetadata[emojiName].styles['3D']
+    }));
+    
+    // Save the selected emojis to local storage
+    localStorage.setItem('selectedEmojis', JSON.stringify(emojisToSave));
 
-    const hasEmojis = activeEmojis.size > 0;
-    const hasType = document.querySelector('.typeOption.active') !== null;
-    const hasLength = document.querySelector('.lengthOption.active') !== null;
-
-    if (!hasEmojis || !hasType || !hasLength) {
-        // If any of the selections are missing, show the error message
-        document.getElementById('generateErrorMessage').style.display = 'flex';
-        let missingItems = [];
-        if (!hasEmojis) missingItems.push('emojis');
-        if (!hasType) missingItems.push('story type');
-        if (!hasLength) missingItems.push('length');
-        document.getElementById('generateErrorText').textContent = `You have to select ${missingItems.join(', ')} to make a story.`;
-    } else {
-        // Prepare the data to be saved
-        const emojisToSave = Array.from(activeEmojis).map(emojiName => ({
-            key: emojiName,
-            src: emojiMetadata[emojiName].styles['3D']
-        }));
-        
-        // Save the selected emojis to local storage
-        localStorage.setItem('selectedEmojis', JSON.stringify(emojisToSave));
-
-        // Redirect to the story page only if all selections are made
-        window.location.href = 'story.html';
-    }
+    // Optionally, you can redirect to the story page here if it's not done by the button's default behavior
+    // window.location.href = '/story.html';
 });
-
-//Delete Generate BNT Error when user select all
-function checkAllSelectionsAndUpdateError() {
-    const hasEmojis = activeEmojis.size > 0;
-    const hasType = document.querySelector('.typeOption.active') !== null;
-    const hasLength = document.querySelector('.lengthOption.active') !== null;
-
-    if (hasEmojis && hasType && hasLength) {
-        // If all selections are made, hide the error message
-        document.getElementById('generateErrorMessage').style.display = 'none';
-    }
-}
-
-
-
 
 // Add event listeners to all elements with the class 'closeErrorBtn'
 document.querySelectorAll('.closeErrorBtn').forEach(function(button) {
