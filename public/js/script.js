@@ -18,6 +18,7 @@ document.getElementById("closeTypeModal").addEventListener("click", function() {
 document.getElementById("saveTypeModal").addEventListener("click", function() {
     const activeTypeOption = document.querySelector('.typeOption.active');
     if (activeTypeOption) {
+        // If a type is selected, proceed to save the selection
         confirmedTypeSelection = activeTypeOption.textContent;
         // Save the type selection in local storage
         localStorage.setItem('confirmedTypeSelection', confirmedTypeSelection);
@@ -34,9 +35,18 @@ document.getElementById("saveTypeModal").addEventListener("click", function() {
 
         // Display the selectedType div with flex style after saving
         selectedTypeDiv.style.display = 'flex';
+
+        // Close the type modal after saving
+        document.getElementById("typeModal").style.display = "none";
+
+        // Hide the type error message if it was previously visible
+        document.getElementById('typeErrorMessage').style.display = 'none';
+    } else {
+        // If no type is selected, display the type error message
+        document.getElementById('typeErrorMessage').style.display = 'flex';
     }
-    document.getElementById("typeModal").style.display = "none";
 });
+
 
 
 
@@ -82,31 +92,38 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("lengthModal").style.display = "none";
     });
 
-document.getElementById("savelengthModal").addEventListener("click", function() {
-    const activeLengthOption = document.querySelector('.lengthOption.active');
-    if (activeLengthOption) {
-        confirmedLengthSelection = activeLengthOption.textContent;
-        
-        // Save the length selection in local storage
-        localStorage.setItem('confirmedLengthSelection', confirmedLengthSelection);
-
-        // Ensure selectedLengthDiv is defined and accessible
-        const selectedLengthDiv = document.getElementById('selectedLength');
-        if (selectedLengthDiv) {
-            // Remove existing text node if it exists
-            if (selectedLengthDiv.childNodes.length > 0 && selectedLengthDiv.childNodes[0].nodeType === Node.TEXT_NODE) {
-                selectedLengthDiv.removeChild(selectedLengthDiv.childNodes[0]);
+    document.getElementById("savelengthModal").addEventListener("click", function() {
+        const activeLengthOption = document.querySelector('.lengthOption.active');
+        if (activeLengthOption) {
+            // If a length option is selected, proceed to save the selection
+            confirmedLengthSelection = activeLengthOption.textContent;
+            // Save the length selection in local storage
+            localStorage.setItem('confirmedLengthSelection', confirmedLengthSelection);
+    
+            const selectedLengthDiv = document.getElementById('selectedLength');
+            if (selectedLengthDiv) {
+                // Remove existing text node if it exists
+                if (selectedLengthDiv.childNodes.length > 0 && selectedLengthDiv.childNodes[0].nodeType === Node.TEXT_NODE) {
+                    selectedLengthDiv.removeChild(selectedLengthDiv.childNodes[0]);
+                }
+    
+                // Insert new text content before the delete image
+                selectedLengthDiv.insertBefore(document.createTextNode(confirmedLengthSelection), selectedLengthDiv.firstChild);
+    
+                // Display the selectedLength div with flex style after saving
+                selectedLengthDiv.style.display = 'flex';
             }
-
-            // Insert new text content before the delete image
-            selectedLengthDiv.insertBefore(document.createTextNode(confirmedLengthSelection), selectedLengthDiv.firstChild);
-
-            // Display the selectedLength div with flex style after saving
-            selectedLengthDiv.style.display = 'flex';
+            // Close the length modal after saving
+            document.getElementById("lengthModal").style.display = "none";
+            
+            // Hide the length error message if it was previously visible
+            document.getElementById('lengthErrorMessage').style.display = 'none';
+        } else {
+            // If no length option is selected, display the length error message
+            document.getElementById('lengthErrorMessage').style.display = 'flex';
         }
-    }
-    document.getElementById("lengthModal").style.display = "none";
-});
+    });
+    
 
 
 
@@ -326,12 +343,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .catch(error => console.error('Error loading emoji metadata:', error));
-
-        // Event listener for the Close button of the error message box
-        document.querySelector('.closeErrorBtn').addEventListener('click', function() {
-        document.getElementById('errorMessage').style.display = 'none'; // Hide error message
-        });
-
 });
 
 function updateEmojiContainer(group, metadata) {
@@ -443,3 +454,16 @@ document.getElementById('generateBtn').addEventListener('click', function() {
     // window.location.href = '/story.html';
 });
 
+// Add event listeners to all elements with the class 'closeErrorBtn'
+document.querySelectorAll('.closeErrorBtn').forEach(function(button) {
+    button.addEventListener('click', function() {
+        // Hide error messages for both emoji and type modals
+        // It's okay if the element doesn't exist in one of the modals; it just won't do anything
+        if (document.getElementById('errorMessage')) {
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+        if (document.getElementById('typeErrorMessage')) {
+            document.getElementById('typeErrorMessage').style.display = 'none';
+        }
+    });
+});
