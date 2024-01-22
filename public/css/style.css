@@ -353,6 +353,17 @@ h2{
     bottom: 20px; /* Bottom side */
     width: 320px;
 }
+#typeModalButtonContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+#lengthModalButtonContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
 
 /*Emoji modal*/
 #emojiModal {
@@ -375,6 +386,16 @@ h2{
 
 
 #closeEmojiModal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#closeTypeModal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#closelengthModal {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -432,6 +453,7 @@ h2{
     #emojiContainer {
         padding-top: 10px;
         background-color: #E9EDF0;
+        padding-bottom: 100px;
     }
     
     #selectedEmojis img {
@@ -441,7 +463,7 @@ h2{
     .modal-error-message {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: start;
         margin-bottom: 10px;
         background-color: #ffcccb; /* Light red background */
         color: #333; /* Dark text */
@@ -454,8 +476,6 @@ h2{
     
     .modal-error-message img {
         cursor: pointer; /* Change cursor to pointer when hovering over the close button */
-        width: 24px; /* Adjust as needed */
-        height: 24px; /* Adjust as needed */
     }
     #emojiButtonErrorContainer {
         display: flex;
@@ -468,7 +488,10 @@ h2{
         width: 320px;
     }
     .closeErrorBtn {
-        margin-right: 10px;
+        padding: 10px 10px 0 0;
+    }
+    .ErrorIcon {
+        padding: 10px 0 0 10px;
     }
 
 /*Type modal*/
