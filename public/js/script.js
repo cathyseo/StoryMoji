@@ -71,6 +71,8 @@ document.getElementById("saveTypeModal").addEventListener("click", function() {
 
     updateGenerateButtonState(); // Update Generate button state after saving
 
+    updateErrorMessage(); // Update error message state after saving
+
 });
 
 
@@ -151,6 +153,8 @@ document.addEventListener('DOMContentLoaded', function() {
         logCurrentState(); // Log the current state after saving length
 
         updateGenerateButtonState(); // Update Generate button state after saving
+
+        updateErrorMessage(); // Update error message state after saving
 
     });
     
@@ -319,6 +323,8 @@ document.getElementById('deleteEmojiTag').addEventListener('click', function() {
 
     updateGenerateButtonState(); // Update Generate button state after saving
 
+    updateErrorMessage(); // Update error message state after saving
+
 });
 
 document.getElementById('deleteTypeTag').addEventListener('click', function() {
@@ -337,6 +343,8 @@ document.getElementById('deleteTypeTag').addEventListener('click', function() {
 
     updateGenerateButtonState(); // Update Generate button state after saving
 
+    updateErrorMessage(); // Update error message state after saving
+
 });
 
 document.getElementById('deleteLengthTag').addEventListener('click', function() {
@@ -354,6 +362,8 @@ document.getElementById('deleteLengthTag').addEventListener('click', function() 
     logCurrentState(); // Log the current state after deletion
 
     updateGenerateButtonState(); // Update Generate button state after saving
+
+    updateErrorMessage(); // Update error message state after saving
 
 });
 
@@ -489,6 +499,8 @@ document.getElementById('saveEmojiModal').addEventListener('click', function() {
 
     updateGenerateButtonState(); // Update Generate button state after saving
 
+    updateErrorMessage(); // Update error message state after saving
+
 });
 
 
@@ -508,9 +520,15 @@ document.getElementById('closeEmojiModal').addEventListener('click', function() 
 });
 
 
-// Event listener for the 'Get a Story' button
-document.getElementById('generateBtn').addEventListener('click', function() {
-    // Prepare the data to be saved
+document.getElementById('generateBtn').addEventListener('click', function(event) {
+    // First, update and check for any error message
+    updateErrorMessage();
+    if (document.getElementById('generateErrorMessage').style.display === 'block') {
+        event.preventDefault(); // Prevent navigation if there's an error
+        return; // Exit the function early if there's an error
+    }
+
+    // If there are no errors, proceed with preparing and saving the data
     const emojisToSave = Array.from(activeEmojis).map(emojiName => ({
         key: emojiName,
         src: emojiMetadata[emojiName].styles['3D']
@@ -519,9 +537,11 @@ document.getElementById('generateBtn').addEventListener('click', function() {
     // Save the selected emojis to local storage
     localStorage.setItem('selectedEmojis', JSON.stringify(emojisToSave));
 
-    // Optionally, you can redirect to the story page here if it's not done by the button's default behavior
+    // Optionally, redirect to the story page here if it's not done by the button's default behavior
     // window.location.href = '/story.html';
 });
+
+
 
 function checkSelectionsAndToggleGenerateButton() {
     const generateBtn = document.getElementById('generateBtn');
@@ -547,9 +567,39 @@ function updateGenerateButtonState() {
     generateBtn.disabled = !(isEmojisSet && isTypeSet && isLengthSet);
 }
 
+// Function to construct and display error message based on the state of options
+function updateErrorMessage() {
+    const generateErrorMessageDiv = document.getElementById('generateErrorMessage');
+    const isEmojisSet = activeEmojis.size > 0;
+    const isTypeSet = confirmedTypeSelection !== null;
+    const isLengthSet = confirmedLengthSelection !== null;
+
+    let errorMessage = '';
+    if (!isEmojisSet) {
+        errorMessage += 'emojis';
+    }
+    if (!isTypeSet) {
+        errorMessage += (errorMessage ? ', ' : '') + 'story type';
+    }
+    if (!isLengthSet) {
+        errorMessage += (errorMessage ? ', ' : '') + 'length';
+    }
+
+    if (errorMessage) {
+        errorMessage = 'You have to select ' + errorMessage + ' to make a story.';
+        generateErrorMessageDiv.style.display = 'block'; // Show the error message div
+        generateErrorMessageDiv.querySelector('span').textContent = errorMessage; // Update the text
+    } else {
+        generateErrorMessageDiv.style.display = 'none'; // Hide the error message div if there are no errors
+    }
+}
+
+
 // Call this function on page load to set the initial state of the Generate button
 document.addEventListener('DOMContentLoaded', function() {
     updateGenerateButtonState();
+    updateErrorMessage();
+
     // ... (rest of your existing code) ...
 });
 
