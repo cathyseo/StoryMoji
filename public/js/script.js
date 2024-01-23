@@ -69,6 +69,8 @@ document.getElementById("saveTypeModal").addEventListener("click", function() {
     }
     logCurrentState(); // Log the current state after saving type
 
+    updateGenerateButtonState(); // Update Generate button state after saving
+
 });
 
 
@@ -147,6 +149,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('lengthErrorMessage').style.display = 'flex';
         }
         logCurrentState(); // Log the current state after saving length
+
+        updateGenerateButtonState(); // Update Generate button state after saving
 
     });
     
@@ -313,6 +317,8 @@ document.getElementById('deleteEmojiTag').addEventListener('click', function() {
     
     logCurrentState(); // Log the current state after deletion
 
+    updateGenerateButtonState(); // Update Generate button state after saving
+
 });
 
 document.getElementById('deleteTypeTag').addEventListener('click', function() {
@@ -329,6 +335,8 @@ document.getElementById('deleteTypeTag').addEventListener('click', function() {
 
     logCurrentState(); // Log the current state after deletion
 
+    updateGenerateButtonState(); // Update Generate button state after saving
+
 });
 
 document.getElementById('deleteLengthTag').addEventListener('click', function() {
@@ -344,6 +352,9 @@ document.getElementById('deleteLengthTag').addEventListener('click', function() 
     checkSelectionsAndToggleGenerateButton();
 
     logCurrentState(); // Log the current state after deletion
+
+    updateGenerateButtonState(); // Update Generate button state after saving
+
 });
 
 
@@ -476,6 +487,8 @@ document.getElementById('saveEmojiModal').addEventListener('click', function() {
 
     logCurrentState(); // Log the current state after saving
 
+    updateGenerateButtonState(); // Update Generate button state after saving
+
 });
 
 
@@ -523,7 +536,22 @@ function checkSelectionsAndToggleGenerateButton() {
     generateBtn.classList.toggle('disabled', generateBtn.disabled);
 }
 
+// Function to check the state of options and update the Generate button's disabled property
+function updateGenerateButtonState() {
+    const generateBtn = document.getElementById('generateBtn');
+    const isEmojisSet = activeEmojis.size > 0;
+    const isTypeSet = confirmedTypeSelection !== null;
+    const isLengthSet = confirmedLengthSelection !== null;
 
+    // If any of the options is null, disable the Generate button, otherwise enable it
+    generateBtn.disabled = !(isEmojisSet && isTypeSet && isLengthSet);
+}
+
+// Call this function on page load to set the initial state of the Generate button
+document.addEventListener('DOMContentLoaded', function() {
+    updateGenerateButtonState();
+    // ... (rest of your existing code) ...
+});
 
 // Add event listeners to all elements with the class 'closeErrorBtn'
 document.querySelectorAll('.closeErrorBtn').forEach(function(button) {
@@ -538,3 +566,4 @@ document.querySelectorAll('.closeErrorBtn').forEach(function(button) {
         }
     });
 });
+
