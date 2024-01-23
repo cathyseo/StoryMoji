@@ -1,9 +1,22 @@
 let activeEmojis = new Set(); // To keep track of activated emojis
-// Initialize confirmedLengthSelection with null or an empty string
-let confirmedLengthSelection = "";
-let confirmedTypeSelection = "";
+let confirmedLengthSelection = null; // Initialize with null
+let confirmedTypeSelection = null; // Initialize with null
 
+// Function to check and log the initial state of selection variables
+function checkInitialState() {
+    console.log('Initial State: ', {
+        emojis: activeEmojis.size > 0 ? 'Not null' : 'null',
+        length: confirmedLengthSelection,
+        type: confirmedTypeSelection
+    });
+}
 
+// Attach the checking function to the DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', function() {
+    checkInitialState(); // Check and log the initial state
+
+    // ... (rest of your existing code) ...
+});
 
 // Event listeners for the Story Type Modal
 document.getElementById("typeButton").addEventListener("click", function() {
@@ -275,30 +288,34 @@ document.getElementById('deleteEmojiTag').addEventListener('click', function() {
     // Hide the entire container
     selectedEmojisContainer.style.display = 'none';
 
-    // Optionally, clear the set of activated emojis if you want to reset the selection
+    // Clear the set of activated emojis if you want to reset the selection
     activeEmojis.clear();
-
     localStorage.removeItem('selectedEmojis');
 
+    // Console log to confirm deletion
+    console.log("Emojis deleted, current state:", activeEmojis.size === 0 ? 'null' : 'not null');
 });
-
-
 
 document.getElementById('deleteTypeTag').addEventListener('click', function() {
     // Clear the selected type and update the display
-    confirmedTypeSelection = '';
+    confirmedTypeSelection = null; // Set to null instead of an empty string
     document.getElementById('selectedType').style.display = 'none';
-    // Additional logic to update the type selection in the modal, if necessary
     localStorage.removeItem('confirmedTypeSelection');
+
+    // Console log to confirm deletion
+    console.log("Type deleted, current state:", confirmedTypeSelection === null ? 'null' : 'not null');
 });
 
 document.getElementById('deleteLengthTag').addEventListener('click', function() {
     // Clear the selected length and update the display
-    confirmedLengthSelection = '';
+    confirmedLengthSelection = null; // Set to null instead of an empty string
     document.getElementById('selectedLength').style.display = 'none';
-    // Additional logic to update the length selection in the modal, if necessary
     localStorage.removeItem('confirmedLengthSelection');
+
+    // Console log to confirm deletion
+    console.log("Length deleted, current state:", confirmedLengthSelection === null ? 'null' : 'not null');
 });
+
 
 
 
