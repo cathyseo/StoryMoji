@@ -277,6 +277,9 @@ document.getElementById('deleteEmojiTag').addEventListener('click', function() {
 
     // Optionally, clear the set of activated emojis if you want to reset the selection
     activeEmojis.clear();
+
+    localStorage.removeItem('selectedEmojis');
+
 });
 
 
@@ -286,6 +289,7 @@ document.getElementById('deleteTypeTag').addEventListener('click', function() {
     confirmedTypeSelection = '';
     document.getElementById('selectedType').style.display = 'none';
     // Additional logic to update the type selection in the modal, if necessary
+    localStorage.removeItem('confirmedTypeSelection');
 });
 
 document.getElementById('deleteLengthTag').addEventListener('click', function() {
@@ -293,6 +297,7 @@ document.getElementById('deleteLengthTag').addEventListener('click', function() 
     confirmedLengthSelection = '';
     document.getElementById('selectedLength').style.display = 'none';
     // Additional logic to update the length selection in the modal, if necessary
+    localStorage.removeItem('confirmedLengthSelection');
 });
 
 
