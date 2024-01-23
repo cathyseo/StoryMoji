@@ -2,6 +2,15 @@ let activeEmojis = new Set(); // To keep track of activated emojis
 let confirmedLengthSelection = null; // Initialize with null
 let confirmedTypeSelection = null; // Initialize with null
 
+// Function to log the current state of options
+function logCurrentState() {
+    console.log({
+        Emojis: activeEmojis.size > 0 ? [...activeEmojis] : 'null',
+        Type: confirmedTypeSelection === null ? 'null' : confirmedTypeSelection,
+        Length: confirmedLengthSelection === null ? 'null' : confirmedLengthSelection
+    });
+}
+
 // Function to check and log the initial state of selection variables
 function checkInitialState() {
     console.log('Initial State: ', {
@@ -58,6 +67,8 @@ document.getElementById("saveTypeModal").addEventListener("click", function() {
         // If no type is selected, display the type error message
         document.getElementById('typeErrorMessage').style.display = 'flex';
     }
+    logCurrentState(); // Log the current state after saving type
+
 });
 
 
@@ -135,6 +146,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // If no length option is selected, display the length error message
             document.getElementById('lengthErrorMessage').style.display = 'flex';
         }
+        logCurrentState(); // Log the current state after saving length
+
     });
     
 
@@ -294,6 +307,12 @@ document.getElementById('deleteEmojiTag').addEventListener('click', function() {
 
     // Console log to confirm deletion
     console.log("Emojis deleted, current state:", activeEmojis.size === 0 ? 'null' : 'not null');
+
+    // Check selections and toggle the Generate button
+    checkSelectionsAndToggleGenerateButton();
+    
+    logCurrentState(); // Log the current state after deletion
+
 });
 
 document.getElementById('deleteTypeTag').addEventListener('click', function() {
@@ -304,6 +323,12 @@ document.getElementById('deleteTypeTag').addEventListener('click', function() {
 
     // Console log to confirm deletion
     console.log("Type deleted, current state:", confirmedTypeSelection === null ? 'null' : 'not null');
+
+    // Check selections and toggle the Generate button
+    checkSelectionsAndToggleGenerateButton();
+
+    logCurrentState(); // Log the current state after deletion
+
 });
 
 document.getElementById('deleteLengthTag').addEventListener('click', function() {
@@ -314,6 +339,11 @@ document.getElementById('deleteLengthTag').addEventListener('click', function() 
 
     // Console log to confirm deletion
     console.log("Length deleted, current state:", confirmedLengthSelection === null ? 'null' : 'not null');
+
+    // Check selections and toggle the Generate button
+    checkSelectionsAndToggleGenerateButton();
+
+    logCurrentState(); // Log the current state after deletion
 });
 
 
@@ -442,6 +472,10 @@ document.getElementById('saveEmojiModal').addEventListener('click', function() {
 
     // Close the emoji modal
     document.getElementById("emojiModal").style.display = "none";
+    
+
+    logCurrentState(); // Log the current state after saving
+
 });
 
 
@@ -475,6 +509,21 @@ document.getElementById('generateBtn').addEventListener('click', function() {
     // Optionally, you can redirect to the story page here if it's not done by the button's default behavior
     // window.location.href = '/story.html';
 });
+
+function checkSelectionsAndToggleGenerateButton() {
+    const generateBtn = document.getElementById('generateBtn');
+    const isEmojisSelected = activeEmojis.size > 0;
+    const isTypeSelected = confirmedTypeSelection !== null;
+    const isLengthSelected = confirmedLengthSelection !== null;
+
+    // Disable the button if any selection is null
+    generateBtn.disabled = !(isEmojisSelected && isTypeSelected && isLengthSelected);
+
+    // Optionally, add visual feedback for disabled state
+    generateBtn.classList.toggle('disabled', generateBtn.disabled);
+}
+
+
 
 // Add event listeners to all elements with the class 'closeErrorBtn'
 document.querySelectorAll('.closeErrorBtn').forEach(function(button) {
