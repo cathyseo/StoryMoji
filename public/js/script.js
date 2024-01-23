@@ -523,7 +523,7 @@ document.getElementById('closeEmojiModal').addEventListener('click', function() 
 document.getElementById('generateBtn').addEventListener('click', function(event) {
     // First, update and check for any error message
     updateErrorMessage();
-    if (document.getElementById('generateErrorMessage').style.display === 'block') {
+    if (document.getElementById('generateErrorMessage').style.display === 'flex') {
         event.preventDefault(); // Prevent navigation if there's an error
         return; // Exit the function early if there's an error
     }
@@ -587,7 +587,7 @@ function updateErrorMessage() {
 
     if (errorMessage) {
         errorMessage = 'You have to select ' + errorMessage + ' to make a story.';
-        generateErrorMessageDiv.style.display = 'block'; // Show the error message div
+        generateErrorMessageDiv.style.display = 'flex'; // Show the error message div
         generateErrorMessageDiv.querySelector('span').textContent = errorMessage; // Update the text
     } else {
         generateErrorMessageDiv.style.display = 'none'; // Hide the error message div if there are no errors

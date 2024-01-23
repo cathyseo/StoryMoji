@@ -300,6 +300,20 @@ h2{
 #generateBtn {
     width: 100%;
 }
+#generateErrorMessage {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: none;
+    color: #333; /* Dark text */
+    border-radius: 5px;
+    margin-top: 10px;
+    gap: 10px;
+}
+#generateErrorMessage img {
+    padding: 0px 0 0 10px;
+}
 .tag {
     font-size: 18px;
     font-weight: 700;
