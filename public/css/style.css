@@ -616,14 +616,13 @@ h2{
     align-items: center;
     justify-content: center;
 }
-#saveBtn {
-    background-color: #B056FF;
-}
+
 
 /*Copy the story as a text*/
 /* Existing styles for the button container, assuming similar structure */
 #copyBtn {
     position: relative;
+    background-color: #B056FF;
 }
 
 /* Default styles for #storyCopied, similar to #linkCopied */
