@@ -225,11 +225,12 @@ button {
     font-size: 18px;
     font-weight: 600;
     display: flex;
-    padding: 20px 30px;
+    padding: 20px;
     justify-content: center;
     align-items: center;
     gap: 8px;
     width:100%;
+    border-radius: 5px;
 }
 
 /* Generator section */
@@ -247,8 +248,8 @@ h2{
 #generatorButtons {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 15px;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
 .secondaryButton {
@@ -258,10 +259,15 @@ h2{
     font-weight: 700;
     display: flex;
     justify-content: space-between;
-    padding: 20px 30px;
+    padding: 20px;
     align-items: center;
     gap: 8px;
     width: 100%;
+    border-radius: 5px;
+}
+
+#clickArrowIcon {
+    border-radius: 3px;
 }
 
 .OptionButton {
@@ -281,6 +287,8 @@ h2{
     display: flex;
     flex-direction: column;
     width: 100%;
+    border-radius: 5px;
+    background-color: #D8CBBA;
 }
 
 #generateContainer button {
@@ -293,12 +301,13 @@ h2{
     flex-wrap: wrap;
     align-items: center;
     gap: 10px;
-    background-color: #D8CBBA;
     padding: 10px;
     min-height: 35px;
+    border-radius: 5px 5px 0 0;
 }
 #generateBtn {
     width: 100%;
+    border-radius: 5px;
 }
 #generateErrorMessage {
     display: flex;
@@ -310,22 +319,24 @@ h2{
     border-radius: 5px;
     margin-top: 10px;
     gap: 10px;
+    color: #6F6F6F;
 }
 #generateErrorMessage img {
     padding: 0px 0 0 10px;
 }
 .tag {
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 600;
     color: #1F2223;
     background-color: white;
     display: flex;
     align-items: center; /* Vertically center all items */
     justify-content: space-between; /* Space out the content and the delete icon */
-    gap: 20px;
+    gap: 12px;
     padding: 8px 14px; /* Adjust padding as needed */
     height: 30px;
     text-transform: uppercase;
+    border-radius: 5px;
 }
 /* Adjust the height of images and text inside the tag */
 .tag img {
@@ -334,13 +345,9 @@ h2{
 }
 .deleteTag {
     cursor: pointer;
+    border-radius: 3px;
 }
-#selectedType {
-    background-color: #B056FF;
-}
-#selectedLength {
-    background-color: #03C9EA;
-}
+
 
 
 
@@ -366,6 +373,7 @@ h2{
     right: 20px; /* Right side */
     bottom: 20px; /* Bottom side */
     width: 320px;
+    gap: 10px;
 }
 #typeModalButtonContainer {
     bottom: 20px;
@@ -427,6 +435,7 @@ h2{
         white-space: nowrap;
         overflow-x: auto; /* Enable horizontal scrolling */
         margin-left: 18px;
+        margin-right: 18px;
         gap: 20px;
         -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS devices */
     
@@ -446,7 +455,7 @@ h2{
         display: none;
     }
     .emojiTab {
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         flex: 0 0 auto; /* Prevent tabs from stretching */
         color:#1F2223;
         text-align: right;
@@ -461,6 +470,11 @@ h2{
     .emojiTab:hover, .emojiTab.active {
         text-decoration: solid underline #1F2223 4px;
     }
+    .scrollArrow img {
+        width: 30px;
+        height: auto;
+    }
+
 
     #emojiContainer {
         padding-top: 10px;
@@ -468,9 +482,16 @@ h2{
         padding-bottom: 100px;
     }
     
+
     #selectedEmojis img {
         width: 24px; /* Keep your existing width */
         height: 24px; /* Keep the emoji images at a fixed size */
+    }
+
+    #selectedEmojisPlaceholder {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
     .modal-error-message {
         display: flex;
@@ -598,6 +619,40 @@ h2{
 #saveBtn {
     background-color: #B056FF;
 }
+
+/*Copy the story as a text*/
+/* Existing styles for the button container, assuming similar structure */
+#copyBtn {
+    position: relative;
+}
+
+/* Default styles for #storyCopied, similar to #linkCopied */
+#storyCopied {
+    position: absolute;
+    bottom: -140px; /* Adjust as needed based on the button's size */
+    left: 50%;
+    transform: translateX(-50%) translateY(100%); /* Position it right below the button */
+    color: #fff;
+    background-color: #333;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap; /* Prevents the text from wrapping */
+    min-width: 100px; /* Set a minimum width */
+    text-align: center; /* Center the text */
+    opacity: 0; /* Start with the element fully transparent */
+    visibility: hidden; /* Initially hidden */
+    transition: visibility 0s linear 0.3s, opacity 0.3s linear; /* Transition for visibility and opacity */
+}
+
+#storyCopied.active {
+    visibility: visible; /* Make it visible */
+    opacity: 1; /* Fully opaque */
+    transition: opacity 0.3s linear; /* Only transition opacity */
+}
+
+
+
 #shareBtn {
     background-color: #03C9EA;
 }
@@ -820,8 +875,8 @@ footer {
     #generatorButtons {
         display: flex;
         flex-direction: row;
-        gap: 8px;
-        margin-bottom: 15px;
+        gap: 10px;
+        margin-bottom: 10px;
     }
     
     
@@ -830,18 +885,23 @@ footer {
         flex-direction: row;
         width: 100%;
     }
+
+    #emojisButton {
+        background-color: #FFA500;
+    }
     
     #selectedOptions {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         gap: 10px;
-        background-color: #D8CBBA;
         padding: 10px;
         width: 66.666%;
+        border-radius: 5px 0px 0px 5px;
     }
     #generateBtn {
         width: 33.333%;
+        border-radius: 5px;
     }
 
     /* Adjust the height of images and text inside the tag */
