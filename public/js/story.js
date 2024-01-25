@@ -1,4 +1,7 @@
 let confirmedTypeSelection = "";
+let currentHeight = 20; // Y position for drawing
+let currentWidth = 20; // X position for drawing emojis
+const emojiSize = 32; // Size of each emoji glyph
 
 // Main story script
 document.addEventListener('DOMContentLoaded', function() {
@@ -228,3 +231,96 @@ document.getElementById('copyBtn').addEventListener('click', function() {
           console.error('There has been a problem with your fetch operation:', error);
       });
 });
+
+
+//Save as an image
+document.getElementById('saveAsImage').addEventListener('click', function() {
+  // Hide the button container before capturing the image
+  const buttonContainer = document.getElementById('outputButtonContainer');
+  buttonContainer.style.display = 'none';
+
+  // Fetch the metadata.json file
+  fetch('metadata.json')
+      .then(response => response.json())
+      .then(metadata => {
+          // Retrieve and parse the selected emojis from local storage
+          const selectedEmojiData = JSON.parse(localStorage.getItem('selectedEmojis')) || [];
+          
+          // Create a canvas element and get its context
+          const canvas = document.createElement('canvas');
+          canvas.width = 800; // Set an appropriate width
+          canvas.height = 600; // Set an appropriate height
+          const ctx = canvas.getContext('2d');
+          ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear previous content
+
+          // Get the story text
+          const storyText = document.getElementById('fairyTaleOutput').innerText;
+          
+          // Starting Y position for drawing
+          let currentHeight = 20;
+          let currentWidth = 20; // X position for drawing emojis
+          const emojiSize = 32; // Size of each emoji glyph
+
+          // Draw only the selected emojis in a row
+          selectedEmojiData.forEach(emojiData => {
+              const emoji = metadata[emojiData.key];
+              if (emoji && emoji.glyph) {
+                  ctx.font = `${emojiSize}px Arial`;
+                  ctx.fillText(emoji.glyph, currentWidth, currentHeight);
+                  currentWidth += emojiSize + 10; // Increase X position for next emoji
+              }
+          });
+
+          // Constants for text wrapping
+          const maxWidth = 760; // Max width for the text
+          const lineHeight = 25; // Line height for the text
+          const textX = 20; // X position for the text
+          let textY = currentHeight + 40; // Y position for the text, adjusted after emojis
+
+          ctx.font = '16px Arial';
+          wrapText(ctx, storyText, textX, textY, maxWidth, lineHeight);
+
+          // Create the image and initiate a download
+          const dataURL = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.download = 'generated_story.png';
+          link.href = dataURL;
+          link.click();
+
+          // Show the button container after the image is created
+          buttonContainer.style.display = 'flex';
+      })
+      .catch(error => {
+          console.error('Error fetching metadata:', error);
+          // Show the button container if there's an error
+          buttonContainer.style.display = 'flex';
+      });
+});
+
+// Function to wrap text
+function wrapText(context, text, x, y, maxWidth, lineHeight) {
+  const words = text.split(' ');
+  let line = '';
+
+  for(let n = 0; n < words.length; n++) {
+      const testLine = line + words[n] + ' ';
+      const metrics = context.measureText(testLine);
+      const testWidth = metrics.width;
+      if (testWidth > maxWidth && n > 0) {
+          context.fillText(line, x, y);
+          line = words[n] + ' ';
+          y += lineHeight;
+      } else {
+          line = testLine;
+      }
+  }
+  context.fillText(line, x, y);
+}
+
+
+
+function getUserSelectedEmojis() {
+  // Implement this function to return an array of keys of the selected emojis
+  // For example: ['Grinning face with smiling eyes', 'Grinning face with sweat']
+  // The exact implementation will depend on how your app tracks user selections
+}
