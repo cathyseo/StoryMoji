@@ -80,9 +80,9 @@ async function loadContent() {
 
         // Retrieve the selections from local storage
         const selectedEmojisData = JSON.parse(localStorage.getItem('selectedEmojis')) || [];
-        const confirmedTypeSelection = localStorage.getItem('selectedType') || "Fairy Story";
-        const confirmedLengthSelection = localStorage.getItem('selectedLength') || "1 sentence";
-
+        const confirmedTypeSelection = localStorage.getItem('confirmedTypeSelection') || "Fairy Story";
+        const confirmedLengthSelection = localStorage.getItem('confirmedLengthSelection') || "1 sentence";
+        
         // Display selected emojis, type, and length
         await displaySelectedOptions(selectedEmojisData, confirmedTypeSelection, confirmedLengthSelection);
 
