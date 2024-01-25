@@ -28,10 +28,19 @@ app.post('/generate-story', async (req, res) => {
     try {
         console.log("Received messages:", req.body.messages);
 
+        // Update lengthTokenMapping to reflect the character count choices
+        const lengthTokenMapping = {
+            "Under 100 characters": 25,
+            "Under 200 characters": 50,
+            "Under 300 characters": 75
+        };
+
+        const maxTokens = lengthTokenMapping[req.body.confirmedLengthSelection] || 25; // default to the shortest if not specified
+
         const completion = await openai.chat.completions.create({
             messages: req.body.messages,
             model: "gpt-4",
-            max_tokens: 150
+            max_tokens: maxTokens
         });
 
         console.log("OpenAI response:", completion);

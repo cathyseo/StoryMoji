@@ -31,11 +31,13 @@ function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, conf
       "Breaking News": "This is strictly a factual news report. Absolutely no storytelling, fictional narratives, or descriptive journeys...",
       "Sci-Fi": "Create a sci-fi story."
   };
+  // Update lengthMapping to reflect the character count choices
   const lengthMapping = {
-      "1 sentence": "in 1 sentence.",
-      "2 sentences": "in 2 sentences.",
-      "3 sentences": "in 3 sentences."
-  };
+    "Under 100 characters": "with a maximum of 100 characters.",
+    "Under 200 characters": "with a maximum of 200 characters.",
+    "Under 300 characters": "with a maximum of 300 characters."
+};
+
 
   // Debugging: Log the keys of storyTypes and the confirmed selections
   console.log("Available story types:", Object.keys(storyTypes));
@@ -54,7 +56,7 @@ function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, conf
 
   // Constructing the prompt
   const promptIntro = storyTypes[confirmedTypeSelection];
-  const promptLength = lengthMapping[confirmedLengthSelection] || "Default Prompt Length";
+  const promptLength = lengthMapping[confirmedLengthSelection] || "with a default maximum character count.";
   let prompt = `${promptIntro}. Story ${promptLength}. And the story involves`;
 
   selectedEmojisData.forEach((emoji, index) => {
@@ -159,16 +161,11 @@ async function generateStory(prompt) {
 
   
 function displayGeneratedStory(story) {
-  // Split the story into sentences, keeping the punctuation with the sentence
-  const sentences = story.match(/[^.!?]+[.!?]\s*/g);
-
-  // Wrap each sentence in <p> tags
-  const formattedStory = sentences.map(sentence => `<p>${sentence.trim()}</p>`).join("");
-
-  // Set the innerHTML of the output element to the formattedStory
+  // Directly set the innerHTML of the output element to the story wrapped in a single <p> tag
   const output = document.getElementById('fairyTaleOutput');
-  output.innerHTML = formattedStory;
+  output.innerHTML = `<p>${story}</p>`; // Display the story in a single paragraph.
 }
+
 
 
 
