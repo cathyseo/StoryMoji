@@ -78,13 +78,13 @@ async function loadContent() {
       // Show loading animation
       document.getElementById('loadingAnimation').style.display = 'flex'; // Show the loading container
 
-      // Retrieve the selections from local storage
-      const confirmedLengthSelection = localStorage.getItem('confirmedLengthSelection') || "1 sentence";
-      // Ensure the default type is a valid key from `storyTypes`, for example, "Fairy Story"
-      const confirmedTypeSelection = localStorage.getItem('confirmedTypeSelection') || "Fairy Story"; 
+        // Retrieve the selections from local storage
+        const selectedEmojisData = JSON.parse(localStorage.getItem('selectedEmojis')) || [];
+        const confirmedTypeSelection = localStorage.getItem('selectedType') || "Fairy Story";
+        const confirmedLengthSelection = localStorage.getItem('selectedLength') || "1 sentence";
 
-      // Retrieve the selected emojis data
-      const selectedEmojisData = JSON.parse(localStorage.getItem('selectedEmojis'));
+        // Display selected emojis, type, and length
+        await displaySelectedOptions(selectedEmojisData, confirmedTypeSelection, confirmedLengthSelection);
 
       if (selectedEmojisData && selectedEmojisData.length > 0) {
           // Generate the prompt
@@ -109,6 +109,28 @@ async function loadContent() {
       console.error('Error loading content:', error);
   }
 }
+
+// Display output selected options
+async function displaySelectedOptions(selectedEmojisData, type, length) {
+  // Fetch emoji metadata
+  const metadataResponse = await fetch('metadata.json');
+  if (!metadataResponse.ok) throw new Error('Failed to load emoji metadata');
+  const metadata = await metadataResponse.json();
+
+  // Display selected emojis as 3D images
+  const selectedEmojisContainer = document.getElementById('outputSelectedEmojis');
+  selectedEmojisContainer.innerHTML = selectedEmojisData
+      .map(emoji => {
+          const emojiData = metadata[emoji.key]; // Adjusted to match the structure used in displayEmojis
+          return emojiData ? `<img src="${emojiData.styles['3D']}" alt="${emoji.key}" style="width:32px;height:32px;" />` : '';
+      })
+      .join(' ');
+
+  // Display selected story type and length without labels
+  document.getElementById('outputSelectedType').textContent = type;
+  document.getElementById('outputSelectedLength').textContent = length;
+}
+
 
 
 

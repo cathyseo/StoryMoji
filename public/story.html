@@ -40,14 +40,21 @@
         <p id="fairyTaleOutput"></p>
         <!-- Update the button to link back to index.html -->
         <!--Seleted options-->
-        <div>
-            <p>We created the story based on your choice :</p>
+        <div id="optionsContent">
+            <p id="youChooseText">You've choose :</p>
             <div id="outputSelectedOptionsWrapper">
-                <div class="outputSelectedOption" id="outputSelectedEmojis"></div>
-                <div class="outputSelectedOption" id="outputSelectedType"></div>
-                <div class="outputSelectedOption" id="outputSelectedLength"></div>
+                <div class="outputSelectedOption" id="outputSelectedEmojis">
+                    <!-- Selected emojis will appear here as images -->
+                </div>
+                <div class="outputSelectedOption" id="outputSelectedType">
+                    <!-- Selected story type will appear here as text -->
+                </div>
+                <div class="outputSelectedOption" id="outputSelectedLength">
+                    <!-- Selected story length will appear here as text -->
+                </div>
             </div>
         </div>
+        
         <div id="outputButtonContainer">
             <div class="outputBtnWrapper" id="tryAgainWrapper">
                 <button id="tryAgainBtn" class="primaryButton" onclick="location.href='index.html'">Try Again</button>
