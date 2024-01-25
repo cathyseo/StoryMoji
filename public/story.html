@@ -39,11 +39,27 @@
         <div id="selectedEmojisPlaceholder" class="outputSelectedEmojis"></div>
         <p id="fairyTaleOutput"></p>
         <!-- Update the button to link back to index.html -->
+        <!--Seleted options-->
+        <div>
+            <p>We created the story based on your choice :</p>
+            <div id="outputSelectedOptionsWrapper">
+                <div class="outputSelectedOption" id="outputSelectedEmojis"></div>
+                <div class="outputSelectedOption" id="outputSelectedType"></div>
+                <div class="outputSelectedOption" id="outputSelectedLength"></div>
+            </div>
+        </div>
         <div id="outputButtonContainer">
-            <button id="tryAgainBtn" class="primaryButton" onclick="location.href='index.html'">Try Again</button>
-            <button id="copyBtn" class="secondaryButton">Copy emojis and story</button>
-            <span id="storyCopied">Story copied</span> <!-- Similar to linkCopied -->
-            <button id="saveAsImage" class="secondaryButton">Save as an image</button>
+            <div class="outputBtnWrapper" id="tryAgainWrapper">
+                <button id="tryAgainBtn" class="primaryButton" onclick="location.href='index.html'">Try Again</button>
+            </div>
+            <div class="outputBtnWrapper" id="copyBtnWrapper">
+                <button id="copyBtn" class="secondaryButton">Copy story as a text</button>
+                <span id="storyCopied">Story copied.</span> <!-- Similar to linkCopied -->
+            </div>
+            <div class="outputBtnWrapper" id="shareThisAppWrapper">
+                <button id="shareThisApp" class="secondaryButton">Share this app</button>
+                <span id="appLinkCopied">App link copied.</span> 
+            </div>
         </div>
     </div>
 

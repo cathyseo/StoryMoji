@@ -232,120 +232,20 @@ document.getElementById('copyBtn').addEventListener('click', function() {
       });
 });
 
+//Share this app button
+document.getElementById("shareThisApp").addEventListener("click", function() {
+  
+  // Define your app link here
+  const appLink = "https://your-app-link.com"; // Replace with your actual app link
 
-//Save as an image
-document.getElementById('saveAsImage').addEventListener('click', function() {
-  const buttonContainer = document.getElementById('outputButtonContainer');
-  buttonContainer.style.display = 'none';
 
-  fetch('metadata.json')
-      .then(response => response.json())
-      .then(metadata => {
-          const selectedEmojiData = JSON.parse(localStorage.getItem('selectedEmojis')) || [];
-          const canvas = document.createElement('canvas');
-          canvas.width = 800;
-          canvas.height = 600;
-          const ctx = canvas.getContext('2d');
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-          const storyText = document.getElementById('fairyTaleOutput').innerText;
-          const emojiSize = 60;
-          const textFontSize = 24;
-          const maxWidth = 720;
-          const lineHeight = 40;
-          const spaceBetweenEmojisAndText = 40;
+  // Show the "App link copied." message
+  var appLinkCopied = document.getElementById('appLinkCopied');
+  appLinkCopied.classList.add('active');
 
-          // Calculate the number of lines the text will wrap into and the total height of the text block
-          const textHeightApprox = getTextHeight(ctx, storyText, maxWidth, textFontSize, lineHeight);
-
-          // Calculate the total content height
-          const totalContentHeight = emojiSize + textHeightApprox + spaceBetweenEmojisAndText;
-
-          // Center the content vertically
-          let currentHeight = (canvas.height - totalContentHeight) / 2;
-          if (currentHeight < emojiSize / 2) currentHeight = emojiSize / 2;
-
-          let currentWidth = 20;
-
-          // Draw the selected emojis
-          ctx.font = `${emojiSize}px Poppins`;
-          selectedEmojiData.forEach(emojiData => {
-              const emoji = metadata[emojiData.key];
-              if (emoji && emoji.glyph) {
-                  ctx.fillText(emoji.glyph, currentWidth, currentHeight + emojiSize);
-                  currentWidth += emojiSize + 10;
-              }
-          });
-
-          // Draw the story text after the emojis
-          ctx.font = `${textFontSize}px Poppins`;
-          const textX = 20;
-          let textY = currentHeight + emojiSize + spaceBetweenEmojisAndText;
-
-          wrapText(ctx, storyText, textX, textY, maxWidth, lineHeight);
-
-          const dataURL = canvas.toDataURL('image/png');
-          const link = document.createElement('a');
-          link.download = 'generated_story.png';
-          link.href = dataURL;
-          link.click();
-
-          buttonContainer.style.display = 'flex';
-      })
-      .catch(error => {
-          console.error('Error fetching metadata:', error);
-          buttonContainer.style.display = 'flex';
-      });
+  // Optionally, hide the message after a few seconds
+  setTimeout(function() {
+      appLinkCopied.classList.remove('active');
+  }, 1000); // Adjust time as needed, matches the time for storyCopied
 });
-
-function wrapText(context, text, x, y, maxWidth, lineHeight) {
-  const words = text.split(' ');
-  let line = '';
-
-  for(let n = 0; n < words.length; n++) {
-      const testLine = line + words[n] + ' ';
-      const metrics = context.measureText(testLine);
-      const testWidth = metrics.width;
-      if (testWidth > maxWidth && n > 0) {
-          context.fillText(line, x, y);
-          line = words[n] + ' ';
-          y += lineHeight;
-      } else {
-          line = testLine;
-      }
-  }
-  context.fillText(line, x, y);
-}
-
-function getTextHeight(ctx, text, maxWidth, fontSize, lineHeight) {
-  ctx.font = `${fontSize}px Poppins`; // Set the font to get accurate measurement
-  const textLines = getTextLines(ctx, text, maxWidth);
-  return textLines * lineHeight; // Total height of the text block
-}
-
-function getTextLines(ctx, text, maxWidth) {
-  const words = text.split(' ');
-  let line = '';
-  let lineCount = 0;
-
-  for(let n = 0; n < words.length; n++) {
-      const testLine = line + words[n] + ' ';
-      const metrics = ctx.measureText(testLine);
-      const testWidth = metrics.width;
-      if (testWidth > maxWidth && n > 0) {
-          line = words[n] + ' ';
-          lineCount++;
-      } else {
-          line = testLine;
-      }
-  }
-  lineCount++; // Add the last line
-  return lineCount;
-}
-
-
-function getUserSelectedEmojis() {
-  // Implement this function to return an array of keys of the selected emojis
-  // For example: ['Grinning face with smiling eyes', 'Grinning face with sweat']
-  // The exact implementation will depend on how your app tracks user selections
-}

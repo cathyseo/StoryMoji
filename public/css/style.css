@@ -78,8 +78,8 @@ ul {
 /* Default styles for #linkCopied */
 #linkCopied {
     position: absolute;
-    bottom: -34px; /* Adjust as needed */
-    left: 16%;
+    bottom: -40px; /* Adjust as needed */
+    left: -8px;
     transform: translateX(-50%);
     color: #fff;
     background-color: #333;
@@ -615,20 +615,29 @@ h2{
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100% !important;
+
 }
+.outputBtnWrapper {
+    width: 100%;
+}
+
 
 
 /*Copy the story as a text*/
 /* Existing styles for the button container, assuming similar structure */
 #copyBtn {
-    position: relative;
     background-color: #B056FF;
+}
+#copyBtnWrapper {
+    position: relative;
 }
 
 /* Default styles for #storyCopied, similar to #linkCopied */
-#storyCopied {
+#storyCopied, #appLinkCopied {
+    z-index: 100; /* Sit on top */
     position: absolute;
-    bottom: -140px; /* Adjust as needed based on the button's size */
+    bottom: 10px; /* Adjust as needed based on the button's size */
     left: 50%;
     transform: translateX(-50%) translateY(100%); /* Position it right below the button */
     color: #fff;
@@ -644,12 +653,11 @@ h2{
     transition: visibility 0s linear 0.3s, opacity 0.3s linear; /* Transition for visibility and opacity */
 }
 
-#storyCopied.active {
+#storyCopied.active, #appLinkCopied.active {
     visibility: visible; /* Make it visible */
     opacity: 1; /* Fully opaque */
     transition: opacity 0.3s linear; /* Only transition opacity */
 }
-
 
 
 #shareBtn {
@@ -664,6 +672,12 @@ h2{
 #fairyTaleOutput p {
     margin-bottom: 50px;
 }
+
+/*App share button*/
+#shareThisAppWrapper {
+    position: relative;
+}
+
 
 /*Loading*/
 
@@ -766,6 +780,9 @@ footer {
         font-weight: 700;
         text-transform: capitalize;
         text-transform: uppercase;
+    }
+    #linkCopied {
+        left: 50%;
     }
     
     li {
@@ -1017,6 +1034,10 @@ footer {
         flex-direction: row;
         gap: 10px;
     }
+    .outputBtnWrapper {
+        width: 33.333%;
+    }
+
     /*Loading*/
     .loading-image {
         /* Adjust the width and height as needed */
@@ -1037,6 +1058,8 @@ footer {
         line-height: 150%;
         margin: 40px 0px 60px 0px;
     }
+
+    /*Footer*/
     footer {
         display: flex;
         flex-direction: row;
