@@ -3,10 +3,26 @@ let currentHeight = 20; // Y position for drawing
 let currentWidth = 20; // X position for drawing emojis
 const emojiSize = 32; // Size of each emoji glyph
 
+// Define the generateNewStory function here, outside of the DOMContentLoaded listener
+function generateNewStory() {
+  const selectedEmojisData = JSON.parse(localStorage.getItem('selectedEmojis')) || [];
+  const confirmedTypeSelection = localStorage.getItem('confirmedTypeSelection') || "Fairy Story";
+  const confirmedLengthSelection = localStorage.getItem('confirmedLengthSelection') || "1 sentence";
+
+  const prompt = createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, confirmedLengthSelection);
+  console.log("Generated Prompt for new story:", prompt);
+
+  // Make sure generateStory is defined and can be called here
+  generateStory(prompt);
+}
+
 // Main story script
 document.addEventListener('DOMContentLoaded', function() {
-    loadContent();
-  });
+  loadContent();
+
+  // Add the event listener for the 'Generate New Story' button here
+  document.getElementById('generateNewStoryBtn').addEventListener('click', generateNewStory);
+});
   
 
 
