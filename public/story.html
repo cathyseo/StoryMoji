@@ -13,9 +13,9 @@
     <header>
         <div id="logoContainer">
             <a href="index.html" id="logo">
-                <img id="" src="assets/svg/logo.svg" alt="Logo">
+                <img id="" src="assets/svg/logo_.svg" alt="Logo">
             </a>
-            <p id="free">FREE</p>
+            <!--<p id="free">FREE</p>-->
         </div>
         <nav>
             <ul>
@@ -41,7 +41,7 @@
         <!-- Update the button to link back to index.html -->
         <!--Seleted options-->
         <div id="optionsContent">
-            <p id="youChooseText">You've choose :</p>
+            <p id="youChooseText">You've selected :</p>
             <div id="outputSelectedOptionsWrapper">
                 <div class="outputSelectedOption" id="outputSelectedEmojis">
                     <!-- Selected emojis will appear here as images -->
@@ -57,14 +57,23 @@
         
         <div id="outputButtonContainer">
             <div class="outputBtnWrapper" id="tryAgainWrapper">
-                <button id="tryAgainBtn" class="primaryButton" onclick="location.href='index.html'">Try Again</button>
+                <button id="tryAgainBtn" class="primaryButton" onclick="location.href='index.html'">
+                    <p>Try Again</p>
+                    <img class="clickArrowIcon" src="assets/svg/buttonArrowRightRadius.svg" alt="Arrow Icon ">
+                </button>
             </div>
             <div class="outputBtnWrapper" id="copyBtnWrapper">
-                <button id="copyBtn" class="secondaryButton">Copy story as a text</button>
+                <button id="copyBtn" class="secondaryButton">
+                    <p>Copy story as a text</p>
+                    <img class="clickArrowIcon" src="assets/svg/buttonArrowRightRadius.svg" alt="Arrow Icon ">
+                </button>
                 <span id="storyCopied">Story copied.</span> <!-- Similar to linkCopied -->
             </div>
             <div class="outputBtnWrapper" id="shareThisAppWrapper">
-                <button id="shareThisApp" class="secondaryButton">Share this app</button>
+                <button id="shareThisApp" class="secondaryButton">
+                    <p>Share this app</p>
+                    <img class="clickArrowIcon" src="assets/svg/buttonArrowRightRadius.svg" alt="Arrow Icon ">
+                </button>
                 <span id="appLinkCopied">App link copied.</span> 
             </div>
         </div>
