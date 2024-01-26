@@ -313,6 +313,9 @@ document.getElementById('deleteEmojiTag').addEventListener('click', function() {
     activeEmojis.clear();
     localStorage.removeItem('selectedEmojis');
 
+    // Update the active status of emoji images in the modal
+    updateEmojiActiveStatus();
+
     // Console log to confirm deletion
     console.log("Emojis deleted, current state:", activeEmojis.size === 0 ? 'null' : 'not null');
 
@@ -324,8 +327,20 @@ document.getElementById('deleteEmojiTag').addEventListener('click', function() {
     updateGenerateButtonState(); // Update Generate button state after saving
 
     updateErrorMessage(); // Update error message state after saving
-
 });
+
+function updateEmojiActiveStatus() {
+    const emojiImages = document.querySelectorAll('.emojiImage');
+    emojiImages.forEach(img => {
+        const emojiName = img.dataset.emojiName;
+        if (activeEmojis.has(emojiName)) {
+            img.classList.add('activeImage');
+        } else {
+            img.classList.remove('activeImage');
+        }
+    });
+}
+
 
 document.getElementById('deleteTypeTag').addEventListener('click', function() {
     // Clear the selected type and update the display
