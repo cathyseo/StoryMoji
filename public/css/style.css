@@ -1,5 +1,10 @@
 /* Base styles for mobile */
 
+::selection {
+    background: #1F2223; /* background color */
+    color: white; /* text color */
+  }
+
 html {
     height: 100%;
     margin: 0;
@@ -254,6 +259,10 @@ button {
     justify-content: space-between;
     align-items: center;
 }
+.primaryButton:hover {
+    background: black;
+
+}
 
 /* Generator section */
 #generatorContainer {
@@ -298,14 +307,24 @@ h2{
 }
 
 #typeButton {
-    background-color: #B056FF;
+    background-color: #BB6DFF;
+}
+#typeButton:hover {
+    background-color: #AB4BFF;
 }
 
 #lengthButton {
     background-color: #03C9EA;
 }
+#lengthButton:hover {
+    background-color: #00B8E0;
+}
+
 #emojisButton {
     background-color: #FFA500;
+}
+#emojisButton:hover {
+    background-color: #FF8A00;
 }
 
 #generateContainer {
@@ -578,7 +597,7 @@ h2{
 
 /*Type modal*/
 #typeModalContentId {
-    background-color: #B056FF;
+    background-color: #BB6DFF;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -687,7 +706,10 @@ h2{
 /*Copy the story as a text*/
 /* Existing styles for the button container, assuming similar structure */
 #copyBtn {
-    background-color: #B056FF;
+    background-color: #BB6DFF;
+}
+#copyBtn:hover {
+    background-color: #AF55FF;
 }
 #copyBtnWrapper {
     position: relative;
@@ -722,6 +744,9 @@ h2{
 
 #shareThisApp {
     background-color: #03C9EA;
+}
+#shareThisApp:hover {
+    background-color: #00B8E0;
 }
 #storyView {
     display: flex;
@@ -1062,7 +1087,7 @@ footer {
     
     /*Type modal*/
     #typeModalContentId {
-        background-color: #B056FF;
+        background-color: #BB6DFF;
         padding: 20px;
         display: flex;
         flex-direction: column;
