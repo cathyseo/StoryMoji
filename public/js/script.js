@@ -2,6 +2,12 @@ let activeEmojis = new Set(); // To keep track of activated emojis
 let confirmedLengthSelection = null; // Initialize with null
 let confirmedTypeSelection = null; // Initialize with null
 
+//Logo link
+document.getElementById('logo').addEventListener('click', function() {
+    window.location.href = 'index.html';
+});
+
+
 // Function to log the current state of options
 function logCurrentState() {
     console.log({

@@ -3,6 +3,13 @@ let currentHeight = 20; // Y position for drawing
 let currentWidth = 20; // X position for drawing emojis
 const emojiSize = 32; // Size of each emoji glyph
 
+
+//Logo link
+document.getElementById('logo').addEventListener('click', function() {
+  window.location.href = 'index.html';
+});
+
+
 // Define the generateNewStory function here, outside of the DOMContentLoaded listener
 function generateNewStory() {
   const selectedEmojisData = JSON.parse(localStorage.getItem('selectedEmojis')) || [];

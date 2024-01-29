@@ -1,3 +1,7 @@
+//Logo link
+document.getElementById('logo').addEventListener('click', function() {
+    window.location.href = 'index.html';
+});
 
 //Share button
 document.getElementById('share').addEventListener('click', function(event) {
