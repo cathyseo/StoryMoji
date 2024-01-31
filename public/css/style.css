@@ -12,7 +12,7 @@ html {
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 150%;
-    color: 1F2223;
+    color: #1F2223;
     background-color: #EBDFD0;
     margin: 0 auto; /* Centers the container */
     padding: 0 18px; /* Padding on both sides */
@@ -63,7 +63,7 @@ header {
     justify-content: space-between;
     gap: 10px;
     flex: 1 0 0;
-    padding: 30px 0px 10px 0px;
+    padding: 30px 0 10px 0;
 }
 #logoContainer {
     display: flex;
@@ -84,7 +84,7 @@ header {
 #free {
     font-size: 14px;
     border-radius: 100px;
-    border: 1px solid var(--Secondary-White, #1F2223);
+    border: 1px solid #1F2223;
     padding: 1px 10px 0 10px;
     line-height: 150%;
 }
@@ -133,13 +133,11 @@ ul {
 /* Hero section*/
 h1, h2, h3, h4, h5, h6 {
     text-transform: capitalize;
-    text-transform: uppercase;
     font-weight: 700;
     letter-spacing: -2px;
     line-height: 120%;
     margin: 0;
     color: #1F2223;
-    text-transform: capitalize;
 }
 h1 {
     font-size: 50px;
@@ -159,7 +157,7 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 0px;
+    margin-top: 0;
     
 }
 
@@ -351,18 +349,17 @@ h2{
 }
 #generateErrorMessage {
     display: flex;
-    justify-content: start;
+    justify-content:flex-start;
     align-items: center;
     margin-bottom: 10px;
     background-color: none;
-    color: #333; /* Dark text */
     border-radius: 5px;
     margin-top: 10px;
     gap: 10px;
     color: #6F6F6F;
 }
 #generateErrorMessage img {
-    padding: 0px 0 0 10px;
+    padding: 0 0 0 10px;
 }
 .tag {
     font-size: 16px;
@@ -404,7 +401,7 @@ h2{
 
 .modal-content {
     margin: auto;
-    padding: 20px 0px;
+    padding: 20px 0;
     width: 100vw; /* Full width */
     height: 100vh; /* Full height */
 }
@@ -482,20 +479,14 @@ h2{
         margin-left: 18px;
         margin-right: 18px;
         gap: 20px;
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS devices */
-    
         /* Hide scrollbar for IE, Edge, and Firefox */
         scrollbar-width: none;
-    
-        /* Prevent scrollbar space from displaying */
+        
+        /* Prevent scrollbar space from displaying in IE and Edge */
         -ms-overflow-style: none;
     }
     
     /* Hide scrollbar for Chrome, Safari, and Opera */
-    #emojiTabs::-webkit-scrollbar {
-        display: none;
-    }
-    
     #emojiTabs::-webkit-scrollbar {
         display: none;
     }
@@ -513,8 +504,12 @@ h2{
     }
     /* Active state for tabs */
     .emojiTab:hover, .emojiTab.active {
-        text-decoration: solid underline #1F2223 4px;
+        text-decoration-line: underline;
+        text-decoration-color: #1F2223;
+        text-decoration-style: solid;
+        text-decoration-thickness: 4px;
     }
+
     .scrollArrow img {
         width: 30px;
         height: auto;
@@ -542,7 +537,7 @@ h2{
     .modal-error-message {
         display: flex;
         justify-content: space-between;
-        align-items: start;
+        align-items: flex-start;
         margin-bottom: 10px;
         background-color: #ffcccb; /* Light red background */
         color: #333; /* Dark text */
@@ -620,13 +615,21 @@ h2{
     white-space: nowrap;
 }
 /* Active state for type */
-   .typeOption:hover, .typeOption.active {
-    text-decoration: solid underline #1F2223 6px;
+.typeOption:hover, .typeOption.active {
+    text-decoration-line: underline;
+    text-decoration-color: #1F2223;
+    text-decoration-style: solid;
+    text-decoration-thickness: 6px;
 }
+
 /* Active state for length */
 .lengthOption:hover, .lengthOption.active {
-    text-decoration: solid underline #1F2223 6px;
+    text-decoration-line: underline;
+    text-decoration-color: #1F2223;
+    text-decoration-style: solid;
+    text-decoration-thickness: 6px;
 }
+
 /*Length modal*/
 #lengthModal {
     background-color: #03C9EA;
@@ -906,7 +909,7 @@ footer {
 
     #heroContainer {
         flex-direction: row;
-        justify-content: start;
+        justify-content: flex-start;
         min-height: 450px;
         width: 100%;
     }
@@ -1072,8 +1075,12 @@ footer {
         }
         /* Active state for tabs */
         .emojiTab:hover, .emojiTab.active {
-            text-decoration: solid underline #1F2223 6px;
+            text-decoration-line: underline;
+            text-decoration-color: #1F2223;
+            text-decoration-style: solid;
+            text-decoration-thickness: 6px;
         }
+
     
         #emojiContainer {
             padding-top: 10px;
@@ -1104,13 +1111,21 @@ footer {
         white-space: nowrap;
     }
     /* Active state for type */
-       .typeOption:hover, .typeOption.active {
-        text-decoration: solid underline #1F2223 12px;
+    .typeOption:hover, .typeOption.active {
+        text-decoration-line: underline;
+        text-decoration-color: #1F2223;
+        text-decoration-style: solid;
+        text-decoration-thickness: 12px;
     }
+
     /* Active state for length */
     .lengthOption:hover, .lengthOption.active {
-        text-decoration: solid underline #1F2223 12px;
+        text-decoration-line: underline;
+        text-decoration-color: #1F2223;
+        text-decoration-style: solid;
+        text-decoration-thickness: 12px;
     }
+
     /*Length modal*/
     #lengthModal {
         background-color: #03C9EA;
