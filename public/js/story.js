@@ -27,8 +27,6 @@ function generateNewStory() {
 document.addEventListener('DOMContentLoaded', function() {
   loadContent();
 
-  // Add the event listener for the 'Generate New Story' button here
-  document.getElementById('generateNewStoryBtn').addEventListener('click', generateNewStory);
 });
   
 
