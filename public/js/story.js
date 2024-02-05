@@ -46,16 +46,16 @@ function displayEmojis(selectedEmojisData, metadata) {
 function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, confirmedLengthSelection) {
   // Story Types and Length Mapping
   const storyTypes = {
-      "Fairy Story": "Create a Disney-style gender-neutral fairy tale story.",
-      "Horror": "Craft a modern horror story set in a contemporary urban environment. The plot should revolve around eerie, unexplained phenomena, causing escalating tension among the characters. Incorporate elements of suspense, unexpected twists, and psychological depth to create an atmosphere of dread. Technology or modern societal themes may play a role in the storyline, contributing to the contemporary setting and the characters' interactions.",
+      "Fairy Story": "Create a short Disney-style gender-neutral fairy tale story.",
+      "Horror": "Craft a short modern eerie horror story set in a contemporary urban environment.",
       "Dad Joke": "Tell an extremely short, pun-based dad joke.",
-      "Breaking News": "This is strictly a factual news report. Absolutely no storytelling, fictional narratives, or descriptive journeys...",
-      "Sci-Fi": "Create a sci-fi story."
+      "Breaking News": "This is strictly a short factual news report. Absolutely no storytelling, fictional narratives, or descriptive journeys.",
+      "Sci-Fi": "Create a futuristic sci-fi story."
   };
   const lengthMapping = {
-      "1 sentence": "in 1 sentence.",
-      "2 sentences": "in 2 sentences.",
-      "3 sentences": "in 3 sentences."
+      "In 100 characters": "in strictly 100 characters.",
+      "In 200 characters": "in strictly 200 characters.",
+      "In 300 characters": "in strictly 300 characters."
   };
 
   // Debugging: Log the keys of storyTypes and the confirmed selections
@@ -73,10 +73,10 @@ function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, conf
       console.log("Selected type is valid, proceeding with generation.");
   }
 
-  // Constructing the prompt
+  // Constructing the prompt without including emojis
   const promptIntro = storyTypes[confirmedTypeSelection];
   const promptLength = lengthMapping[confirmedLengthSelection] || "Default Prompt Length";
-  let prompt = `${promptIntro}. Story ${promptLength}. And the story involves`;
+  let prompt = `${promptIntro}. Story ${promptLength}.`;
 
   selectedEmojisData.forEach((emoji, index) => {
       if (emoji && emoji.key) {
@@ -102,7 +102,7 @@ async function loadContent() {
         // Retrieve the selections from local storage
         const selectedEmojisData = JSON.parse(localStorage.getItem('selectedEmojis')) || [];
         const confirmedTypeSelection = localStorage.getItem('confirmedTypeSelection') || "Fairy Story";
-        const confirmedLengthSelection = localStorage.getItem('confirmedLengthSelection') || "1 sentence";
+        const confirmedLengthSelection = localStorage.getItem('confirmedLengthSelection') || "In 100 characters";
         
         // Display selected emojis, type, and length
         await displaySelectedOptions(selectedEmojisData, confirmedTypeSelection, confirmedLengthSelection);
@@ -178,18 +178,28 @@ async function generateStory(prompt) {
   }
 }
 
-  
 function displayGeneratedStory(story) {
+  // Remove any starting and ending quotation marks
+  story = story.replace(/^"|"$/g, '');
+
   // Split the story into sentences, keeping the punctuation with the sentence
   const sentences = story.match(/[^.!?]+[.!?]\s*/g);
 
-  // Wrap each sentence in <p> tags
-  const formattedStory = sentences.map(sentence => `<p>${sentence.trim()}</p>`).join("");
+  // Handle null if no sentences are found
+  if (!sentences) {
+    console.error('No sentences found in the story.');
+    return;
+  }
+
+  // Join sentences with a space instead of wrapping in <p> tags
+  const formattedStory = sentences.map(sentence => sentence.trim()).join(" ");
 
   // Set the innerHTML of the output element to the formattedStory
   const output = document.getElementById('fairyTaleOutput');
   output.innerHTML = formattedStory;
 }
+
+
 
 
 

@@ -413,7 +413,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const emojiTabsContainer = document.getElementById('emojiTabs');
             uniqueGroups.forEach(group => {
-                if (group !== 'People & Body') {
+                // Skip creating tabs for 'People & Body', 'Symbols', and 'Flags'
+                if (group !== 'People & Body' && group !== 'Symbols' && group !== 'Flags') {
                     const tab = document.createElement('div');
                     tab.className = 'emojiTab';
                     tab.textContent = group;
@@ -431,13 +432,17 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             if (uniqueGroups.size > 0) {
-                const firstTab = emojiTabsContainer.children[0];
-                firstTab.classList.add('active');
-                updateEmojiContainer([...uniqueGroups][0], emojiMetadata);
+                // Ensure the first visible tab is activated
+                const visibleTabs = Array.from(emojiTabsContainer.children).filter(tab => tab.style.display !== 'none');
+                if (visibleTabs.length > 0) {
+                    visibleTabs[0].classList.add('active');
+                    updateEmojiContainer(visibleTabs[0].textContent, emojiMetadata);
+                }
             }
         })
         .catch(error => console.error('Error loading emoji metadata:', error));
 });
+
 
 function updateEmojiContainer(group, metadata) {
     const emojiContainer = document.getElementById('emojiContainer');
