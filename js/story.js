@@ -153,8 +153,6 @@ async function displaySelectedOptions(selectedEmojisData, type, length) {
 }
 
 
-
-
 async function generateStory(prompt) {
   const messages = [
       {"role": "system", "content": "You are a helpful assistant."},
