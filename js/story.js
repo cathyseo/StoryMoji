@@ -160,7 +160,7 @@ async function generateStory(prompt) {
   ];
 
   try {
-    const response = await fetch('/api/generate-story', { // URL 수정됨
+    const response = await fetch('/api/server', { // URL 수정됨
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
