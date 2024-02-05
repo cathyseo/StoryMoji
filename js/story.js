@@ -162,7 +162,7 @@ async function generateStory(prompt) {
   ];
 
   try {
-    const response = await fetch('/generate-story', {
+    const response = await fetch('/api/generate-story', { // URL 수정됨
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -177,6 +177,7 @@ async function generateStory(prompt) {
     console.error('Error:', error);
   }
 }
+
 
 function displayGeneratedStory(story) {
   // Remove any starting and ending quotation marks
