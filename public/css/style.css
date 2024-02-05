@@ -359,7 +359,7 @@ h2{
     color: #6F6F6F;
 }
 #generateErrorMessage img {
-    padding: 0 0 0 10px;
+    padding: 0;
 }
 .tag {
     font-size: 16px;
