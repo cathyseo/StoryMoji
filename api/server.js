@@ -1,4 +1,4 @@
-// generate-story.js
+
 const { OpenAI } = require('openai');
 
 // 환경 변수에서 API 키를 가져옵니다.
