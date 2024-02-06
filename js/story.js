@@ -208,6 +208,9 @@ function displayGeneratedStory(story) {
 document.getElementById('share').addEventListener('click', function(event) {
   event.preventDefault();
 
+  // The main domain to be shared
+  const mainDomain = 'https://www.storymoji.online';
+
   // Track the event with GA4 before the share functionality
   gtag('event', 'Header Share Click', {
     'event_category': 'Button Clicks',
@@ -219,17 +222,17 @@ document.getElementById('share').addEventListener('click', function(event) {
       return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
   }
 
-  // If it's a mobile device, use the native share modal
+  // If it's a mobile device and the share API is supported, use the native share modal
   if (isMobileDevice() && navigator.share) {
       navigator.share({
           title: document.title,
-          url: window.location.href
+          url: mainDomain // Share the main domain
       }).then(() => {
           console.log('Thanks for sharing!');
       }).catch(console.error);
   } else {
       // For non-mobile devices, use the existing clipboard functionality
-      navigator.clipboard.writeText(window.location.href).then(function() {
+      navigator.clipboard.writeText(mainDomain).then(function() { // Copy the main domain
           var linkCopied = document.getElementById('linkCopied');
           linkCopied.classList.add('active');
           setTimeout(function() {
@@ -240,6 +243,7 @@ document.getElementById('share').addEventListener('click', function(event) {
       });
   }
 });
+
 
 document.getElementById('copyBtn').addEventListener('click', function() {
   // Fetch the metadata.json
@@ -291,22 +295,35 @@ document.getElementById('copyBtn').addEventListener('click', function() {
 });
 
 //Share this app button
-document.getElementById("shareThisApp").addEventListener("click", function() {
-  
+document.getElementById("shareThisApp").addEventListener("click", function(event) {
+  event.preventDefault(); // Prevent any default action triggered by the button
+
+  // Track the event with GA4
+  gtag('event', 'Share This App Click', {
+    'event_category': 'Button Clicks',
+    'event_label': 'Share this app button on output page'
+  });
+
   // Define your app link here
-  const appLink = "https://your-app-link.com"; // Replace with your actual app link
+  const appLink = "https://www.storymoji.online"; // Replace with your actual app link
 
+  // Copy the appLink to the clipboard
+  navigator.clipboard.writeText(appLink).then(function() {
+    // Show the "App link copied." message
+    var appLinkCopied = document.getElementById('appLinkCopied');
+    appLinkCopied.classList.add('active');
 
+    // Optionally, hide the message after a few seconds
+    setTimeout(function() {
+        appLinkCopied.classList.remove('active');
+    }, 2000); // Adjust time as needed
 
-  // Show the "App link copied." message
-  var appLinkCopied = document.getElementById('appLinkCopied');
-  appLinkCopied.classList.add('active');
-
-  // Optionally, hide the message after a few seconds
-  setTimeout(function() {
-      appLinkCopied.classList.remove('active');
-  }, 1000); // Adjust time as needed, matches the time for storyCopied
+  }).catch(function(error) {
+    // Handle any errors that occur during copy
+    console.error('Could not copy text: ', error);
+  });
 });
+
 
 //Try again button
 function trackTryAgainEvent() {
