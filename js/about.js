@@ -5,7 +5,13 @@ document.getElementById('logo').addEventListener('click', function() {
 
 //Share button
 document.getElementById('share').addEventListener('click', function(event) {
-  event.preventDefault();
+    event.preventDefault();
+  
+    // Track the event with GA4 before the share functionality
+    gtag('event', 'Header Share Click', {
+        'event_category': 'Button Clicks',
+        'event_label': 'Header Share Click'
+      });
 
   // Function to check if the device is mobile
   function isMobileDevice() {
