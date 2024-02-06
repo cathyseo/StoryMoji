@@ -76,13 +76,14 @@ function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, conf
   // Constructing the prompt without including emojis
   const promptIntro = storyTypes[confirmedTypeSelection];
   const promptLength = lengthMapping[confirmedLengthSelection] || "Default Prompt Length";
-  let prompt = `${promptIntro}. Story ${promptLength}.`;
+  let prompt = `${promptIntro}. Story ${promptLength}. The story is about`;
 
   selectedEmojisData.forEach((emoji, index) => {
       if (emoji && emoji.key) {
           prompt += ` ${emoji.key}${index < selectedEmojisData.length - 1 ? ',' : '.'}`;
       }
   });
+  
 
   // Debugging: Log the final prompt for validation
   console.log("Generated Prompt:", prompt);
@@ -110,7 +111,6 @@ async function loadContent() {
       if (selectedEmojisData && selectedEmojisData.length > 0) {
           // Generate the prompt
           const prompt = createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, confirmedLengthSelection);
-          console.log("Generated Prompt:", prompt); // Debugging line
 
           // Call generateStory or similar function
           await generateStory(prompt); // Make sure this function is defined and properly sends the prompt to your backend
