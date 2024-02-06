@@ -301,3 +301,19 @@ document.getElementById("shareThisApp").addEventListener("click", function() {
       appLinkCopied.classList.remove('active');
   }, 1000); // Adjust time as needed, matches the time for storyCopied
 });
+
+//Try again button
+function trackTryAgainEvent() {
+  // Check if gtag is a function to avoid errors
+  if (typeof gtag === 'function') {
+    gtag('event', 'Try Again Click', {
+      'event_category': 'Button Clicks', 
+      'event_label': 'Try again'
+    });
+  }
+  
+  // Redirect after a delay
+  setTimeout(function() {
+    location.href = 'index.html';
+  }, 500); // Increased delay to 500ms
+}

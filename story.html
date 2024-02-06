@@ -84,7 +84,7 @@
         
         <div id="outputButtonContainer">
             <div class="outputBtnWrapper" id="tryAgainWrapper">
-                <button id="tryAgainBtn" class="primaryButton" onclick="gtag('event', 'Try Again Click', {'event_category': 'Button Clicks', 'event_label': 'Try again'}); setTimeout(function(){ location.href='index.html'; }, 200);">
+                <button id="tryAgainBtn" class="primaryButton" onclick="trackTryAgainEvent();">
                     <p>Try Again</p>
                     <img class="clickArrowIcon" src="assets/svg/buttonArrowWhite.svg" alt="Arrow Icon ">
                 </button>
