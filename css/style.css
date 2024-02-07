@@ -846,13 +846,17 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #D8CBBA;
+    background-color: #EBDFD0;
     color: #1F2223;
     height: 100vh; /* Make sure the body takes full viewport height */
 }
 .error-page {
-    max-width: 1000px; /* Set a max-width for larger screens */
+    max-width: 600px; /* Set a max-width for larger screens */
     margin-bottom: 40px;
+}
+.error-page img {
+    width: 150px;
+    height: auto;
 }
 #errorPageBody {
     margin-top: 30px;
