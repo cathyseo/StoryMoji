@@ -84,14 +84,15 @@ function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, conf
       }
   });
   
-    // GA4 Custom Event Tracking
-    gtag('event', 'option-select', {
-      'event_category': 'Selected options',
-      'event_label': 'Selected options for story',
-      'Selected_type': confirmedTypeSelection,
-      'Selected_length': confirmedLengthLengthSelection,
-      'Selected_emojis': selectedEmojisData.map(emoji => emoji.key).join(', ')
-  });
+// GA4 Custom Event Tracking
+gtag('event', 'option-select', {
+  'event_category': 'Selected options',
+  'event_label': 'Selected options for story',
+  'Selected_type': confirmedTypeSelection,
+  'Selected_length': confirmedLengthSelection, // Corrected from confirmedLengthLengthSelection
+  'Selected_emojis': selectedEmojisData.map(emoji => emoji.key).join(', ')
+});
+
 
   // Debugging: Log the final prompt for validation
   console.log("Generated Prompt:", prompt);
