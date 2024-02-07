@@ -90,7 +90,6 @@ gtag('event', 'option-select', {
   'event_label': 'Selected options for story',
   'Selected_type': confirmedTypeSelection,
   'Selected_length': confirmedLengthSelection, // Corrected from confirmedLengthLengthSelection
-  'Selected_emojis': selectedEmojisData.map(emoji => emoji.key).join(', ')
 });
 
 
@@ -116,6 +115,15 @@ async function loadContent() {
         
         // Display selected emojis, type, and length
         await displaySelectedOptions(selectedEmojisData, confirmedTypeSelection, confirmedLengthSelection);
+
+        // Track each emoji selection individually
+        selectedEmojisData.forEach(emoji => {
+          gtag('event', 'option-select', {
+              'event_category': 'Selected options',
+              'event_label': 'Selected emojis for story',
+              'Selected_emoji': emoji.key // Track each emoji key individually
+          });
+      });
 
       if (selectedEmojisData && selectedEmojisData.length > 0) {
           // Generate the prompt
