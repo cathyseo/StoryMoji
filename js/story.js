@@ -85,7 +85,7 @@ function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, conf
   });
   
 // GA4 Custom Event Tracking
-gtag('event', 'option-select', {
+gtag('event', 'Option-select', {
   'event_category': 'Selected options',
   'event_label': 'Selected options for story',
   'Selected_type': confirmedTypeSelection,
@@ -118,7 +118,7 @@ async function loadContent() {
 
         // Track each emoji selection individually
         selectedEmojisData.forEach(emoji => {
-          gtag('event', 'option-select', {
+          gtag('event', 'Option-select', {
               'event_category': 'Selected options',
               'event_label': 'Selected emojis for story',
               'Selected_emoji': emoji.key // Track each emoji key individually
@@ -195,24 +195,9 @@ async function generateStory(prompt) {
 
 
 function displayGeneratedStory(story) {
-  // Remove any starting and ending quotation marks
-  story = story.replace(/^"|"$/g, '');
-
-  // Split the story into sentences, keeping the punctuation with the sentence
-  const sentences = story.match(/[^.!?]+[.!?]\s*/g);
-
-  // Handle null if no sentences are found
-  if (!sentences) {
-    console.error('No sentences found in the story.');
-    return;
-  }
-
-  // Join sentences with a space instead of wrapping in <p> tags
-  const formattedStory = sentences.map(sentence => sentence.trim()).join(" ");
-
-  // Set the innerHTML of the output element to the formattedStory
+  // Set the innerHTML of the output element directly to the story
   const output = document.getElementById('fairyTaleOutput');
-  output.innerHTML = formattedStory;
+  output.innerHTML = story.trim();
 }
 
 
