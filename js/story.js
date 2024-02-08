@@ -17,7 +17,7 @@ function generateNewStory() {
   const confirmedLengthSelection = localStorage.getItem('confirmedLengthSelection') || "1 sentence";
 
   const prompt = createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, confirmedLengthSelection);
-  console.log("Generated Prompt for new story:", prompt);
+
 
   // Make sure generateStory is defined and can be called here
   generateStory(prompt);
@@ -93,8 +93,6 @@ gtag('event', 'Option-select', {
 });
 
 
-  // Debugging: Log the final prompt for validation
-  console.log("Generated Prompt:", prompt);
 
   // Return the generated prompt
   return prompt;
