@@ -49,7 +49,7 @@ function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, conf
       "Fairy Story": "Create a short Disney-style gender-neutral fairy tale story.",
       "Horror": "Craft a short modern eerie horror story set in a contemporary urban environment.",
       "Dad Joke": "Tell an extremely short, pun-based dad joke.",
-      "Breaking News": "This is strictly a short factual news report. Absolutely no storytelling, fictional narratives, or descriptive journeys.",
+      "Pop Song Lyric": "Create a short part of catchy lyrics inspired by Taylor Swift and Lizzo(but don't mention them in the lyric.). Focus on love, self-celebration. Aim for a vibe that uplifts and gets people dancing. Write seamlessly, without using 'Verse', 'Chorus', or numbers.",           
       "Sci-Fi": "Create a futuristic sci-fi story."
   };
   const lengthMapping = {

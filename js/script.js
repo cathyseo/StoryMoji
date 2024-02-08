@@ -492,7 +492,7 @@ function updateEmojiContainer(group, metadata) {
                         if (activeEmojis.has(emojiName)) {
                             activeEmojis.delete(emojiName);
                             this.classList.remove('activeImage');
-                        } else if (activeEmojis.size < 5) {
+                        } else if (activeEmojis.size < 3) {
                             activeEmojis.add(emojiName);
                             this.classList.add('activeImage');
                         } else {
