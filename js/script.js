@@ -457,29 +457,28 @@ function updateEmojiContainer(group, metadata) {
     const emojiContainer = document.getElementById('emojiContainer');
     emojiContainer.innerHTML = '';
 
-    // URLs of the emojis to exclude
-    const excludedEmojiUrls = [
-        'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Church_3d.png',
-        'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/hindu_temple_3d.png',
-        'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/synagogue_3d.png',
-        'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/shinto_shrine_3d.png',
-        'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/kaaba_3d.png'
+    // List of emoji names to exclude
+    const excludedEmojiNames = [
+        'Church',
+        'Mosque',
+        'Hindu temple',
+        'Synagogue',
+        'Shinto shrine',
+        'Kaaba'
     ];
 
-    for (const emoji in metadata) {
-        if (metadata[emoji].group === group) {
-            const emojiUrl = metadata[emoji].styles['3D'];
-
-            // Check if the emoji's URL is in the list of URLs to exclude
-            if (!excludedEmojiUrls.includes(emojiUrl)) {
+    for (const emojiName in metadata) {
+        if (metadata[emojiName].group === group) {
+            // Check if the emoji's name is in the list of names to exclude
+            if (!excludedEmojiNames.includes(emojiName)) {
                 const img = document.createElement('img');
-                img.src = emojiUrl;
-                img.alt = metadata[emoji].cldr;
+                img.src = metadata[emojiName].styles['3D'];
+                img.alt = metadata[emojiName].cldr;
                 img.className = 'emojiImage';
-                img.dataset.emojiName = emoji;
+                img.dataset.emojiName = emojiName;
 
                 // Add 'activeImage' class if the emoji is in the activeEmojis set
-                if (activeEmojis && activeEmojis.has(emoji)) { // Ensure activeEmojis is defined
+                if (activeEmojis && activeEmojis.has(emojiName)) {
                     img.classList.add('activeImage');
                 }
 
@@ -489,7 +488,7 @@ function updateEmojiContainer(group, metadata) {
                     const emojiName = this.dataset.emojiName;
 
                     // Toggle selection status and update UI accordingly
-                    if (activeEmojis) { // Ensure activeEmojis is defined
+                    if (activeEmojis) {
                         if (activeEmojis.has(emojiName)) {
                             activeEmojis.delete(emojiName);
                             this.classList.remove('activeImage');
