@@ -453,52 +453,62 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error loading emoji metadata:', error));
 });
 
-
 function updateEmojiContainer(group, metadata) {
     const emojiContainer = document.getElementById('emojiContainer');
     emojiContainer.innerHTML = '';
 
+    // URLs of the emojis to exclude
+    const excludedEmojiUrls = [
+        'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Church_3d.png',
+        'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/hindu_temple_3d.png',
+        'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/synagogue_3d.png',
+        'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/shinto_shrine_3d.png',
+        'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/kaaba_3d.png'
+    ];
+
     for (const emoji in metadata) {
         if (metadata[emoji].group === group) {
-            const img = document.createElement('img');
-            img.src = metadata[emoji].styles['3D'];
-            img.alt = metadata[emoji].cldr;
-            img.className = 'emojiImage';
-            img.dataset.emojiName = emoji;
+            const emojiUrl = metadata[emoji].styles['3D'];
 
-            // Add 'activeImage' class if the emoji is in the activeEmojis set
-            if (activeEmojis.has(emoji)) {
-                img.classList.add('activeImage');
-            }
+            // Check if the emoji's URL is in the list of URLs to exclude
+            if (!excludedEmojiUrls.includes(emojiUrl)) {
+                const img = document.createElement('img');
+                img.src = emojiUrl;
+                img.alt = metadata[emoji].cldr;
+                img.className = 'emojiImage';
+                img.dataset.emojiName = emoji;
 
-            // Attach click event listener to each emoji
-            img.addEventListener('click', function() {
-                // Retrieve the emoji name from the data-attribute
-                const emojiName = this.dataset.emojiName;
-
-                // Check if the emoji is already selected
-                if (activeEmojis.has(emojiName)) {
-                    // If so, deselect it
-                    activeEmojis.delete(emojiName);
-                    this.classList.remove('activeImage');
-                } else {
-                    // If not, check if we can add a new emoji to the selection
-                    if (activeEmojis.size < 5) {
-                        // If less than 5 emojis are selected, add the new one
-                        activeEmojis.add(emojiName);
-                        this.classList.add('activeImage');
-                    } else {
-                        // If 5 emojis are already selected, show the error message
-                        document.getElementById('errorMessage').style.display = 'flex';
-                    }
+                // Add 'activeImage' class if the emoji is in the activeEmojis set
+                if (activeEmojis && activeEmojis.has(emoji)) { // Ensure activeEmojis is defined
+                    img.classList.add('activeImage');
                 }
-            });
 
-            // Append the emoji image to the container
-            emojiContainer.appendChild(img);
+                // Attach click event listener to each emoji
+                img.addEventListener('click', function() {
+                    // Retrieve the emoji name from the data-attribute
+                    const emojiName = this.dataset.emojiName;
+
+                    // Toggle selection status and update UI accordingly
+                    if (activeEmojis) { // Ensure activeEmojis is defined
+                        if (activeEmojis.has(emojiName)) {
+                            activeEmojis.delete(emojiName);
+                            this.classList.remove('activeImage');
+                        } else if (activeEmojis.size < 5) {
+                            activeEmojis.add(emojiName);
+                            this.classList.add('activeImage');
+                        } else {
+                            document.getElementById('errorMessage').style.display = 'flex';
+                        }
+                    }
+                });
+
+                // Append the emoji image to the container
+                emojiContainer.appendChild(img);
+            }
         }
     }
 }
+
 
 
 // Event listener for the Save button
