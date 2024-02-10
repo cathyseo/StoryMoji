@@ -621,21 +621,21 @@ function updateErrorMessage() {
 
     let errorMessage = '';
     if (!isEmojisSet) {
-        errorMessage += 'emojis';
+        errorMessage += '이모지';
     }
     if (!isTypeSet) {
-        errorMessage += (errorMessage ? ', ' : '') + 'story type';
+        errorMessage += (errorMessage ? ', ' : '') + '스토리 유형';
     }
     if (!isLengthSet) {
-        errorMessage += (errorMessage ? ', ' : '') + 'length';
+        errorMessage += (errorMessage ? ', ' : '') + '길이';
     }
 
     if (errorMessage) {
-        errorMessage = 'You have to select ' + errorMessage + ' to make a story.';
-        generateErrorMessageDiv.style.display = 'flex'; // Show the error message div
-        generateErrorMessageDiv.querySelector('span').textContent = errorMessage; // Update the text
+        errorMessage = errorMessage + '를 선택해야 스토리를 만들 수 있습니다.';
+        generateErrorMessageDiv.style.display = 'flex'; // 오류 메시지 div 표시
+        generateErrorMessageDiv.querySelector('span').textContent = errorMessage; // 텍스트 업데이트
     } else {
-        generateErrorMessageDiv.style.display = 'none'; // Hide the error message div if there are no errors
+        generateErrorMessageDiv.style.display = 'none'; // 오류가 없으면 오류 메시지 div 숨김
     }
 }
 

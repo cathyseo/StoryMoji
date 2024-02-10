@@ -46,16 +46,16 @@ function displayEmojis(selectedEmojisData, metadata) {
 function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, confirmedLengthSelection) {
   // Story Types and Length Mapping
   const storyTypes = {
-      "Fairy Story": "Create a short Disney-style gender-neutral fairy tale story.",
-      "Horror": "Craft a short modern eerie horror story set in a contemporary urban environment.",
-      "Dad Joke": "Tell an extremely short, pun-based dad joke.",
-      "Pop Song Lyric": "Create a short part of catchy lyrics inspired by Taylor Swift and Lizzo(but don't mention them in the lyric.). Focus on love, self-celebration. Aim for a vibe that uplifts and gets people dancing. Write seamlessly, without using 'Verse', 'Chorus', or numbers.",           
-      "Sci-Fi": "Create a futuristic sci-fi story."
+    "동화": "디즈니 스타일의 성별 중립적인 짧은 동화 스토리를 만듭니다.",
+    "호러": "현대 도시 환경에서 벌어지는 짧고 소름 끼치는 현대적인 호러 스토리를 구성합니다.",
+    "아재 개그": "극히 짧고 말장난을 기반으로 한 웃긴 아재 개그를 들려줍니다.",
+    "팝송 가사": "테일러 스위프트와 리조에서 영감을 받은 (하지만 가사에 그들을 언급하지 않고) 사랑, 자기 긍정에 초점을 맞춘 캐치한 가사의 짧은 부분을 만듭니다. 사람들이 춤추게 만드는 긍정적인 분위기를 목표로 하며, 'Verse', 'Chorus', 또는 숫자를 사용하지 않고 매끄럽게 작성합니다.",
+    "SF 소설": "짧은 미래적인 과학 소설 스토리를 만듭니다."
   };
   const lengthMapping = {
-      "In 100 characters": "in strictly 100 characters.",
-      "In 200 characters": "in strictly 200 characters.",
-      "In 300 characters": "in strictly 300 characters."
+    "대략 100자 이내": "정확히 100자 이내입니다.",
+    "대략 200자 이내": "정확히 200자 이내입니다.",
+    "대략 300자 이내": "정확히 300자 이내입니다."
   };
 
   // Debugging: Log the keys of storyTypes and the confirmed selections
@@ -75,8 +75,8 @@ function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, conf
 
   // Constructing the prompt without including emojis
   const promptIntro = storyTypes[confirmedTypeSelection];
-  const promptLength = lengthMapping[confirmedLengthSelection] || "Default Prompt Length";
-  let prompt = `${promptIntro}. Story ${promptLength}. The story is about`;
+  const promptLength = lengthMapping[confirmedLengthSelection] || "기본 프롬프트 길이";
+  let prompt = `${promptIntro}. 스토리 ${promptLength}. 이 스토리는 다음에 관한 것입니다.`;
 
   selectedEmojisData.forEach((emoji, index) => {
       if (emoji && emoji.key) {
