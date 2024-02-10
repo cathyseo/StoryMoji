@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Title Tag -->
-    <title>Output StoryMoji: Explore AI-Crafted Narratives | StoryMoji</title>
-    <!-- Meta Description -->
-    <meta name="description" content="Read and engage with your custom AI-generated stories on StoryMoji. View narratives crafted from your emoji choices, copy the text, and share the creativity with others.">
-    <!-- Open Graph / Facebook -->
+    <!-- 타이틀 태그 -->
+    <title>스토리모지 결과 페이지: 선택하는 모든 이모지가 스토리를 만듭니다 - ChatGTP4 AI 기반 스토리텔링</title>
+    <!-- 메타 설명 -->
+    <meta name="description" content="사용자의 이모지 선택에 따라 AI가 생성한 스토리를 텍스트로 복사하여 다른 사람들과 창의성을 공유하세요.">
+    <!-- 오픈 그래프 / 페이스북 -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.storymoji.online/" />
-    <meta property="og:title" content="StoryMoji: Every Emoji You Choose Makes A Story - AI-Powered Storytelling" />
-    <meta property="og:description" content="Introducing StoryMoji, the AI Storyteller that transforms your chosen emojis into captivating stories. Leveraging the power of ChatGTP4, this innovative app turns a selection of expressive 3D emojis into unique narratives at the click of a button. Spark inspiration with AI-powered storytelling tailored to your preferences" />
+    <meta property="og:title" content="스토리모지: 선택하는 모든 이모지가 스토리를 만듭니다 - ChatGTP4 AI 기반 스토리텔링" />
+    <meta property="og:description" content="스토리모지를 소개합니다, 선택한 이모지를 매혹적인 스토리로 변환하는 AI 스토리텔러. ChatGTP4의 힘을 활용하여, 버튼 클릭 한 번으로 다양한 표현의 3D 이모지를 독특한 내러티브로 전환합니다. AI 기반 스토리텔링으로 영감을 불어넣으세요" />
     <meta property="og:image" content="https://www.storymoji.online/assets/img/thumbnail.png" />
 
-    <!-- Twitter -->
+    <!-- 트위터 -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://www.storymoji.online/" />
-    <meta name="twitter:title" content="StoryMoji: Every Emoji You Choose Makes A Story - AI-Powered Storytelling" />
-    <meta name="twitter:description" content="Introducing StoryMoji, the AI Storyteller that transforms your chosen emojis into captivating stories. Leveraging the power of ChatGTP4, this innovative app turns a selection of expressive 3D emojis into unique narratives at the click of a button. Spark inspiration with AI-powered storytelling tailored to your preferences" />
+    <meta name="twitter:title" content="스토리모지: 선택하는 모든 이모지가 스토리를 만듭니다 - ChatGTP4 AI 기반 스토리텔링" />
+    <meta name="twitter:description" content="스토리모지를 소개합니다, 선택한 이모지를 매혹적인 스토리로 변환하는 AI 스토리텔러. ChatGTP4의 힘을 활용하여, 버튼 클릭 한 번으로 다양한 표현의 3D 이모지를 독특한 내러티브로 전환합니다. AI 기반 스토리텔링으로 영감을 불어넣으세요" />
     <meta name="twitter:image" content="https://www.storymoji.online/assets/img/thumbnail.png" />
 
     <meta charset="UTF-8">
@@ -39,44 +39,42 @@
     <header>
         <div id="logoContainer">
             <div id="logo">
-                <img id="" src="assets/svg/logo_.svg" alt="Logo">
+                <img id="" src="assets/svg/logo_.svg" alt="로고">
             </div>
-            <!--<p id="free">FREE</p>-->
         </div>
         <nav>
             <ul>
-                <li><a href="about.html">About</a></li>
+                <li><a href="about.html">프로젝트 소개</a></li>
                 <li id="shareContainer">
-                    <a href="#" id="share">Share</a>
-                    <span id="linkCopied">Link copied</span>
+                    <a href="#" id="share">공유하기</a>
+                    <span id="linkCopied">링크 복사됨</span>
                 </li>
             </ul>
         </nav>
     </header>
     
-    <!-- Add this in your body tag where you want the loading animation to appear -->
+    <!-- 로딩 애니메이션을 표시하고자 하는 body 태그 위치에 추가 -->
     <div id="loadingAnimation" class="loading-container">
-        <img src="assets/img/writing.png" alt="Loading" class="loading-image">
-        <p class="loading-text">Hang tight, we are writing a new story!</p>    
+        <img src="assets/img/writing.png" alt="로딩 중" class="loading-image">
+        <p class="loading-text">잠시만 기다려주세요, 새 스토리를 작성 중입니다!</p>    
     </div>
-  
 
     <div id="storyView" style="display: none;">
         <div id="selectedEmojisPlaceholder" class="outputSelectedEmojis"></div>
         <p id="fairyTaleOutput"></p>
-        <!-- Update the button to link back to index.html -->
-        <!--Seleted options-->
+        <!-- index.html로 돌아가는 버튼 업데이트 -->
+        <!-- 선택된 옵션들 -->
         <div id="optionsContent">
-            <p id="youChooseText">You've selected :</p>
+            <p id="youChooseText">선택한 내용:</p>
             <div id="outputSelectedOptionsWrapper">
                 <div class="outputSelectedOption" id="outputSelectedEmojis">
-                    <!-- Selected emojis will appear here as images -->
+                    <!-- 여기에 선택된 이모지들이 이미지로 표시됩니다 -->
                 </div>
                 <div class="outputSelectedOption" id="outputSelectedType">
-                    <!-- Selected story type will appear here as text -->
+                    <!-- 선택된 이야기 유형이 여기 텍스트로 나타납니다 -->
                 </div>
                 <div class="outputSelectedOption" id="outputSelectedLength">
-                    <!-- Selected story length will appear here as text -->
+                    <!-- 선택된 이야기 길이가 여기 텍스트로 나타납니다 -->
                 </div>
             </div>
         </div>
@@ -84,39 +82,38 @@
         <div id="outputButtonContainer">
             <div class="outputBtnWrapper" id="tryAgainWrapper">
                 <button id="tryAgainBtn" class="primaryButton" onclick="trackTryAgainEvent();">
-                    <p>Try Again</p>
-                    <img class="clickArrowIcon" src="assets/svg/buttonArrowWhite.svg" alt="Arrow Icon ">
+                    <p>새 스토리 만들기</p>
+                    <img class="clickArrowIcon" src="assets/svg/buttonArrowWhite.svg" alt="화살표 아이콘">
                 </button>
             </div>
             <div class="outputBtnWrapper" id="copyBtnWrapper">
                 <button id="copyBtn" class="secondaryButton" onclick="gtag('event', 'Copy Story Text Click', { 'event_category': 'Button Clicks', 'event_label': 'Copy story as a text'});">
-                    <p>Copy story as text</p>
-                    <img class="clickArrowIcon" src="assets/svg/buttonArrowBlack.svg" alt="Arrow Icon ">
+                    <p>스토리 복사</p>
+                    <img class="clickArrowIcon" src="assets/svg/buttonArrowBlack.svg" alt="화살표 아이콘">
                 </button>
-                <span id="storyCopied">Story copied.</span> <!-- Similar to linkCopied -->
+                <span id="storyCopied">스토리 복사됨.</span>
             </div>
             <div class="outputBtnWrapper" id="shareThisAppWrapper">
                 <button id="shareThisApp" class="secondaryButton">
-                    <p>Share this app</p>
-                    <img class="clickArrowIcon" src="assets/svg/buttonArrowBlack.svg" alt="Arrow Icon ">
+                    <p>앱 공유하기</p>
+                    <img class="clickArrowIcon" src="assets/svg/buttonArrowBlack.svg" alt="화살표 아이콘">
                 </button>
-                <span id="appLinkCopied">App link copied.</span> 
+                <span id="appLinkCopied">앱 링크 복사됨.</span>
             </div>
         </div>
-        <!-- <button id="generateNewStoryBtn" class="secondaryButton">Generate a new Story with same options</button> -->
 
     </div>
 
     <footer>
         <div id="copyrightText">© Cathy Seo</div>
         <div id="footerLinks">
-            <a id="footerAbout">About</a>
-            <a href="https://github.com/cathyseo/EmojiStoryteller.git" target="_blank">Source Code</a>
-            <a href="mailto:cathyseo.d@gmail.com">Contact Me</a>
+            <a id="footerAbout">프로젝트 소개</a>
+            <a href="https://github.com/cathyseo/EmojiStoryteller.git" target="_blank">소스 코드</a>
+            <a href="mailto:cathyseo.d@gmail.com">연락하기</a>
         </div>
     </footer>
 
-    <script src="js/story.js"></script> <!-- Separate JavaScript file for story logic -->
+    <script src="js/story.js"></script> <!-- 스토리 로직을 위한 별도의 JavaScript 파일 -->
 
 </body>
 </html>
