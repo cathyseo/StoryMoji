@@ -15,7 +15,8 @@ module.exports = async (req, res) => {
         const completion = await openai.chat.completions.create({
             messages: messages,
             model: "gpt-4",
-            max_tokens: 150
+            max_tokens: 350,
+            
         });
 
         console.log("OpenAI response:", completion);
