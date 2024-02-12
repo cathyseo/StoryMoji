@@ -46,16 +46,16 @@ function displayEmojis(selectedEmojisData, metadata) {
 function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, confirmedLengthSelection) {
   // Story Types and Length Mapping
   const storyTypes = {
-    "동화": "디즈니 스타일의 성별 중립적인 짧은 동화 스토리를 만듭니다.",
-    "호러": "현대 도시 환경에서 벌어지는 소름 끼치고 으스스한 공포 영화 스토리를 만듭니다. 귀신과 기이한 현상을 소재로 할 수 있습니다.",
-    "연속극 드라마": "대기업 후계자 남성과 평범한 여성을 주인공으로 한 한국의 전형적이며 자극적인 연속극 드라마 속 연인의 대화입니다. 남성의 이름은 준호, 여성의 이름은 지은 입니다. 이들은 서로를 ~씨 등의 이름으로 부를 수 있습나다. '지은:' 또는 '준호:' 등의 indicator는 필요 없습니다. 대화는 가족의 반대와 숨겨진 진실을 밝힙니다. 이들은 서로 존댓말로 대화합니다. 이야기의 자연스러움 보다는 전체 내용을 짧게 완결하는데 집중합니다.",
-    "K-POP 가사": "아이유와 블랙핑크에서 영감을 받은 (하지만 가사에 그들을 언급하지 않고) 사랑, 자기 긍정에 초점을 맞춘 캐치한 가사의 짧은 부분을 만듭니다. 사람들이 춤추게 만드는 긍정적인 분위기를 목표로 하며, 'Verse', 'Chorus', 또는 숫자를 사용하지 않고 매끄럽게 작성합니다. 어떤 설명 문구 없이 가사만 만듭니다.",
-    "SF 소설": "짧은 미래적인 과학 소설 스토리를 만듭니다."
+    "공포 영화": "현대 도시 환경에서 벌어지는 소름 끼치고 으스스한 공포 영화 스토리를 만듭니다. 귀신과 기이한 현상을 소재로 할 수 있습니다.",
+    "공상과학 소설": "미래적인 우주 공상 과학 소설의 짧은 스토리를 만듭니다. 내러티브 보다는 글을 짧게 완성하는것에 집중합니다.",
+    "연속극 드라마": "대기업 후계자 남성과 평범한 여성을 주인공으로 한 한국의 전형적이며 자극적인 연속극 드라마 속 연인의 대화입니다. 이들은 서로를 ~씨 등의 이름으로 부를 수 있습나다. '철수:' 또는 '영희:' 등의 indicator는 필요 없습니다. 억지로 영어를 번역하는 단어 보다는 한글을 사용하고 공식적이고 문어적 표현 보다는 구어체를 사용합니다. 대화는 그들의 사랑에 대한 가족의 반대에 관한 것입니다. 이들은 서로 존댓말로 대화합니다. 이야기의 자연스러움 보다는 전체 내용을 짧게 완결하는데 집중합니다.",
+    "케이팝 가사": "BTS와 블랙핑크에서 영감을 받은 (하지만 가사에 그들을 언급하지 않고) 사랑, 자기 긍정에 초점을 맞춘 캐치한 가사의 짧은 부분을 만듭니다. 사람들이 춤추게 만드는 긍정적인 분위기를 목표로 하며, 'Verse', 'Chorus', 또는 숫자를 사용하지 않고 매끄럽게 작성합니다. 어떤 설명 문구 없이 가사만 만듭니다. 영어 말고 한글을 사용하고 존댓말은 사용하지 않습니다",
+    "홈쇼핑 광고": "홈쇼핑 광고의 한 부분을 구어체로 작성합니다. 제품의 특징, 장점, 어떤 분들에게 좋은지 등을 강조하는 방식으로 구성되어야 합니다. 제품을 매력적으로 보이게 하고 구매 욕구를 자극해야 합니다. 예를 들어 '이번에 소개할 제품은 ~ 입니다!'로 시작할 수 있습니다."
+
   };
   const lengthMapping = {
-    "대략 100자 이내": "100자 이내의 완전히 완성된 글입니다.",
-    "대략 200자 이내": "200자 이내의 완전히 완성된 글입니다.",
-    "대략 300자 이내": "300자 이내의 완전히 완성된 글입니다."
+    "2 문장 이내": "2 문장 이내의 완전히 완성된 글입니다.",
+    "3 문장 이내": "3 문장 이내의 완전히 완성된 글입니다."
   };
 
   // Debugging: Log the keys of storyTypes and the confirmed selections
@@ -76,7 +76,7 @@ function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, conf
   // Constructing the prompt without including emojis
   const promptIntro = storyTypes[confirmedTypeSelection];
   const promptLength = lengthMapping[confirmedLengthSelection] || "기본 프롬프트 길이";
-  let prompt = `${promptIntro}. 스토리 ${promptLength}. 이 스토리는 다음에 관한 것입니다.`;
+  let prompt = `${promptIntro} 이 스토리는 ${promptLength} 이 스토리는 다음에 관한 것입니다.`;
 
   selectedEmojisData.forEach((emoji, index) => {
       if (emoji && emoji.key) {
@@ -92,7 +92,7 @@ gtag('event', 'Option-select', {
   'Selected_length': confirmedLengthSelection, // Corrected from confirmedLengthLengthSelection
 });
 
-
+console.log("Final prompt:", prompt);
 
   // Return the generated prompt
   return prompt;
