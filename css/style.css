@@ -78,7 +78,7 @@ header {
     cursor: pointer;
 }
 #logo img {
-    width: 160px;
+    width: 140px;
     height: auto;
 }
 #free {
@@ -94,7 +94,8 @@ li {
 ul {
     display: flex;
     align-items: center;
-    gap: 27px;
+    gap: 20px;
+    font-size: 15px;
 }
 /* Existing styles for #shareContainer */
 #shareContainer {
@@ -619,7 +620,7 @@ h2{
     text-decoration-line: underline;
     text-decoration-color: #1F2223;
     text-decoration-style: solid;
-    text-decoration-thickness: 6px;
+    text-decoration-thickness: 5px;
 }
 
 /* Active state for length */
@@ -627,7 +628,7 @@ h2{
     text-decoration-line: underline;
     text-decoration-color: #1F2223;
     text-decoration-style: solid;
-    text-decoration-thickness: 6px;
+    text-decoration-thickness: 5px;
 }
 
 /*Length modal*/
@@ -904,7 +905,7 @@ footer {
     li {
         list-style-type: none;
     }
-    ui {
+    ul {
         display: flex;
         align-items: center;
         gap: 27px;
@@ -1139,7 +1140,7 @@ footer {
         text-decoration-line: underline;
         text-decoration-color: #1F2223;
         text-decoration-style: solid;
-        text-decoration-thickness: 12px;
+        text-decoration-thickness: 8px;
     }
 
     /* Active state for length */
@@ -1147,7 +1148,7 @@ footer {
         text-decoration-line: underline;
         text-decoration-color: #1F2223;
         text-decoration-style: solid;
-        text-decoration-thickness: 12px;
+        text-decoration-thickness: 8px;
     }
 
     /*Length modal*/

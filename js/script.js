@@ -624,7 +624,7 @@ function updateErrorMessage() {
         errorMessage += '이모지';
     }
     if (!isTypeSet) {
-        errorMessage += (errorMessage ? ', ' : '') + '스토리 유형';
+        errorMessage += (errorMessage ? ', ' : '') + '스타일';
     }
     if (!isLengthSet) {
         errorMessage += (errorMessage ? ', ' : '') + '길이';
