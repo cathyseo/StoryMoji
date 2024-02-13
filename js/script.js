@@ -464,7 +464,8 @@ function updateEmojiContainer(group, metadata) {
         'Hindu temple',
         'Synagogue',
         'Shinto shrine',
-        'Kaaba'
+        'Kaaba',
+        'Map of japan'
     ];
 
     for (const emojiName in metadata) {
