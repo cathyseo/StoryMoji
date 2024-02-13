@@ -396,7 +396,7 @@ h2{
     top: 0;
     width: 100vw; /* Full width */
     height: 100vh; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+    overflow: hidden; /* Enable scroll if needed */
 }
 
 .modal-content {
@@ -404,6 +404,8 @@ h2{
     padding: 20px 0;
     width: 100vw; /* Full width */
     height: 100vh; /* Full height */
+    overflow: hidden; /* Enable scroll if needed */
+
 }
 .modalButtonContainer {
     display: flex;
@@ -520,6 +522,7 @@ h2{
         padding-top: 10px;
         background-color: #E9EDF0;
         padding-bottom: 100px;
+        display: ruby-text;
     }
     
 
@@ -612,7 +615,19 @@ h2{
     font-weight: 700;
     text-align: left;
     text-transform: uppercase;
-    white-space: nowrap;
+    display:flex;
+    flex-direction: column;
+}
+#lengthContainer {
+    color: #1F2223;
+    gap: 20px;
+    font-size: 40px;
+    line-height: 130%;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+    display:flex;
+    flex-direction: column;
 }
 /* Active state for type */
 .typeOption:hover, .typeOption.active {
@@ -1049,7 +1064,7 @@ footer {
         top: 0;
         width: 100vw; /* Full width */
         height: 100vh; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
+        overflow: hidden; /* Enable scroll if needed */
     }
     
     .modal-content {
@@ -1058,6 +1073,8 @@ footer {
         width: 100vw; /* Full width */
         height: 100vh; /* Full height */
         box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        overflow: hidden; /* 모달 내부와 외부 스크롤 방지 */
+
     }
     .modal-content * {   
         /*max-width: 100%; Ensure children don't exceed parent's width */
@@ -1132,7 +1149,15 @@ footer {
         font-weight: 700;
         text-align: left;
         text-transform: uppercase;
-        white-space: nowrap;
+    }
+    #lengthContainer {
+        color: #1F2223;
+        gap: 20px;
+        font-size: 80px;
+        line-height: 130%;
+        font-weight: 700;
+        text-align: left;
+        text-transform: uppercase;
     }
     /* Active state for type */
     .typeOption:hover, .typeOption.active {
