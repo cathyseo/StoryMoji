@@ -431,7 +431,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const emojiTabsContainer = document.getElementById('emojiTabs');
         uniqueGroups.forEach(group => {
             // "People & Body" 그룹을 제외하고 탭 생성
-            if (group !== "People & Body") {
+            if (group !== 'People & Body' && group !== 'Symbols' && group !== 'Flags') {
                 const tab = document.createElement('div');
                 tab.className = 'emojiTab';
                 tab.textContent = groupNamesKorean[group] || group; // 영어 그룹 이름을 한국어로 매핑

@@ -522,6 +522,7 @@ h2{
         padding-top: 10px;
         background-color: #E9EDF0;
         padding-bottom: 100px;
+        display: ruby-text;
     }
     
 
@@ -1089,11 +1090,15 @@ footer {
             background-color: white;
             border-radius: 10px;
         }
+
+        #emojiTabs {
+            gap: 50px;
+        }
     
         .emojiTab {
             color:#1F2223;
             text-align: right;
-            font-size: 38px;
+            font-size: 60px;
             font-style: normal;
             font-weight: 700;
             line-height: 130%;
