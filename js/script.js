@@ -283,7 +283,7 @@ document.getElementById('share').addEventListener('click', function(event) {
     event.preventDefault();
   
     // The main domain to be shared
-    const mainDomain = 'https://www.storymoji.online';
+    const mainDomain = 'https://www.kr.storymoji.online';
   
     // Track the event with GA4 before the share functionality
     gtag('event', 'Header Share Click', {

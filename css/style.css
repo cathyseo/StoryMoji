@@ -168,6 +168,7 @@ h2 {
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
+    margin-bottom: 30px;
 }
 
 
@@ -958,6 +959,7 @@ footer {
         justify-content: flex-start;
         min-height: 450px;
         width: 100%;
+        margin-bottom: 0px;
     }
     #heroImgContainer {
         height: 405px;
@@ -1177,7 +1179,7 @@ footer {
         text-decoration-line: underline;
         text-decoration-color: #1F2223;
         text-decoration-style: solid;
-        text-decoration-thickness: 6px;
+        text-decoration-thickness: 8px;
         text-underline-offset: 12px; /* 밑줄과 텍스트 사이의 간격을 3px로 설정 */
 
         
@@ -1188,7 +1190,7 @@ footer {
         text-decoration-line: underline;
         text-decoration-color: #1F2223;
         text-decoration-style: solid;
-        text-decoration-thickness: 6px;
+        text-decoration-thickness: 8px;
         text-underline-offset: 12px; /* 밑줄과 텍스트 사이의 간격을 3px로 설정 */
 
     }

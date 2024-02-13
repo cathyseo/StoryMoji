@@ -209,7 +209,7 @@ document.getElementById('share').addEventListener('click', function(event) {
   event.preventDefault();
 
   // The main domain to be shared
-  const mainDomain = 'https://www.storymoji.online';
+  const mainDomain = 'https://www.kr.storymoji.online';
 
   // Track the event with GA4 before the share functionality
   gtag('event', 'Header Share Click', {
@@ -305,7 +305,7 @@ document.getElementById("shareThisApp").addEventListener("click", function(event
   });
 
   // Define your app link here
-  const appLink = "https://www.storymoji.online"; // Replace with your actual app link
+  const appLink = "https://www.kr.storymoji.online"; // Replace with your actual app link
 
   // Copy the appLink to the clipboard
   navigator.clipboard.writeText(appLink).then(function() {
