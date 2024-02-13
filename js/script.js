@@ -412,46 +412,55 @@ document.getElementById("emojisButton").addEventListener("click", function() {
 // Fetch emoji metadata and handle tab functionalities
 document.addEventListener('DOMContentLoaded', function() {
     fetch('metadata.json')
-        .then(response => response.json())
-        .then(fetchedMetadata => {
-            emojiMetadata = fetchedMetadata;
+    .then(response => response.json())
+    .then(fetchedMetadata => {
+        const emojiMetadata = fetchedMetadata;
 
-            const uniqueGroups = new Set();
-            for (const emoji in emojiMetadata) {
-                uniqueGroups.add(emojiMetadata[emoji].group);
+        // 한국어 그룹 이름 매핑
+        const groupNamesKorean = {
+            "Smileys & Emotion": "스마일리 & 감정",
+            "Animals & Nature": "동물 & 자연",
+            "Food & Drink": "음식 & 음료",
+            "Travel & Places": "여행 & 장소",
+            "Activities": "활동",
+            "Objects": "물건",
+            // "People & Body" 그룹은 제외하거나 숨기기 위해 여기에 포함하지 않음
+        };
+
+        const uniqueGroups = [...new Set(Object.values(emojiMetadata).map(emoji => emoji.group))];
+        const emojiTabsContainer = document.getElementById('emojiTabs');
+        uniqueGroups.forEach(group => {
+            // "People & Body" 그룹을 제외하고 탭 생성
+            if (group !== "People & Body") {
+                const tab = document.createElement('div');
+                tab.className = 'emojiTab';
+                tab.textContent = groupNamesKorean[group] || group; // 영어 그룹 이름을 한국어로 매핑
+                tab.dataset.groupNameEnglish = group; // 데이터 속성을 사용하여 영어 그룹 이름 저장
+                emojiTabsContainer.appendChild(tab);
             }
+        });
 
-            const emojiTabsContainer = document.getElementById('emojiTabs');
-            uniqueGroups.forEach(group => {
-                // Skip creating tabs for 'People & Body', 'Symbols', and 'Flags'
-                if (group !== 'People & Body' && group !== 'Symbols' && group !== 'Flags') {
-                    const tab = document.createElement('div');
-                    tab.className = 'emojiTab';
-                    tab.textContent = group;
-                    emojiTabsContainer.appendChild(tab);
-                }
+        document.querySelectorAll('.emojiTab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.emojiTab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                const group = this.dataset.groupNameEnglish; // 영어 그룹 이름을 사용하여 메타데이터 업데이트
+                updateEmojiContainer(group, emojiMetadata);
             });
+        });
 
-            const tabs = document.querySelectorAll('.emojiTab');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    updateEmojiContainer(this.textContent, emojiMetadata);
-                });
-            });
-
-            if (uniqueGroups.size > 0) {
-                // Ensure the first visible tab is activated
-                const visibleTabs = Array.from(emojiTabsContainer.children).filter(tab => tab.style.display !== 'none');
-                if (visibleTabs.length > 0) {
-                    visibleTabs[0].classList.add('active');
-                    updateEmojiContainer(visibleTabs[0].textContent, emojiMetadata);
-                }
+        if (uniqueGroups.length > 0) {
+            const firstTab = emojiTabsContainer.querySelector('.emojiTab');
+            if (firstTab) {
+                firstTab.click(); // 첫 번째 탭을 프로그래매틱하게 클릭하여 활성화
             }
-        })
-        .catch(error => console.error('Error loading emoji metadata:', error));
+        }
+    })
+    .catch(error => {
+        console.error('Error loading emoji metadata:', error);
+    });
 });
+
 
 function updateEmojiContainer(group, metadata) {
     const emojiContainer = document.getElementById('emojiContainer');
