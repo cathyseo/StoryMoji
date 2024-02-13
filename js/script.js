@@ -250,28 +250,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //Animate images
 document.addEventListener('DOMContentLoaded', function() {
-    // Function to toggle between animated and non-animated images
+    // 이미지를 토글하는 함수
     function toggleImage(event) {
-        // Get the clicked image element
-        var img = event.target;
-        // Check if the image is non-animated
+        var img = event.target; // 클릭된 이미지 요소 가져오기
+        
+        // 이미지가 비활성화된 상태인 경우
         if (img.src.includes('-NA.png')) {
-            // Change to the animated image
-            img.src = img.src.replace('-NA.png', '.png');
+            img.src = img.src.replace('-NA.png', '.png'); // 활성화된 이미지로 변경
         } else {
-            // Change back to the non-animated image
-            img.src = img.src.replace('.png', '-NA.png');
+            img.src = img.src.replace('.png', '-NA.png'); // 비활성화된 이미지로 변경
         }
     }
 
-    // Get all elements with the class 'heroIMG'
-    var images = document.querySelectorAll('.heroIMG');
+    var images = document.querySelectorAll('.heroIMG'); // 'heroIMG' 클래스를 가진 모든 요소 가져오기
 
-    // Add click event listener to each image
+    // 각 이미지에 클릭 이벤트 리스너 추가
     images.forEach(function(img) {
         img.addEventListener('click', toggleImage);
     });
+
+    // 'Cow' 이미지에 대한 특별 처리
+    // 페이지 로드 시 'Cow' 이미지를 기본적으로 활성화된 이미지로 설정
+    var cowImage = document.getElementById('imgCow');
+    if (cowImage.src.includes('-NA.png')) {
+        cowImage.src = cowImage.src.replace('-NA.png', '.png');
+    }
 });
+
 
 //Share button
 document.getElementById('share').addEventListener('click', function(event) {
