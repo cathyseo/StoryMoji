@@ -250,28 +250,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //Animate images
 document.addEventListener('DOMContentLoaded', function() {
-    // Function to toggle between animated and non-animated images
+
     function toggleImage(event) {
-        // Get the clicked image element
-        var img = event.target;
-        // Check if the image is non-animated
+        var img = event.target; 
+        
         if (img.src.includes('-NA.png')) {
-            // Change to the animated image
-            img.src = img.src.replace('-NA.png', '.png');
+            img.src = img.src.replace('-NA.png', '.png'); 
         } else {
-            // Change back to the non-animated image
-            img.src = img.src.replace('.png', '-NA.png');
+            img.src = img.src.replace('.png', '-NA.png'); 
         }
     }
 
-    // Get all elements with the class 'heroIMG'
-    var images = document.querySelectorAll('.heroIMG');
+    var images = document.querySelectorAll('.heroIMG'); 
 
-    // Add click event listener to each image
+
     images.forEach(function(img) {
         img.addEventListener('click', toggleImage);
     });
+
+
+    var cowImage = document.getElementById('imgCow');
+    if (cowImage.src.includes('-NA.png')) {
+        cowImage.src = cowImage.src.replace('-NA.png', '.png');
+    }
 });
+
 
 //Share button
 document.getElementById('share').addEventListener('click', function(event) {
