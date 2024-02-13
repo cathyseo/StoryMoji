@@ -509,7 +509,8 @@ h2{
         text-decoration-line: underline;
         text-decoration-color: #1F2223;
         text-decoration-style: solid;
-        text-decoration-thickness: 4px;
+        text-decoration-thickness: 3px;
+        text-underline-offset: 6px; /* 밑줄과 텍스트 사이의 간격을 3px로 설정 */
     }
 
     .scrollArrow img {
@@ -609,6 +610,20 @@ h2{
 }
 #typeContainer {
     color: #1F2223;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 40px;
+    line-height: 130%;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+#lengthContainer {
+    color: #1F2223;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
     font-size: 40px;
     line-height: 130%;
@@ -622,7 +637,9 @@ h2{
     text-decoration-line: underline;
     text-decoration-color: #1F2223;
     text-decoration-style: solid;
-    text-decoration-thickness: 5px;
+    text-decoration-thickness: 4px;
+    text-underline-offset: 6px; /* 밑줄과 텍스트 사이의 간격을 3px로 설정 */
+
 }
 
 /* Active state for length */
@@ -630,7 +647,8 @@ h2{
     text-decoration-line: underline;
     text-decoration-color: #1F2223;
     text-decoration-style: solid;
-    text-decoration-thickness: 5px;
+    text-decoration-thickness: 4px;
+    text-underline-offset: 6px; /* 밑줄과 텍스트 사이의 간격을 3px로 설정 */
 }
 
 /*Length modal*/
@@ -1111,6 +1129,8 @@ footer {
             text-decoration-color: #1F2223;
             text-decoration-style: solid;
             text-decoration-thickness: 6px;
+            text-underline-offset: 12px; /* 밑줄과 텍스트 사이의 간격을 3px로 설정 */
+
         }
 
     
@@ -1142,12 +1162,25 @@ footer {
         text-transform: uppercase;
         white-space: nowrap;
     }
+    #lengthContainer {
+        color: #1F2223;
+        gap: 20px;
+        font-size: 80px;
+        line-height: 130%;
+        font-weight: 700;
+        text-align: left;
+        text-transform: uppercase;
+        white-space: nowrap; 
+    }
     /* Active state for type */
     .typeOption:hover, .typeOption.active {
         text-decoration-line: underline;
         text-decoration-color: #1F2223;
         text-decoration-style: solid;
-        text-decoration-thickness: 8px;
+        text-decoration-thickness: 6px;
+        text-underline-offset: 12px; /* 밑줄과 텍스트 사이의 간격을 3px로 설정 */
+
+        
     }
 
     /* Active state for length */
@@ -1155,7 +1188,9 @@ footer {
         text-decoration-line: underline;
         text-decoration-color: #1F2223;
         text-decoration-style: solid;
-        text-decoration-thickness: 8px;
+        text-decoration-thickness: 6px;
+        text-underline-offset: 12px; /* 밑줄과 텍스트 사이의 간격을 3px로 설정 */
+
     }
 
     /*Length modal*/
