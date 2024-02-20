@@ -548,6 +548,10 @@ h2{
         flex-direction: row;
         align-items: center;
         flex-wrap: wrap;
+        user-select: none; /* Standard syntax */
+        -webkit-user-select: none; /* Safari/Chrome/Opera */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
     }
     .modal-error-message {
         display: flex;
@@ -699,6 +703,10 @@ h2{
 }
 #optionsContent {
     margin-bottom: 50px;
+    user-select: none; /* Standard syntax */
+    -webkit-user-select: none; /* Safari/Chrome/Opera */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
 }
 #youChooseText {
     font-size: 20px;

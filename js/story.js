@@ -285,7 +285,6 @@ document.getElementById('copyBtn').addEventListener('click', function() {
 
 
 
-//Share this app button
 document.getElementById("shareThisApp").addEventListener("click", function(event) {
   event.preventDefault(); // Prevent any default action triggered by the button
 
@@ -298,21 +297,36 @@ document.getElementById("shareThisApp").addEventListener("click", function(event
   // Define your app link here
   const appLink = "https://www.storymoji.online"; // Replace with your actual app link
 
-  // Copy the appLink to the clipboard
-  navigator.clipboard.writeText(appLink).then(function() {
-    // Show the "App link copied." message
-    var appLinkCopied = document.getElementById('appLinkCopied');
-    appLinkCopied.classList.add('active');
+  // Function to check if the device is mobile
+  function isMobileDevice() {
+      return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+  }
 
-    // Optionally, hide the message after a few seconds
-    setTimeout(function() {
-        appLinkCopied.classList.remove('active');
-    }, 2000); // Adjust time as needed
+  // If it's a mobile device and the share API is supported, use the native share modal
+  if (isMobileDevice() && navigator.share) {
+      navigator.share({
+          title: 'Check out this app!', // You can customize the title
+          url: appLink // Share the app link
+      }).then(() => {
+          console.log('Thanks for sharing!');
+      }).catch(console.error);
+  } else {
+      // For non-mobile devices or when the share API is not supported, fallback to clipboard functionality
+      navigator.clipboard.writeText(appLink).then(function() {
+        // Show the "App link copied." message
+        var appLinkCopied = document.getElementById('appLinkCopied');
+        appLinkCopied.classList.add('active');
 
-  }).catch(function(error) {
-    // Handle any errors that occur during copy
-    console.error('Could not copy text: ', error);
-  });
+        // Optionally, hide the message after a few seconds
+        setTimeout(function() {
+            appLinkCopied.classList.remove('active');
+        }, 2000); // Adjust time as needed
+
+      }).catch(function(error) {
+        // Handle any errors that occur during copy
+        console.error('Could not copy text: ', error);
+      });
+  }
 });
 
 
@@ -328,6 +342,6 @@ function trackTryAgainEvent() {
   
   // Redirect after a delay
   setTimeout(function() {
-    location.href = 'index.html';
+    location.href = 'https://www.storymoji.online';
   }, 500); // Increased delay to 500ms
 }
