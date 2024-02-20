@@ -49,7 +49,7 @@ function createPromptFromEmojis(selectedEmojisData, confirmedTypeSelection, conf
       "Fairy Story": "Create a short Disney-style gender-neutral fairy tale story.",
       "Horror": "Craft a short modern eerie horror story set in a contemporary urban environment.",
       "Dad Joke": "Tell an extremely short, pun-based dad joke.",
-      "Pop Song Lyric": "Create a short part of catchy lyrics inspired by Taylor Swift and Lizzo(but don't mention them in the lyric.). Focus on love, self-celebration. Aim for a vibe that uplifts and gets people dancing. Write seamlessly, without using 'Verse', 'Chorus', or numbers.",           
+      "Pop Song Lyric": "Create a short part of catchy lyrics inspired by Taylor Swift and Lizzo(but don't mention them in the lyric.). Focus on love, self-celebration. Aim for a vibe that uplifts and gets people dancing. Write seamlessly, without using 'Verse', 'Chorus', or numbers. Don't use any explanation using '()'",           
       "Sci-Fi": "Create a futuristic sci-fi story."
   };
   const lengthMapping = {
@@ -204,17 +204,21 @@ function displayGeneratedStory(story) {
 
 
 
-//Share button
 document.getElementById('share').addEventListener('click', function(event) {
-  event.preventDefault();
+  event.preventDefault(); // Prevent the default action
 
   // The main domain to be shared
   const mainDomain = 'https://www.storymoji.online';
 
+  // Custom title for the share dialog
+  const shareTitle = 'Check out Storymoji!';
+  // Optional: Custom text for the share dialog
+  const shareText = 'Discover amazing stories with emojis. Share your favorites with friends!';
+
   // Track the event with GA4 before the share functionality
   gtag('event', 'Header Share Click', {
-    'event_category': 'Button Clicks',
-    'event_label': 'Header Share Click'
+      'event_category': 'Button Clicks',
+      'event_label': 'Header Share Click'
   });
 
   // Function to check if the device is mobile
@@ -225,24 +229,30 @@ document.getElementById('share').addEventListener('click', function(event) {
   // If it's a mobile device and the share API is supported, use the native share modal
   if (isMobileDevice() && navigator.share) {
       navigator.share({
-          title: document.title,
-          url: mainDomain // Share the main domain
+          title: 'StoryMoji: AI-Powered Storytelling',
+          text: 'ChatGTP4 Side Project',
+          url: 'https://www.storymoji.online' // Share the main domain
       }).then(() => {
           console.log('Thanks for sharing!');
       }).catch(console.error);
   } else {
-      // For non-mobile devices, use the existing clipboard functionality
-      navigator.clipboard.writeText(mainDomain).then(function() { // Copy the main domain
+      // For non-mobile devices or when the share API is not supported
+      // Copy the main domain to the clipboard
+      navigator.clipboard.writeText(mainDomain).then(function() {
+          // Show a message indicating the link was copied
           var linkCopied = document.getElementById('linkCopied');
-          linkCopied.classList.add('active');
-          setTimeout(function() {
-              linkCopied.classList.remove('active');
-          }, 1000); // Duration for the message display
+          if (linkCopied) {
+              linkCopied.classList.add('active');
+              setTimeout(function() {
+                  linkCopied.classList.remove('active');
+              }, 1000); // Duration for the message display
+          }
       }, function(err) {
           console.error('Could not copy text:', err);
       });
   }
 });
+
 
 document.getElementById('copyBtn').addEventListener('click', function() {
   fetch('metadata.json')
@@ -305,8 +315,9 @@ document.getElementById("shareThisApp").addEventListener("click", function(event
   // If it's a mobile device and the share API is supported, use the native share modal
   if (isMobileDevice() && navigator.share) {
       navigator.share({
-          title: 'Check out this app!', // You can customize the title
-          url: appLink // Share the app link
+        title: 'StoryMoji: AI-Powered Storytelling',
+        text: 'ChatGTP4 Side Project',
+        url: appLink // Share the app link
       }).then(() => {
           console.log('Thanks for sharing!');
       }).catch(console.error);
