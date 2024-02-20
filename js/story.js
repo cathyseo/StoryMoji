@@ -244,57 +244,53 @@ document.getElementById('share').addEventListener('click', function(event) {
   }
 });
 
-document.getElementById('copyBtn').addEventListener('click', function() {
-  // 모바일 기기에서 실행되는지 확인
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    // 스토리 텍스트 요소
-    var storyTextElement = document.getElementById('fairyTaleOutput');
+ocument.getElementById('copyBtn').addEventListener('click', function() {
+  // Fetch the metadata.json
+  fetch('metadata.json')
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json(); // Parse JSON data from the response
+      })
+      .then(metadata => {
+          // Now we have the metadata, proceed with the rest of the code
+          
+          // Get the story text
+          const storyText = document.getElementById('fairyTaleOutput').innerText;
 
-    // 사용자가 텍스트를 쉽게 복사할 수 있도록 텍스트 선택
-    var range = document.createRange();
-    range.selectNodeContents(storyTextElement);
-    var selection = window.getSelection();
-    selection.removeAllRanges(); // 이전에 선택된 범위가 있을 경우 제거
-    selection.addRange(range); // 새로운 범위 추가
+          // Get the selected emojis data
+          const selectedEmojisData = JSON.parse(localStorage.getItem('selectedEmojis'));
+          console.log('Selected Emojis Data:', selectedEmojisData);
 
-    // 여기서 더 이상의 액션은 필요 없음. 사용자가 나타난 선택 영역을 복사할 수 있음
-  } else {
-    // 비모바일 기기에서의 기존 로직 실행
-    fetch('metadata.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(metadata => {
-            const storyText = document.getElementById('fairyTaleOutput').innerText;
-            const selectedEmojisData = JSON.parse(localStorage.getItem('selectedEmojis'));
+          // Extract glyph data from metadata and concatenate with the story text
+          const emojiGlyphs = selectedEmojisData.map(emoji => {
+              const emojiData = metadata[emoji.key];
+              return emojiData ? emojiData.glyph : ''; // Use the glyph field from the metadata
+          }).join(' '); // Join the glyphs with a space
+          console.log('Emoji Glyphs:', emojiGlyphs);
 
-            const emojiGlyphs = selectedEmojisData.map(emoji => {
-                const emojiData = metadata[emoji.key];
-                return emojiData ? emojiData.glyph : '';
-            }).join(' ');
+          // Add a line break after emojis if there are any
+          const fullTextToCopy = emojiGlyphs.length > 0 ? `${emojiGlyphs}\n\n${storyText}` : storyText;
+          console.log('Full Text to Copy:', fullTextToCopy);
 
-            const fullTextToCopy = emojiGlyphs.length > 0 ? `${emojiGlyphs}\n\n${storyText}` : storyText;
-
-            navigator.clipboard.writeText(fullTextToCopy)
-                .then(() => {
-                    console.log('Story with emojis copied to clipboard successfully.');
-                    var storyCopied = document.getElementById('storyCopied');
-                    storyCopied.classList.add('active');
-                    setTimeout(function() {
-                        storyCopied.classList.remove('active');
-                    }, 1000);
-                })
-                .catch(err => {
-                    console.error('Failed to copy story with emojis: ', err);
-                });
-        })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
-        });
-  }
+          // Copy the full text (with emojis) to the clipboard
+          navigator.clipboard.writeText(fullTextToCopy)
+              .then(() => {
+                  console.log('Story with emojis copied to clipboard successfully.');
+                  var storyCopied = document.getElementById('storyCopied');
+                  storyCopied.classList.add('active');
+                  setTimeout(function() {
+                      storyCopied.classList.remove('active');
+                  }, 1000); // Duration for the message display
+              })
+              .catch(err => {
+                  console.error('Failed to copy story with emojis: ', err);
+              });
+      })
+      .catch(error => {
+          console.error('There has been a problem with your fetch operation:', error);
+      });
 });
 
 
