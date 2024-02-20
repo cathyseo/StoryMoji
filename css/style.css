@@ -435,7 +435,7 @@ h2{
 }
 
 #emojiContainer {
-    padding: 10px 18px 100px 18px;
+    padding: 10px 18px 120px 18px;
     background-color: #E9EDF0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); /* Creates a grid with a minimum column width of 60px */
@@ -1107,17 +1107,16 @@ footer {
         right: 20px; /* Right side */
         bottom: 20px; /* Bottom side */
     }
-    
     /*Emoji modal*/
     #emojiModal {
         background-color: #E9EDF0;
     }
     #emojiContainer {
-        padding: 10px 18px 100px 18px;
+        padding: 20px 18px 100px 18px;
         background-color: #E9EDF0;
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Creates a grid with a minimum column width of 60px */
-        grid-auto-rows: 80px; /* Makes the grid rows 60px high to match the column width */
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); /* Creates a grid with a minimum column width of 60px */
+        grid-auto-rows: 90px; /* Makes the grid rows 60px high to match the column width */
         gap: 12px; /* Space between grid items */
         justify-content: center;
         align-items: center; /* This centers the content of all grid items vertically */
