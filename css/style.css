@@ -63,7 +63,7 @@ header {
     justify-content: space-between;
     gap: 10px;
     flex: 1 0 0;
-    padding: 30px 0 10px 0;
+    padding: 15px 0 10px 0;
 }
 #logoContainer {
     display: flex;
@@ -140,7 +140,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #1F2223;
 }
 h1 {
-    font-size: 50px;
+    font-size: 46px;
     display: inline-block; /* Aligns with the line-height */
     vertical-align: top; /* Aligns text to the top of the container */
 }
@@ -391,13 +391,16 @@ h2{
 
 /*Modal*/
 .modal {
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100vw; /* Full width */
     height: 100vh; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+    overflow: hidden; /* Hide overflow by default */
+    display: flex; /* Use flexbox to center modal content */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
 }
 
 .modal-content {
@@ -408,6 +411,7 @@ h2{
     overflow: auto; /* Enable scroll if needed */
 
 }
+
 .modalButtonContainer {
     display: flex;
     right: 20px; /* Right side */
@@ -515,7 +519,7 @@ h2{
         font-style: normal;
         font-weight: 700;
         line-height: 130%;
-        text-transform: uppercase;
+        text-transform: capitalize;
         white-space: nowrap;
         gap: 10px;
     }
@@ -851,7 +855,7 @@ footer {
 }
 #aboutContainer h1 {
     letter-spacing: 0px;
-    font-size: 30px;
+    font-size: 42px;
 }
 #pContainer {
     display: flex;
@@ -1100,6 +1104,16 @@ footer {
     #emojiModal {
         background-color: #E9EDF0;
     }
+    #emojiContainer {
+        padding: 10px 18px 100px 18px;
+        background-color: #E9EDF0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Creates a grid with a minimum column width of 60px */
+        grid-auto-rows: 80px; /* Makes the grid rows 60px high to match the column width */
+        gap: 12px; /* Space between grid items */
+        justify-content: center;
+        align-items: center; /* This centers the content of all grid items vertically */
+    }
     #emojiContainer img {
         width: 80px; /* Width of the image */
         height: 80px; /* Height of the image to maintain aspect ratio */
@@ -1125,7 +1139,7 @@ footer {
             text-decoration-line: underline;
             text-decoration-color: #1F2223;
             text-decoration-style: solid;
-            text-decoration-thickness: 6px;
+            text-decoration-thickness: 7px;
         }
 
     
