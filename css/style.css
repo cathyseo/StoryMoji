@@ -1134,6 +1134,9 @@ footer {
             white-space: nowrap;
             gap: 60px;
         }
+        #emojiTabs {
+            gap: 60px;
+        }
         /* Active state for tabs */
         .emojiTab:hover, .emojiTab.active {
             text-decoration-line: underline;
