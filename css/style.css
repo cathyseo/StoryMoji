@@ -397,7 +397,7 @@ h2{
     top: 0;
     width: 100vw; /* Full width */
     height: 100vh; /* Full height */
-    overflow: hidden; /* Enable scroll if needed */
+    overflow: auto; /* Enable scroll if needed */
 }
 
 .modal-content {
@@ -405,7 +405,7 @@ h2{
     padding: 20px 0;
     width: 100vw; /* Full width */
     height: 100vh; /* Full height */
-    overflow: hidden; /* Enable scroll if needed */
+    overflow: auto; /* Enable scroll if needed */
 
 }
 .modalButtonContainer {
@@ -430,14 +430,27 @@ h2{
     background-color: #E9EDF0;
 }
 
-#emojiContainer img {
-    width: 60px;
-    height: 60px;
-    padding: 5px;
-    margin: 5px;
-    cursor: pointer; /* This makes the cursor look like a pointer hand when you hover over the emojis */
-
+#emojiContainer {
+    padding: 10px 18px 100px 18px;
+    background-color: #E9EDF0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); /* Creates a grid with a minimum column width of 60px */
+    grid-auto-rows: 60px; /* Makes the grid rows 60px high to match the column width */
+    gap: 12px; /* Space between grid items */
+    justify-content: center;
+    align-items: center; /* This centers the content of all grid items vertically */
 }
+
+
+#emojiContainer img {
+    width: 60px; /* Width of the image */
+    height: 60px; /* Height of the image to maintain aspect ratio */
+    margin: 8px;
+    object-fit: contain; /* Ensures the image is scaled correctly within the cell */
+    margin: auto; /* This will center the image within the cell */
+    cursor: pointer; /* This makes the cursor look like a pointer hand when you hover over the emojis */
+}
+
 /* Active state for images */
 #emojiContainer img:hover, #emojiContainer img.activeImage {
     background-color: white;
@@ -498,12 +511,13 @@ h2{
         flex: 0 0 auto; /* Prevent tabs from stretching */
         color:#1F2223;
         text-align: right;
-        font-size: 26px;
+        font-size: 24px;
         font-style: normal;
         font-weight: 700;
         line-height: 130%;
         text-transform: uppercase;
         white-space: nowrap;
+        gap: 10px;
     }
     /* Active state for tabs */
     .emojiTab:hover, .emojiTab.active {
@@ -518,13 +532,6 @@ h2{
         height: auto;
     }
 
-
-    #emojiContainer {
-        padding-top: 10px;
-        background-color: #E9EDF0;
-        padding-bottom: 100px;
-        display: ruby-text;
-    }
     
 
     #selectedEmojis img {
@@ -1075,7 +1082,7 @@ footer {
         width: 100vw; /* Full width */
         height: 100vh; /* Full height */
         box-sizing: border-box; /* Include padding and border in the element's total width and height */
-        overflow: hidden; /* 모달 내부와 외부 스크롤 방지 */
+    overflow: auto; /* Changed from hidden to auto */
 
     }
     .modal-content * {   
@@ -1093,28 +1100,25 @@ footer {
     #emojiModal {
         background-color: #E9EDF0;
     }
-
     #emojiContainer img {
-        width: 80px;
-        height: 80px;
-        padding: 5px;
-        margin: 5px;
+        width: 80px; /* Width of the image */
+        height: 80px; /* Height of the image to maintain aspect ratio */
+        margin: 8px;
+        object-fit: contain; /* Ensures the image is scaled correctly within the cell */
+        margin: auto; /* This will center the image within the cell */
+        cursor: pointer; /* This makes the cursor look like a pointer hand when you hover over the emojis */
     }
-        /* Active state for images */
-        #emojiContainer img:hover, #emojiContainer img.activeImage {
-            background-color: white;
-            border-radius: 10px;
-        }
     
         .emojiTab {
             color:#1F2223;
             text-align: right;
-            font-size: 38px;
+            font-size: 46px;
             font-style: normal;
             font-weight: 700;
             line-height: 130%;
             text-transform: uppercase;
             white-space: nowrap;
+            gap: 60px;
         }
         /* Active state for tabs */
         .emojiTab:hover, .emojiTab.active {
@@ -1125,10 +1129,6 @@ footer {
         }
 
     
-        #emojiContainer {
-            padding-top: 10px;
-            background-color: #E9EDF0;
-        }
         
         #selectedEmojis img {
             width: 24px; /* Keep your existing width */
