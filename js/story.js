@@ -273,10 +273,10 @@ document.getElementById('copyBtn').addEventListener('click', function() {
                   }, 1000);
               })
               .catch(err => {
-                  // Modified part: Show an alert for manual copying on failure
-                  alert('Automatic copying is not possible on this device for security reasons. Please copy manually.');
-                  console.error('Failed to copy story with emojis: ', err);
-              });
+                console.error('Failed to copy story with emojis: ', err);
+                // Using confirm as a workaround to show a message with an "OK" button
+                confirm('Copying text automatically is restricted on this device for privacy reasons. Please copy the text manually.');
+               });
       })
       .catch(error => {
           console.error('There has been a problem with your fetch operation:', error);
