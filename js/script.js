@@ -182,54 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-
-    // Function to disable scrolling
-    function disableScrolling() {
-        document.body.style.overflow = 'hidden';
-    }
-
-    // Function to enable scrolling
-    function enableScrolling() {
-        document.body.style.overflow = '';
-    }
-
-    // Event listener for opening the Story Type Modal
-    document.getElementById("typeButton").addEventListener("click", function() {
-        document.getElementById("typeModal").style.display = "block";
-        disableScrolling(); // Disable scrolling when modal is open
-    });
-
-    // Event listener for closing the Story Type Modal using the Close button
-    document.getElementById("closeTypeModal").addEventListener("click", function() {
-        document.getElementById("typeModal").style.display = "none";
-        enableScrolling(); // Enable scrolling when modal is closed
-    });
-
-    
-    // Event listener for the Length Modal
-    document.getElementById("lengthButton").addEventListener("click", function() {
-        document.getElementById("lengthModal").style.display = "block";
-        disableScrolling(); // Disable scrolling when modal is open
-        updateActiveLengthState(); // Update active state when the modal is opened
-    });
-
-    document.getElementById("closelengthModal").addEventListener("click", function() {
-        document.getElementById("lengthModal").style.display = "none";
-        enableScrolling(); // Enable scrolling when modal is closed
-    });
-
-    document.getElementById("savelengthModal").addEventListener("click", function() {
-        // Logic for handling the saving of length selection
-        // (Your existing code for saving goes here...)
-
-        // Regardless of whether saving is successful or not,
-        // ensure scrolling is re-enabled when the modal is meant to be closed.
-        enableScrolling(); // Enable scrolling after attempting to save/close the modal
-    });
-
-    // (Rest of your existing code for handling length options and other logic...)
-});
 
 
 function updateActiveLengthState() {
