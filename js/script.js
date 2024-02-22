@@ -41,6 +41,7 @@ document.getElementById("typeButton").addEventListener("click", function() {
 
 document.getElementById("closeTypeModal").addEventListener("click", function() {
     document.getElementById("typeModal").style.display = "none";
+    document.body.classList.remove('body-fixed'); // 여기에 추가
 });
 
 document.getElementById("saveTypeModal").addEventListener("click", function() {
@@ -66,6 +67,8 @@ document.getElementById("saveTypeModal").addEventListener("click", function() {
 
         // Close the type modal after saving
         document.getElementById("typeModal").style.display = "none";
+        document.body.classList.remove('body-fixed'); // 여기에 추가
+
 
         // Hide the type error message if it was previously visible
         document.getElementById('typeErrorMessage').style.display = 'none';
@@ -101,32 +104,44 @@ function updateActiveTypeState() {
 
 
 
-//Story type, Length modal
 document.addEventListener('DOMContentLoaded', function() {
+    let openModalsCount = 0; // 열린 모달의 개수를 추적
+
+    function showModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
+        if (openModalsCount === 0) {
+            document.body.classList.add('body-fixed'); // 첫 모달이 열릴 때 배경 고정
+        }
+        openModalsCount++; // 모달이 열릴 때마다 카운트 증가
+    }
+
+    function hideModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+        openModalsCount--; // 모달이 닫힐 때마다 카운트 감소
+        if (openModalsCount === 0) {
+            document.body.classList.remove('body-fixed'); // 모든 모달이 닫혔을 때 배경 고정 해제
+        }
+    }
 
     // Story Type Modal 열기
     document.getElementById("typeButton").addEventListener("click", function() {
-        document.getElementById("typeModal").style.display = "block";
-        document.body.classList.add('body-fixed'); // 배경 고정
+        showModal("typeModal");
     });
 
     // Story Type Modal 닫기
     document.getElementById("closeTypeModal").addEventListener("click", function() {
-        document.getElementById("typeModal").style.display = "none";
-        document.body.classList.remove('body-fixed'); // 배경 고정 해제
+        hideModal("typeModal");
     });
 
     // Length Modal 열기
     document.getElementById("lengthButton").addEventListener("click", function() {
-        document.getElementById("lengthModal").style.display = "block";
-        document.body.classList.add('body-fixed'); // 배경 고정
+        showModal("lengthModal");
         updateActiveLengthState(); // Modal 열릴 때 active 상태 업데이트
     });
 
     // Length Modal 닫기
     document.getElementById("closelengthModal").addEventListener("click", function() {
-        document.getElementById("lengthModal").style.display = "none";
-        document.body.classList.remove('body-fixed'); // 배경 고정 해제
+        hideModal("lengthModal");
     });
 
     // Length Modal 저장 및 닫기
@@ -136,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 선택된 길이 옵션이 있다면, 선택 사항 저장
             confirmedLengthSelection = activeLengthOption.textContent;
             localStorage.setItem('confirmedLengthSelection', confirmedLengthSelection);
-    
+
             const selectedLengthDiv = document.getElementById('selectedLength');
             if (selectedLengthDiv) {
                 if (selectedLengthDiv.childNodes.length > 0 && selectedLengthDiv.childNodes[0].nodeType === Node.TEXT_NODE) {
@@ -145,23 +160,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 selectedLengthDiv.insertBefore(document.createTextNode(confirmedLengthSelection), selectedLengthDiv.firstChild);
                 selectedLengthDiv.style.display = 'flex';
             }
-            document.getElementById("lengthModal").style.display = "none";
-            document.body.classList.remove('body-fixed'); // 배경 고정 해제
-            
+
             document.getElementById('lengthErrorMessage').style.display = 'none';
         } else {
             document.getElementById('lengthErrorMessage').style.display = 'flex';
         }
+
+        hideModal("lengthModal"); // 모달 닫기 및 배경 고정 해제 로직을 이용
+
+        // 추가적으로 필요한 상태 업데이트 함수들
         logCurrentState();
         updateGenerateButtonState();
         updateErrorMessage();
     });
 
-    
-
-
-
-    // Event listeners for length options
+    // 길이 옵션에 대한 이벤트 리스너
     const lengthOptions = document.querySelectorAll('.lengthOption');
     lengthOptions.forEach(option => {
         option.addEventListener('click', function() {
@@ -170,10 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
-
-    // ... (rest of your existing code) ...
-    
+    // 여기에 기타 필요한 코드나 이벤트 리스너를 추가하세요.
 });
 
 
