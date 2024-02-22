@@ -1,24 +1,34 @@
 let activeEmojis = new Set(); // To keep track of activated emojis
 let confirmedLengthSelection = null; // Initialize with null
 let confirmedTypeSelection = null; // Initialize with null
-let scrollPosition = 0;
+let scrollPosition = 0; // 스크롤 위치를 저장할 변수
+let openModalsCount = 0; // 열린 모달의 개수를 추적
 
 function showModal(modalId) {
-    scrollPosition = window.pageYOffset; // 현재 스크롤 위치 저장
-    document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollPosition}px`; // 스크롤 위치 고정
-    document.getElementById(modalId).style.display = 'block';
+    const modal = document.getElementById(modalId);
+    modal.style.display = "block";
+    if (openModalsCount === 0) {
+        scrollPosition = window.pageYOffset; // 현재 스크롤 위치 저장
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollPosition}px`; // 스크롤 위치 고정
+        document.body.style.width = '100%';
+    }
+    openModalsCount++;
 }
 
 function hideModal(modalId) {
-    document.body.style.overflow = '';
-    document.body.style.position = '';
-    document.body.style.top = '';
-    window.scrollTo(0, scrollPosition); // 저장된 스크롤 위치로 복원
-    document.getElementById(modalId).style.display = 'none';
+    const modal = document.getElementById(modalId);
+    modal.style.display = "none";
+    openModalsCount--;
+    if (openModalsCount === 0) {
+        document.body.style.removeProperty('overflow');
+        document.body.style.removeProperty('position');
+        document.body.style.removeProperty('top');
+        document.body.style.removeProperty('width');
+        window.scrollTo(0, scrollPosition); // 저장된 스크롤 위치로 복원
+    }
 }
-
 
 
 //Logo link
@@ -56,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.getElementById("typeButton").addEventListener("click", function() {
     document.getElementById("typeModal").style.display = "block";
     updateActiveTypeState(); // Update the active state based on the confirmed selection
+    showModal("typeModal");
 });
 
 document.getElementById("closeTypeModal").addEventListener("click", function() {
@@ -100,6 +111,9 @@ document.getElementById("saveTypeModal").addEventListener("click", function() {
     updateGenerateButtonState(); // Update Generate button state after saving
 
     updateErrorMessage(); // Update error message state after saving
+
+    hideModal("typeModal");
+
 
 });
 
@@ -432,6 +446,7 @@ document.getElementById('deleteLengthTag').addEventListener('click', function() 
 // Event listener for opening the Emoji Modal
 document.getElementById("emojisButton").addEventListener("click", function() {
     document.getElementById("emojiModal").style.display = "block";
+    showModal("emojiModal");
 });
 
 
@@ -573,6 +588,9 @@ document.getElementById('saveEmojiModal').addEventListener('click', function() {
 
     updateErrorMessage(); // Update error message state after saving
 
+    hideModal("emojiModal");
+
+
 });
 
 
@@ -589,6 +607,8 @@ document.getElementById('closeEmojiModal').addEventListener('click', function() 
 
     // Clear the set of activated emojis
     activeEmojis.clear();
+
+    hideModal("emojiModal");
 });
 
 
