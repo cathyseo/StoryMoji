@@ -23,16 +23,6 @@ body {
     min-height: 100vh; /* Ensure the body takes at least the viewport height */
 
 }
-/* 배경 고정 및 클릭 방지 */
-.body-fixed {
-    overflow: hidden; /* 스크롤 방지 */
-    pointer-events: none; /* 모든 포인터 이벤트 비활성화 */
-}
-
-.body-fixed .modal {
-    pointer-events: auto; /* 모달 내에서는 포인터 이벤트 활성화 */
-}
-
 * {
     font-family: 'Poppins', sans-serif;
 }
