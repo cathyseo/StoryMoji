@@ -519,7 +519,7 @@ h2{
         font-style: normal;
         font-weight: 700;
         line-height: 130%;
-        text-transform: capitalize;
+        text-transform: uppercase;
         white-space: nowrap;
         gap: 10px;
     }
@@ -631,8 +631,8 @@ h2{
     font-weight: 700;
     text-align: left;
     text-transform: uppercase;
-    display:flex;
-    flex-direction: column;
+    display: block;
+    padding-bottom: 60px;
 }
 #lengthContainer {
     color: #1F2223;
@@ -642,8 +642,8 @@ h2{
     font-weight: 700;
     text-align: left;
     text-transform: uppercase;
-    display:flex;
-    flex-direction: column;
+    display: block;
+    padding-bottom: 60px;
 }
 /* Active state for type */
 .typeOption:hover, .typeOption.active {
@@ -1172,6 +1172,8 @@ footer {
         font-weight: 700;
         text-align: left;
         text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
     }
     #lengthContainer {
         color: #1F2223;
@@ -1181,6 +1183,8 @@ footer {
         font-weight: 700;
         text-align: left;
         text-transform: uppercase;
+        display:flex;
+        flex-direction: column;
     }
     /* Active state for type */
     .typeOption:hover, .typeOption.active {
