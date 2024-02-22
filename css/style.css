@@ -140,7 +140,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #1F2223;
 }
 h1 {
-    font-size: 46px;
+    font-size: 38px;
     display: inline-block; /* Aligns with the line-height */
     vertical-align: top; /* Aligns text to the top of the container */
 }
@@ -206,8 +206,8 @@ h2 {
 #imgFire {
     position: absolute;
     top: 20%;
-    left: 3%;
-    width: 96px;
+    left: 6%;
+    width: 82px;
     height: auto;
 }
 #imgFlying {
@@ -233,9 +233,9 @@ h2 {
 }
 #imgHeart {
     position: absolute;
-    top: 62%;
-    left: 10%;
-    width: 72px;
+    top: 56%;
+    left: 7%;
+    width: 82px;
     height: auto;
 }
 
