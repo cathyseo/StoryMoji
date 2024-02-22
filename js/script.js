@@ -1,6 +1,25 @@
 let activeEmojis = new Set(); // To keep track of activated emojis
 let confirmedLengthSelection = null; // Initialize with null
 let confirmedTypeSelection = null; // Initialize with null
+let scrollPosition = 0;
+
+function showModal(modalId) {
+    scrollPosition = window.pageYOffset; // 현재 스크롤 위치 저장
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollPosition}px`; // 스크롤 위치 고정
+    document.getElementById(modalId).style.display = 'block';
+}
+
+function hideModal(modalId) {
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    window.scrollTo(0, scrollPosition); // 저장된 스크롤 위치로 복원
+    document.getElementById(modalId).style.display = 'none';
+}
+
+
 
 //Logo link
 document.getElementById('logo').addEventListener('click', function() {
