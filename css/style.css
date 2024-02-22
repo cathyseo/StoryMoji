@@ -645,6 +645,9 @@ h2{
     display: block;
     padding-bottom: 60px;
 }
+.typeOption {
+    padding-bottom: 20px;
+}
 /* Active state for type */
 .typeOption:hover, .typeOption.active {
     text-decoration-line: underline;
@@ -652,7 +655,9 @@ h2{
     text-decoration-style: solid;
     text-decoration-thickness: 6px;
 }
-
+.lengthOption {
+    padding-bottom: 20px;
+}
 /* Active state for length */
 .lengthOption:hover, .lengthOption.active {
     text-decoration-line: underline;
@@ -1166,25 +1171,26 @@ footer {
     }
     #typeContainer {
         color: #1F2223;
-        gap: 20px;
         font-size: 80px;
         line-height: 130%;
         font-weight: 700;
         text-align: left;
         text-transform: uppercase;
-        display: flex;
-        flex-direction: column;
+        display: block;
+        padding-bottom: 0;
     }
     #lengthContainer {
         color: #1F2223;
-        gap: 20px;
         font-size: 80px;
         line-height: 130%;
         font-weight: 700;
         text-align: left;
         text-transform: uppercase;
-        display:flex;
-        flex-direction: column;
+        display: block;
+        padding-bottom: 0;
+    }
+    .typeOption {
+        padding-bottom: 10px;
     }
     /* Active state for type */
     .typeOption:hover, .typeOption.active {
@@ -1193,7 +1199,10 @@ footer {
         text-decoration-style: solid;
         text-decoration-thickness: 12px;
     }
+    .lengthOption {
+        padding-bottom: 10px;
 
+    }
     /* Active state for length */
     .lengthOption:hover, .lengthOption.active {
         text-decoration-line: underline;
