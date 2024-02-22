@@ -104,65 +104,59 @@ function updateActiveTypeState() {
 //Story type, Length modal
 document.addEventListener('DOMContentLoaded', function() {
 
-    // Event listener for opening the Story Type Modal
+    // Story Type Modal 열기
     document.getElementById("typeButton").addEventListener("click", function() {
         document.getElementById("typeModal").style.display = "block";
+        document.body.classList.add('body-fixed'); // 배경 고정
     });
 
-    // Event listener for closing the Story Type Modal using the Close button
-    // Note: Ensure you have unique IDs for each modal's Close and Save buttons
+    // Story Type Modal 닫기
     document.getElementById("closeTypeModal").addEventListener("click", function() {
         document.getElementById("typeModal").style.display = "none";
+        document.body.classList.remove('body-fixed'); // 배경 고정 해제
     });
 
-    
-    // Event listener for the Length Modal
+    // Length Modal 열기
     document.getElementById("lengthButton").addEventListener("click", function() {
         document.getElementById("lengthModal").style.display = "block";
-        updateActiveLengthState(); // Update active state when the modal is opened
+        document.body.classList.add('body-fixed'); // 배경 고정
+        updateActiveLengthState(); // Modal 열릴 때 active 상태 업데이트
     });
 
+    // Length Modal 닫기
     document.getElementById("closelengthModal").addEventListener("click", function() {
         document.getElementById("lengthModal").style.display = "none";
+        document.body.classList.remove('body-fixed'); // 배경 고정 해제
     });
 
+    // Length Modal 저장 및 닫기
     document.getElementById("savelengthModal").addEventListener("click", function() {
         const activeLengthOption = document.querySelector('.lengthOption.active');
         if (activeLengthOption) {
-            // If a length option is selected, proceed to save the selection
+            // 선택된 길이 옵션이 있다면, 선택 사항 저장
             confirmedLengthSelection = activeLengthOption.textContent;
-            // Save the length selection in local storage
             localStorage.setItem('confirmedLengthSelection', confirmedLengthSelection);
     
             const selectedLengthDiv = document.getElementById('selectedLength');
             if (selectedLengthDiv) {
-                // Remove existing text node if it exists
                 if (selectedLengthDiv.childNodes.length > 0 && selectedLengthDiv.childNodes[0].nodeType === Node.TEXT_NODE) {
                     selectedLengthDiv.removeChild(selectedLengthDiv.childNodes[0]);
                 }
-    
-                // Insert new text content before the delete image
                 selectedLengthDiv.insertBefore(document.createTextNode(confirmedLengthSelection), selectedLengthDiv.firstChild);
-    
-                // Display the selectedLength div with flex style after saving
                 selectedLengthDiv.style.display = 'flex';
             }
-            // Close the length modal after saving
             document.getElementById("lengthModal").style.display = "none";
+            document.body.classList.remove('body-fixed'); // 배경 고정 해제
             
-            // Hide the length error message if it was previously visible
             document.getElementById('lengthErrorMessage').style.display = 'none';
         } else {
-            // If no length option is selected, display the length error message
             document.getElementById('lengthErrorMessage').style.display = 'flex';
         }
-        logCurrentState(); // Log the current state after saving length
-
-        updateGenerateButtonState(); // Update Generate button state after saving
-
-        updateErrorMessage(); // Update error message state after saving
-
+        logCurrentState();
+        updateGenerateButtonState();
+        updateErrorMessage();
     });
+
     
 
 
@@ -180,55 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ... (rest of your existing code) ...
     
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-
-    // Function to disable scrolling
-    function disableScrolling() {
-        document.body.style.overflow = 'hidden';
-    }
-
-    // Function to enable scrolling
-    function enableScrolling() {
-        document.body.style.overflow = '';
-    }
-
-    // Event listener for opening the Story Type Modal
-    document.getElementById("typeButton").addEventListener("click", function() {
-        document.getElementById("typeModal").style.display = "block";
-        disableScrolling(); // Disable scrolling when modal is open
-    });
-
-    // Event listener for closing the Story Type Modal using the Close button
-    document.getElementById("closeTypeModal").addEventListener("click", function() {
-        document.getElementById("typeModal").style.display = "none";
-        enableScrolling(); // Enable scrolling when modal is closed
-    });
-
-    
-    // Event listener for the Length Modal
-    document.getElementById("lengthButton").addEventListener("click", function() {
-        document.getElementById("lengthModal").style.display = "block";
-        disableScrolling(); // Disable scrolling when modal is open
-        updateActiveLengthState(); // Update active state when the modal is opened
-    });
-
-    document.getElementById("closelengthModal").addEventListener("click", function() {
-        document.getElementById("lengthModal").style.display = "none";
-        enableScrolling(); // Enable scrolling when modal is closed
-    });
-
-    document.getElementById("savelengthModal").addEventListener("click", function() {
-        // Logic for handling the saving of length selection
-        // (Your existing code for saving goes here...)
-
-        // Regardless of whether saving is successful or not,
-        // ensure scrolling is re-enabled when the modal is meant to be closed.
-        enableScrolling(); // Enable scrolling after attempting to save/close the modal
-    });
-
-    // (Rest of your existing code for handling length options and other logic...)
 });
 
 
