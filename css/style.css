@@ -27,8 +27,6 @@ body {
 .body-fixed {
     overflow: hidden; /* 스크롤 방지 */
     pointer-events: none; /* 모든 포인터 이벤트 비활성화 */
-    touch-action: none; /* 터치 액션 방지 */
-
 }
 
 .body-fixed .modal {
